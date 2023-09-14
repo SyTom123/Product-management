@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   description: String,
   price: Number,
   discountPercentage: Number,
-  stock: Number,
+  stock: Number, 
   thumbnail: String,
   status: String,
   position: Number,
@@ -13,4 +13,4 @@ const productSchema = new mongoose.Schema({
 });
 
 const Product = mongoose.model("Product", productSchema, "products");
-module.export = Product;
+module.exports = Product;
