@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 require("dotenv").config();
 const route = require("./routes/client/index.route");
+const routeAdmin =require('./routes/admin/index.route')
 const database = require('./config/database')
 
 
@@ -16,6 +17,7 @@ app.use(express.static("public"));
 
 //route
 route(app);
+routeAdmin(app);
 
 // connect database
 database.connect();
