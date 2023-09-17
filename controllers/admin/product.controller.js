@@ -1,6 +1,7 @@
 const Product = require('../../models/product.model');
 const filterStatusHelper = require("../../helper/filterStatus");
-const searchHelper = require("../../helper/search.js")
+const searchHelper = require("../../helper/search.js");
+const paginationHelper = require('../../helper/pagination')
 // [GET] /admin/product
 module.exports.index = async (req, res) => {
     try {
@@ -20,13 +21,28 @@ module.exports.index = async (req, res) => {
             find.title = objectSearch.regex;
         }
 
-        const products = await Product.find(find);
+        // Pagination
+        const initPagination = {
+            currentPage: 1,
+            limitItems: 4
+        }
+        const countProducts  = await Product.count(find);
+        const objectPagination = paginationHelper(initPagination, req.query, countProducts);
+
+
+        // End Pagination
+        const products = await Product.find(find)
+        .limit(objectPagination.limitItems)
+        .skip(objectPagination.skip);
+
+        // const products = await Product.find(find);
 
         res.render("admin/pages/products/index.pug", {
             pageTitle: "Danh sach san pham",
             products: products,
             filterStatus: filterStatus,
-            keyword: objectSearch.keyword
+            keyword: objectSearch.keyword,
+            pagination: objectPagination
         })
 
     } catch (error) {
