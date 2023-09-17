@@ -4,6 +4,7 @@ require("dotenv").config();
 const route = require("./routes/client/index.route");
 const routeAdmin = require('./routes/admin/index.route')
 const database = require('./config/database');
+const methodOverride = require("method-override")
 
 const systemConfig = require('./config/system')
 
@@ -16,6 +17,10 @@ app.set("view engine", "pug");
 
 // use static file
 app.use(express.static("public"));
+
+//  override with POST having ? method= PATCH
+app.use(methodOverride('_method'));
+
 
 // Variable
 app.locals.prefixAdmin = systemConfig.prefix_admin;
