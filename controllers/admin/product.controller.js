@@ -35,15 +35,24 @@ module.exports.index = async (req, res) => {
         .limit(objectPagination.limitItems)
         .skip(objectPagination.skip);
 
-        // const products = await Product.find(find);
-
-        res.render("admin/pages/products/index.pug", {
-            pageTitle: "Danh sach san pham",
-            products: products,
-            filterStatus: filterStatus,
-            keyword: objectSearch.keyword,
-            pagination: objectPagination
-        })
+        if(products.length > 0) {
+            res.render("admin/pages/products/index.pug", {
+                pageTitle: "Danh sach san pham",
+                products: products,
+                filterStatus: filterStatus,
+                keyword: objectSearch.keyword,
+                pagination: objectPagination
+            })
+        }
+        else {
+            let stringQuery = "";
+            for(const key in req.query) {
+                if(key != "page") {
+                    stringQuery += `&${key}=${req.query[key]}`
+                }
+            }
+            res.redirect(`${req.baseUrl}?page=1${stringQuery}`);
+        }
 
     } catch (error) {
         console.log(error)
