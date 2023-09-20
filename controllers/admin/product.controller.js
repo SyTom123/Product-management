@@ -49,12 +49,26 @@ module.exports.index = async (req, res) => {
         console.log(error)
     }
 }
-// [GET] /admin/products/:id
+// [PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
     const status = req.params.status;
     const id = req.params.id;
 
     await Product.updateOne({_id: id}, {status: status})
     res.redirect('back')
+}
+// [PATCH] /admin/products/change-multi/:status/:id
+module.exports.changeMulti = async (req, res) => {
+    const type = req.body.type;
+    const ids = req.body.ids.split(", ");
+    switch (type) {
+        case "active":
+        case "inactive":
+            await Product.updateMany({_id: {$in: ids}}, {status: type});
+            break;
+        default:
+            break;
+    }
+    res.redirect('back');
 }
 
