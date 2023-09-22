@@ -118,7 +118,14 @@ if(formChangeMulti) {
         const checkboxMulti = document.querySelector("[checkbox-multi]");
         const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked");
 
-        if(inputsChecked.length > 0 ){
+        const typeChange= e.target.elements.type.value;
+        if(typeChange == "delete-all") {
+            const isConfirm = window.confirm("Bạn có chắc chắn muốn xóa các sản phẩm này không?");
+            if(!isConfirm) {
+                return ;
+            }
+        }
+        if(inputsChecked.length > 0 ){  
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
 
@@ -139,6 +146,7 @@ if(formChangeMulti) {
 const buttonDelete = document.querySelectorAll("[button-delete]");
 
 if(buttonDelete.length > 0) {
+
     const formDeleteItem = document.querySelector("#form-delete-item");
     const path = formDeleteItem.getAttribute("data-path");
 

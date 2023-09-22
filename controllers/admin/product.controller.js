@@ -34,7 +34,7 @@ module.exports.index = async (req, res) => {
         const products = await Product.find(find)
         .limit(objectPagination.limitItems)
         .skip(objectPagination.skip);
-
+        let ok = 0;
         if(products.length > 0) {
             res.render("admin/pages/products/index.pug", {
                 pageTitle: "Danh sach san pham",
@@ -45,13 +45,30 @@ module.exports.index = async (req, res) => {
             })
         }
         else {
-            let stringQuery = "";
-            for(const key in req.query) {
-                if(key != "page") {
-                    stringQuery += `&${key}=${req.query[key]}`
+            ok ++;
+            console.log(ok);
+            if(ok === 1) {
+                console.log("sytom")
+                let stringQuery = "";
+                for(const key in req.query) {
+                    if(key != "page") {
+                        stringQuery += `&${key}=${req.query[key]}`
+                    }
                 }
+                res.redirect(`${req.baseUrl}?page=1${stringQuery}`);
+                
             }
-            res.redirect(`${req.baseUrl}?page=1${stringQuery}`);
+            else {
+                console.log("vao day")
+                res.render("admin/pages/products/index.pug", {
+                    pageTitle: "Danh sach san pham",
+                    products: products,
+                    filterStatus: filterStatus,
+                    keyword: objectSearch.keyword,
+                    pagination: objectPagination
+                })
+            }
+           
         }
 
     } catch (error) {
@@ -75,6 +92,12 @@ module.exports.changeMulti = async (req, res) => {
         case "inactive":
             await Product.updateMany({_id: {$in: ids}}, {status: type});
             break;
+        case "delete-all":
+            await Product.updateMany({_id: {$in: ids}}, {
+                deleted: true,
+                deletedAt: new Date()
+            });
+            break;
         default:
             break;
     }
@@ -92,5 +115,4 @@ module.exports.deleteItem = async (req, res) => {
         }) 
     res.redirect("back");
 }
-
 
