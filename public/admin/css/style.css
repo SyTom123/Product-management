@@ -51,7 +51,7 @@
     z-index: 10;
 }
 [show-alert].alert-hidden {
-    animation:alert-hidden ease-in 2s ;
+    animation:alert-hidden ease-in 1s ;
     animation-fill-mode: both;
 }
  [close-alert] {
@@ -66,6 +66,11 @@
     color: red;
     justify-content: center;
     align-items: center;
+    margin-left: 16px;
+}
+[close-alert] span {
+    position: relative;
+    bottom:2px;
 }
 @keyframes alert-hidden {
     from {
