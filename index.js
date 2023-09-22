@@ -4,6 +4,9 @@ require("dotenv").config();
 const route = require("./routes/client/index.route");
 const routeAdmin = require('./routes/admin/index.route');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('express-flash');
 const database = require('./config/database');
 const methodOverride = require("method-override")
 
@@ -15,6 +18,12 @@ const app = express();
 // views / view engine
 app.set("views", "./views");
 app.set("view engine", "pug");
+
+// Flash
+app.use(cookieParser("Nguyentiensy"));
+app.use(session({cookie:{maxAge: 60000}}));
+app.use(flash());
+// End Flash
 
 // use static file
 app.use(express.static("public"));

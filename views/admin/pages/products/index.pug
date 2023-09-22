@@ -3,7 +3,10 @@ include ../../mixins/filter-status.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/change-multi.pug
+include ../../mixins/alert.pug
 block main 
+    +alert-success(5000)
+    h1(class="mb-3") Danh sách sản phẩm
     .card.mb-3 
         .card-header Bộ lọc và tìm kiếm 
         .card-body  
@@ -13,10 +16,11 @@ block main
                 .col-6  
                     +search(keyword)
     .card.mb-3
-        .card-header Danh sách
+        .card-header Hành động
         .card-body 
             +change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
     .card.mb-3 
+
         .card-header Danh sách sản phẩm
         .card-body
             table(

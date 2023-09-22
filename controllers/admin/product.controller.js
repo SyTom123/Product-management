@@ -81,8 +81,9 @@ module.exports.changeStatus = async (req, res) => {
     const status = req.params.status;
     const id = req.params.id;
 
-    await Product.updateOne({_id: id}, {status: status})
-    res.redirect('back')
+    await Product.updateOne({_id: id}, {status: status});
+    req.flash("success", "Cập nhật trạng thái thành công!");
+    res.redirect('back');
 }
 // [PATCH] /admin/products/change-multi/:status/:id
 module.exports.changeMulti = async (req, res) => {
