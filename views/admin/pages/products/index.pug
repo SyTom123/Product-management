@@ -26,11 +26,16 @@ block main
                 thead 
                     tr 
                         th 
-                            input(type="checkbox" name= "checkall")
+                            input(
+                                type="checkbox" 
+                                name= "checkall"
+                                style ="cursor: pointer"
+                            )
                         th STT 
                         th Hình ảnh 
                         th Tiêu đề
                         th Giá
+                        th Vị trí
                         th Trạng thái 
                         th Hành động 
                 tbody 
@@ -39,6 +44,8 @@ block main
                             tr 
                                 td  
                                     input(
+                                        style ="cursor: pointer"
+                                        width = "50px"
                                         type= "checkbox"
                                         name="id"
                                         value= item.id
@@ -48,10 +55,19 @@ block main
                                     img(src=item.thumbnail, alt=item.title width="100px" height="auto")
                                 td #{item.title}
                                 td #{item.price} $
+                                td  
+                                    input(
+                                        type="number"
+                                        value=item.position
+                                        style="width:56px; outline:none;border:1px solid #ddd; border-radius:5px; text-align: center;"
+                                        min="1"
+                                        name="position"
+                                    )
                                 td 
                                     if(item.status == 'active')
                                         button(
                                             class="badge badge-success"
+                                            style="border:none;padding: 10px;font-size: 13px"
                                             button-change-status
                                             data-status= item.status 
                                             data-id= item.id
@@ -59,14 +75,15 @@ block main
                                     else 
                                         button(
                                             class="badge badge-danger"
+                                            style="border:none;padding: 10px;font-size: 13px"
                                             button-change-status 
                                             data-status= item.status 
                                             data-id= item.id
                                         ) Dừng hoạt động
                                 td
-                                    button(class="btn btn-warning btn-sm") Sửa
+                                    button(class="btn btn-warning btn-sm text-white") Sửa
                                     button(
-                                        class="btn btn-danger btn-sm ml-1"
+                                        class="btn btn-danger btn-sm ml-1 text-white"
                                         button-delete
                                         data-id=item.id
                                     ) Xóa
