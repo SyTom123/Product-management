@@ -100,6 +100,7 @@ module.exports.changeMulti = async (req, res) => {
                 deleted: true,
                 deletedAt: new Date()
             });
+            req.flash("success", `Xóa thành công ${ids.length} bản ghi!`);
             break;
         case "change-position": 
             for(const item of ids){
@@ -122,6 +123,7 @@ module.exports.deleteItem = async (req, res) => {
             deleted: true,
             deletedAt: new Date()
         }) 
+    req.flash("success", "Xóa bản ghi thành công!");
     res.redirect("back");
 }
 
