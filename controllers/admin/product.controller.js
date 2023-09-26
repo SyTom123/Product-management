@@ -1,80 +1,64 @@
 const Product = require('../../models/product.model');
 const filterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search.js");
-const paginationHelper = require('../../helper/pagination')
+const paginationHelper = require('../../helper/pagination');
+
 // [GET] /admin/product
 module.exports.index = async (req, res) => {
-    try {
-        // filter status
-        const filterStatus = filterStatusHelper(req.query)
-        //End filter status
+   
+// filter status
+const filterStatus = filterStatusHelper(req.query)
+//End filter status
 
-        // Search
-        let objectSearch = searchHelper(req.query);
-        let find = {
-            deleted: false,
-        }
-        if(req.query.status){
-            find.status = req.query.status;
-        }
-        if(req.query.keyword){
-            find.title = objectSearch.regex;
-        }
+// Search
+let objectSearch = searchHelper(req.query);
+let find = {
+    deleted: false,
+}
+if(req.query.status){
+    find.status = req.query.status;
+}
+if(req.query.keyword){
+    find.title = objectSearch.regex;
+}
 
-        // Pagination
-        const initPagination = {
-            currentPage: 1,
-            limitItems: 4
-        }
-        const countProducts  = await Product.count(find);
-        const objectPagination = paginationHelper(initPagination, req.query, countProducts);
+// Pagination
+const initPagination = {
+    currentPage: 1,
+    limitItems: 4
+}
+const countProducts  = await Product.count(find);
+const objectPagination = paginationHelper(initPagination, req.query, countProducts);
 
 
-        // End Pagination
-        const products = await Product.find(find)
-        .sort({position: "desc"})
-        .limit(objectPagination.limitItems)
-        .skip(objectPagination.skip);
-        let ok = 0;
-        if(products.length > 0) {
-            res.render("admin/pages/products/index.pug", {
-                pageTitle: "Danh sach san pham",
-                products: products,
-                filterStatus: filterStatus,
-                keyword: objectSearch.keyword,
-                pagination: objectPagination
-            })
-        }
-        else {
-            ok ++;
-            console.log(ok);
-            if(ok === 1) {
-                console.log("sytom")
-                let stringQuery = "";
-                for(const key in req.query) {
-                    if(key != "page") {
-                        stringQuery += `&${key}=${req.query[key]}`
-                    }
-                }
-                res.redirect(`${req.baseUrl}?page=1${stringQuery}`);
-                
-            }
-            else {
-                console.log("vao day")
-                res.render("admin/pages/products/index.pug", {
-                    pageTitle: "Danh sach san pham",
-                    products: products,
-                    filterStatus: filterStatus,
-                    keyword: objectSearch.keyword,
-                    pagination: objectPagination
-                })
-            }
-           
-        }
+// End Pagination
+const products = await Product.find(find)
+.sort({position: "desc"})
+.limit(objectPagination.limitItems)
+.skip(objectPagination.skip);
 
-    } catch (error) {
-        console.log(error)
+if(products.length == 0 && countProducts > 0) {
+    let stringQuery = "";
+
+    for(const key in req.query) {
+        if(key != "page") {
+        stringQuery += `&${key}=${req.query[key]}`;
+        }
     }
+    const href = `${req.baseUrl}?page=1${stringQuery}`;
+
+    res.redirect(href);
+    } 
+else {
+    res.render("admin/pages/products/index", {
+        pageTitle: "Danh sách sản phẩm",
+        products: products,
+        filterStatus: filterStatus,
+        keyword: objectSearch.keyword,
+        pagination: objectPagination
+    });
+}
+
 }
 // [PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
