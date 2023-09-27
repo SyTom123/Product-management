@@ -2,6 +2,7 @@ const Product = require('../../models/product.model');
 const filterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search.js");
 const paginationHelper = require('../../helper/pagination');
+const systemConfig = require('../../config/system')
 
 // [GET] /admin/product
 module.exports.index = async (req, res) => {
@@ -109,5 +110,32 @@ module.exports.deleteItem = async (req, res) => {
         }) 
     req.flash("success", "Xóa bản ghi thành công!");
     res.redirect("back");
+}
+//[GET] /admin/product/create
+module.exports.create = async (req,res) => {
+    res.render("admin/pages/products/create", {
+        pageTitle: "Thêm mới sản phẩm"
+    });
+}
+//[POST] /admin/product/createPost
+module.exports.createPost = async (req,res) => {
+
+    req.body.price = +req.body.price;
+    req.body.discountPercentage = +req.body.discountPercentage;
+    req.body.stock = +req.body.stock;
+
+    if(req.body.position === "") {
+        const countProducts = await Product.countDocuments();
+        const position = countProducts + 1;
+        req.body.position = position;
+    }
+    else {
+        req.body.position = +req.body.position;
+    }
+
+    const product = new Product(req.body);
+    await product.save();
+
+    res.redirect(`/${systemConfig.prefix_admin}/products`);
 }
 

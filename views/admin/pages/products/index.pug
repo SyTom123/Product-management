@@ -18,7 +18,13 @@ block main
     .card.mb-3
         .card-header Hành động
         .card-body 
-            +change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+            .row
+                .col-8 
+                    +change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+                .col-4 
+                    a(href=`/${prefixAdmin}/products/create` class="btn btn-outline-success")
+                        <i class="fa-solid fa-plus"></i>
+                        span(class ="ml-1") Thêm mới 
     .card.mb-3 
 
         .card-header Danh sách sản phẩm
