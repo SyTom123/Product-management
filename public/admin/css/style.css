@@ -84,3 +84,16 @@
     }
 }
 /* End Show Alert */
+/* image preview */
+.image-preview {
+    width: 200px;
+    height: auto;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;
+}
+.image-preview[src=""]{
+    display: none;
+}
+/* End image preview */
