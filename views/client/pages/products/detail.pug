@@ -1,0 +1,44 @@
+extends ../../layouts/default.pug
+
+block main
+    .container
+        .card(
+            class="mx-auto my-3"
+            style="max-width:500px"
+            )
+            .card-body
+                if (product.title)
+                    h3(class="mb-3 text-center") #{product.title}
+
+                if (product.price)
+                    div(class="mb-3") Giá: <b>#{product.price} </b> $
+
+                if (product.discountPercentage)
+                    div(class="mb-3") Giảm giá: <b>#{product.discountPercentage}</b> %
+
+                if (product.stock)
+                    div(class="mb-3") Còn lại: <b>#{product.stock} </b>sản phẩm
+
+                if (product.thumbnail)
+                    p Hình ảnh
+                    div(class="mb-3 text-center" )
+                        img(
+                            src=product.thumbnail
+                            style="width: 200px; border:1px solid #ddd; border-radius: 5px"
+                        )
+
+                if (product.status)
+                    div(class="mb-3")
+                        span Trạng thái:
+                        if (product.status === "active")
+                            span(class="badge badge-success ml-2") Hoạt động
+                        else
+                            span(class="badge badge-danger ml-2") Dừng hoạt động
+
+                if (product.position)
+                    div(class="mb-3") Vị trí: <b>#{product.position}</b>
+
+                if (product.description)
+                    div(class="mb-4")
+                        span Mô tả:
+                        span  #{product.description}
