@@ -17,7 +17,7 @@ const systemConfig = require('./config/system')
 const app = express();
 
 // views / view engine
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 // Flash
@@ -27,7 +27,7 @@ app.use(flash());
 // End Flash
 
 // use static file
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
 //  override with POST having ? method= PATCH
 app.use(methodOverride('_method'));
