@@ -136,7 +136,6 @@ module.exports.createPost = async (req,res) => {
         req.body.thumbnail = `/uploads/${req.file.filename}`;
         
     }
-    console.log(req.file);
     const product = new Product(req.body);
     await product.save();
     req.flash("success", "Thêm mới sản phẩm thành công");
@@ -144,3 +143,35 @@ module.exports.createPost = async (req,res) => {
     res.redirect(`/${systemConfig.prefix_admin}/products`);
 }
 
+//[GET] /admin/product/edit 
+module.exports.edit = async (req, res) => {
+    const id = req.params.id
+    const product = await Product.findOne({
+        _id: id,
+        deleted: false
+    })
+    res.render("admin/pages/products/edit.pug", {
+        product: product
+    })
+}
+
+//[PATCH] /admin/product/editPatch
+module.exports.editPatch = async (req,res) => {
+    
+    const id = req.params.id;
+
+    req.body.price = +req.body.price;
+    req.body.discountPercentage = +req.body.discountPercentage;
+    req.body.stock = +req.body.stock; 
+    req.body.position = +req.body.position;
+    
+    if(req.file && req.file.filename){
+        req.body.thumbnail = `/uploads/${req.file.filename}`;
+        
+    }
+
+    await Product.updateOne({_id: id}, req.body);
+    req.flash("success", "Cập nhật sản phẩm thành công");
+
+    res.redirect("back");
+}

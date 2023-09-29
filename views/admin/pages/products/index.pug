@@ -91,7 +91,9 @@ block main
                                             data-id= item.id
                                         ) Dừng hoạt động
                                 td
-                                    button(class="btn btn-warning btn-sm text-white") Sửa
+                                    a(
+                                        href=`/${prefixAdmin}/products/edit/${item.id}`
+                                        class="btn btn-warning btn-sm text-white") Sửa
                                     button(
                                         class="btn btn-danger btn-sm ml-1 text-white"
                                         button-delete
