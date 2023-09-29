@@ -92,10 +92,13 @@ block main
                                         ) Dừng hoạt động
                                 td
                                     a(
+                                        href=`/${prefixAdmin}/products/detail/${item.id}`
+                                        class="btn btn-secondary btn-sm text-white") Xem chi tiết
+                                    a(
                                         href=`/${prefixAdmin}/products/edit/${item.id}`
-                                        class="btn btn-warning btn-sm text-white") Sửa
+                                        class="btn btn-warning btn-sm mx-1 text-white") Sửa
                                     button(
-                                        class="btn btn-danger btn-sm ml-1 text-white"
+                                        class="btn btn-danger btn-sm text-white"
                                         button-delete
                                         data-id=item.id
                                     ) Xóa
