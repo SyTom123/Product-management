@@ -9,6 +9,7 @@ const session = require('express-session');
 const flash = require('express-flash');
 const database = require('./config/database');
 const methodOverride = require("method-override");
+var path = require('path');
 
 
 const systemConfig = require('./config/system')
@@ -19,6 +20,11 @@ const app = express();
 // views / view engine
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
+
+// tinymce
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
+//End tinymce
 
 // Flash
 app.use(cookieParser("Nguyentiensy"));
