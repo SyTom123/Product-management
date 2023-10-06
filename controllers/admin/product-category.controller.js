@@ -12,7 +12,7 @@ module.exports.index = async (req, res) => {
     const records = await ProductCategory.find(find);
 
     const newRecords = createTree(records);
-    console.log(newRecords);
+
     res.render("admin/pages/product-category/index", {
         records: newRecords
     });
@@ -49,4 +49,38 @@ module.exports.createPost = async(req, res) => {
     await record.save();
 
     res.redirect(`/${systemConfig.prefix_admin}/product-category`);
+}
+
+//[GET] /admin/product-category/edit/:id
+module.exports.edit = async(req, res) => {
+
+    const id = req.params.id;
+    const data = await ProductCategory.findOne({
+        _id:id,
+        deleted:false
+    });
+
+    const records= await ProductCategory.find({
+        deleted: false
+    })
+    const newRecords = createTree(records);
+    res.render("admin/pages/product-category/edit",{
+        pageTitle: "Chỉnh sửa danh mục sản phẩm",
+        data:data,
+        records: newRecords
+    })
+
+}
+//[PATCH] /admin/product-category/edit/:id
+module.exports.editPatch = async(req, res) => {
+
+    const id = req.params.id;
+    req.body.position = +req.body.position;
+
+    await ProductCategory.updateOne({_id: id}, req.body);
+
+    req.flash("success", "Chỉnh sửa danh mục sản phẩm thành công");
+
+    res.redirect("back");
+
 }
