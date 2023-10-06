@@ -1,0 +1,48 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-tree.pug
+
+block main 
+    .container
+    .card(
+        class="mx-auto"
+        style="max-width:500px"
+        )
+        .card-body
+            if (data.title)
+                h3(class="mb-3 text-center") #{data.title}
+            
+            if (data.parent_title)
+                div(class="mb-3") Danh mục cha: <b>#{data.parent_title} </b>
+
+            if (data.price)
+                div(class="mb-3") Giá: <b>#{data.price} </b> $
+
+            if (data.discountPercentage)
+                div(class="mb-3") Giảm giá: <b>#{data.discountPercentage}</b> %
+
+            if (data.stock)
+                div(class="mb-3") Còn lại: <b>#{data.stock} </b>sản phẩm
+
+            if (data.thumbnail)
+                p Hình ảnh
+                div(class="mb-3 text-center" )
+                    img(
+                        src=data.thumbnail
+                        style="width: 200px; border:1px solid #ddd; border-radius: 5px"
+                    )
+
+            if (data.status)
+                div(class="mb-3")
+                    span Trạng thái:
+                    if (data.status === "active")
+                        span(class="badge badge-success ml-2 p-2") Hoạt động
+                    else
+                        span(class="badge badge-danger ml-2 p-2") Dừng hoạt động
+
+            if (data.position)
+                div(class="mb-3") Vị trí: <b>#{data.position}</b>
+
+            if (data.description)
+                div(class="mb-4")
+                    span Mô tả:
+                    span  !{data.description}
