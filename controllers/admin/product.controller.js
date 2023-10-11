@@ -97,6 +97,7 @@ module.exports.changeStatus = async (req, res) => {
 module.exports.changeMulti = async (req, res) => {
     const type = req.body.type;
     const ids = req.body.ids.split(", ");
+    
     switch (type) {
         case "active":
         case "inactive":
@@ -106,7 +107,10 @@ module.exports.changeMulti = async (req, res) => {
         case "delete-all":
             await Product.updateMany({_id: {$in: ids}}, {
                 deleted: true,
-                deletedAt: new Date()
+                deletedBy: {
+                    account_id: res.locals.user.id,
+                    deletedAt: new Date()
+                }
             });
             req.flash("success", `Xóa thành công ${ids.length} bản ghi!`);
             break;
@@ -126,10 +130,14 @@ module.exports.deleteItem = async (req, res) => {
     const ids = req.params.id;
     // await Product.deleteOne({_id: ids}) 
     // xóa mềm
-    await Product.updateOne({_id: ids}, 
+    await Product.updateOne(
+        {_id: ids}, 
         {
             deleted: true,
-            deletedAt: new Date()
+            deletedBy: {
+                account_id: res.locals.user.id,
+                deletedAt: new Date()
+            }
         }) 
     req.flash("success", "Xóa bản ghi thành công!");
     res.redirect("back");
