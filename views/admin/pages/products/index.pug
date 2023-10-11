@@ -61,6 +61,7 @@ block main
                             th Vị trí
                             th Trạng thái 
                             th Nguời tạo
+                            th Nguời cập nhật
                             th Hành động 
                     tbody 
                         if(products.length > 0)
@@ -109,6 +110,12 @@ block main
                                             div #{item.createdBy.accountFullname}
                                             div 
                                                 +formatDateTime(item.createdBy.createAt)
+                                    td 
+                                        if(item.updatedBy.length > 0)
+                                            div #{item.updatedBy.slice(-1)[0].accountFullName}
+                                            div
+                                                +formatDateTime(item.updatedBy.slice(-1)[0].updatedAt)
+
                                     td
                                         a(
                                             href=`/${prefixAdmin}/products/detail/${item.id}`
