@@ -1,5 +1,6 @@
 const Product = require('../../models/product.model');
-const ProductCategory = require('../../models/product-category.model')
+const ProductCategory = require('../../models/product-category.model');
+const Account = require('../../models/account.model');
 const filterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search.js");
 const paginationHelper = require('../../helper/pagination');
@@ -49,6 +50,16 @@ const products = await Product.find(find)
 .sort(sort)
 .limit(objectPagination.limitItems)
 .skip(objectPagination.skip);
+
+for(const product of products) {
+    const user = await Account.findOne ({
+        _id: product.createdBy.account_id
+    })
+    if(user) {
+        product.createdBy.accountFullname = user.fullName;
+    }
+   
+}
 
 if(products.length == 0 && countProducts > 0) {
     let stringQuery = "";
@@ -140,8 +151,9 @@ module.exports.create = async (req,res) => {
 //[POST] /admin/product/createPost
 module.exports.createPost = async (req,res) => {
 
-    const permissions = req.locals.role.permissions;
-    if(permissions.includes("products-create")) {
+    const permissions = res.locals.role.permissions;
+
+    if(permissions.includes("products_create")) {
         req.body.price = +req.body.price;
         req.body.discountPercentage = +req.body.discountPercentage;
         req.body.stock = +req.body.stock;
@@ -154,6 +166,11 @@ module.exports.createPost = async (req,res) => {
         else {
             req.body.position = +req.body.position;
         }
+
+        req.body.createdBy= {
+            account_id: res.locals.user.id
+        };
+        console.log(req.body);
 
         const product = new Product(req.body);
         await product.save();

@@ -10,6 +10,7 @@ const flash = require('express-flash');
 const database = require('./config/database');
 const methodOverride = require("method-override");
 var path = require('path');
+var moment = require('moment');
 
 
 const systemConfig = require('./config/system')
@@ -44,6 +45,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // Variable
 app.locals.prefixAdmin = systemConfig.prefix_admin;
+app.locals.moment = moment;
 //End Variable
 
 //route
