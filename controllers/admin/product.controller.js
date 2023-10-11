@@ -140,26 +140,31 @@ module.exports.create = async (req,res) => {
 //[POST] /admin/product/createPost
 module.exports.createPost = async (req,res) => {
 
-    req.body.price = +req.body.price;
-    req.body.discountPercentage = +req.body.discountPercentage;
-    req.body.stock = +req.body.stock;
+    const permissions = req.locals.role.permissions;
+    if(permissions.includes("products-create")) {
+        req.body.price = +req.body.price;
+        req.body.discountPercentage = +req.body.discountPercentage;
+        req.body.stock = +req.body.stock;
+    
+        if(req.body.position === "") {
+            const countProducts = await Product.countDocuments();
+            const position = countProducts + 1;
+            req.body.position = position;
+        }
+        else {
+            req.body.position = +req.body.position;
+        }
 
-    if(req.body.position === "") {
-        const countProducts = await Product.countDocuments();
-        const position = countProducts + 1;
-        req.body.position = position;
+        const product = new Product(req.body);
+        await product.save();
+        req.flash("success", "Thêm mới sản phẩm thành công");
+    
+        res.redirect(`/${systemConfig.prefix_admin}/products`);
     }
     else {
-        req.body.position = +req.body.position;
+        return;
     }
-    // if(req.file && req.file.filename){
-    //     req.body.thumbnail = `/uploads/${req.file.filename}`;
-    // }
-    const product = new Product(req.body);
-    await product.save();
-    req.flash("success", "Thêm mới sản phẩm thành công");
-
-    res.redirect(`/${systemConfig.prefix_admin}/products`);
+   
 }
 
 //[GET] /admin/product/edit 
