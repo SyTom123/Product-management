@@ -33,11 +33,33 @@ block main
                 )
                     option(value="") --Chọn danh mục --
                     +select-tree(records)
+            div(class="form-group form-check form-check-inline")
+                input(
+                    type="radio"
+                    class="form-check-input"
+                    id="feature1"
+                    name="featured"
+                    value="1"
+                    style="cursor: pointer"
+                )
+                label(for="feature1" class="form-check-label" style="cursor: pointer") Nổi bật
+            div(class="form-group form-check form-check-inline")
+                input(
+                    type="radio"
+                    class="form-check-input"
+                    id="feature0"
+                    name="featured"
+                    value="0"
+                    style="cursor: pointer"
+                    checked
+                )
+                label(for="feature0" class="form-check-label" style="cursor: pointer") Không
             div(class="form-group")
                 label(for="desc") Mô tả
                 textarea(
                     class="form-control textarea-mce"
                     id="desc"
+                    style="cursor: pointer"
                     name="description"
                     rows="5"
                 )

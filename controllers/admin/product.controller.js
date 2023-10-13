@@ -67,8 +67,6 @@ for(const product of products) {
           _id: userUpdatedId.account_id
         });
 
-        console.log(userUpdated)
-
         if(userUpdated) {
           userUpdatedId.accountFullName = userUpdated.fullName;
         }
@@ -217,7 +215,6 @@ module.exports.createPost = async (req,res) => {
         req.body.createdBy= {
             account_id: res.locals.user.id
         };
-        console.log(req.body);
 
         const product = new Product(req.body);
         await product.save();
