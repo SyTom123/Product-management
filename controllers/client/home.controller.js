@@ -12,8 +12,17 @@ module.exports.index = async (req, res) => {
 
     const newProductsFeatured = productsHelper.priceNewProduct(productsFeatured);
 
+    // Hiển thị danh sách bài viết mới nhất
+    const productsNew = await Product.find({
+        deleted:false,
+        status: "active"
+    }).sort({position: "desc"}).limit(6);
+    
+    const newProductsNew =  productsHelper.priceNewProduct(productsNew);
+
     res.render("client/pages/home/index.pug", {
         pageTitle: "Trang chủ",
-        productsFeatured: newProductsFeatured
+        productsFeatured: newProductsFeatured,
+        productsNew: newProductsNew
     })
 }
