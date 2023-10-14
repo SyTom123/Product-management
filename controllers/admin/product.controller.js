@@ -117,6 +117,7 @@ module.exports.changeStatus = async (req, res) => {
     req.flash("success", "Cập nhật trạng thái thành công!");
     res.redirect('back');
 }
+
 // [PATCH] /admin/products/change-multi/:status/:id
 module.exports.changeMulti = async (req, res) => {
     const type = req.body.type;
@@ -260,7 +261,6 @@ module.exports.editPatch = async (req,res) => {
     
     if(req.file && req.file.filename){
         req.body.thumbnail = `/uploads/${req.file.filename}`;
-        
     }
 
     const updatedBy = {

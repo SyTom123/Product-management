@@ -2,7 +2,7 @@ mixin sub-menu(items, path)
     ul 
         each item in items 
             li 
-                a(href=`${path}/${item.slug}`) 
+                a(href=`${path}/detail/${item.slug}`) 
                     span #{item.title}
                     if(item.children && item.children.length > 0) 
                         i(

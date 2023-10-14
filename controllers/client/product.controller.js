@@ -24,9 +24,20 @@ module.exports.detail = async (req, res) => {
             deleted: false,
             status: "active"
         });
+
         if(!product) {
             return res.redirect("/products");
         }
+
+        const viewed = product.viewed ?? 0;
+        const title = product.title;
+   
+        const viewedUpdate = viewed + 1;
+        await Product.updateOne({slug: slug}, {
+            viewed: viewedUpdate
+        })
+        
+       
         res.render("client/pages/products/detail", {
             pageTitle: "Chi tiết sản phẩm",
             product: product

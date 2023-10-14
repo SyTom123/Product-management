@@ -21,6 +21,10 @@ const productSchema = new mongoose.Schema({
   status: String,
   featured: String,
   position: Number,
+  viewed: {
+    type:Number,
+    default: 0
+  },
   createdBy: {
     account_id: String,
     createAt: {
