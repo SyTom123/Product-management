@@ -3,11 +3,30 @@ include ../mixins/sub-menu.pug
 header.header 
     .container 
         .row.d-flex.align-items-center
-            .col-3
+            .col-2
                 .inner-logo
                     a(href="/")
                         img(src="/images/logo.svg", alt="Logo")
-            .col-9
+            .col-4 
+                form(
+                    action="/search"
+                    method="GET"
+                ) 
+                    div(class="form-group d-flex mb-0")
+                        input(
+                            type="text"
+                            placeholder="Nhập từ khóa..."
+                            class="form-control"
+                            name="keyword"
+                            value=keyword
+                            style="width:75%;  margin-right:5px"
+                        )
+                        button(
+                            type="submit"
+                            class="btn btn-primary"
+                        ) Tìm
+
+            .col-6
                 .inner-menu
                     ul 
                         li  
