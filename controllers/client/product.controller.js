@@ -18,9 +18,11 @@ module.exports.index = async (req, res) => {
         products: newProducts
     })
 }
+// [GET] /products/detail/:slugProduct
+
 module.exports.detail = async (req, res) => {
     try {
-        const slug = req.params.slug;
+        const slug = req.params.slugProduct;
         const product = await Product.findOne({
             slug: slug,
             deleted: false,
@@ -39,6 +41,16 @@ module.exports.detail = async (req, res) => {
             viewed: viewedUpdate
         })
         
+        if(product.product_category_id) {
+            const category = await ProductCategory.findOne({
+                _id: product.product_category_id,
+                deleted: false,
+                status: "active"
+            })
+            product.category = category;
+        }
+        product.priceNew = productsHelper.newPrice(product);
+
        
         res.render("client/pages/products/detail", {
             pageTitle: "Chi tiết sản phẩm",
@@ -89,7 +101,7 @@ module.exports.category = async (req, res) => {
     const newProducts = productsHelper.priceNewProduct(products);
 
     res.render("client/pages/products/index", {
-        pageTitle: "Danh sách sản phẩm",
+        pageTitle: category.title,
         products: newProducts
     });
 }
