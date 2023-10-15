@@ -55,6 +55,7 @@ module.exports.createPost = async(req, res) => {
 module.exports.edit = async(req, res) => {
 
     const id = req.params.id;
+    
     const data = await ProductCategory.findOne({
         _id:id,
         deleted:false
