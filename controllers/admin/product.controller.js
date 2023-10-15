@@ -51,6 +51,8 @@ const products = await Product.find(find)
 .limit(objectPagination.limitItems)
 .skip(objectPagination.skip);
 
+console.log(products);
+
 for(const product of products) {
     // Lấy ra người tạo
     const userCreated = await Account.findOne ({

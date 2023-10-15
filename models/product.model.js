@@ -21,6 +21,10 @@ const productSchema = new mongoose.Schema({
   status: String,
   featured: String,
   position: Number,
+  deleted: {
+    type: Boolean,
+    default: false
+  },
   viewed: {
     type:Number,
     default: 0
