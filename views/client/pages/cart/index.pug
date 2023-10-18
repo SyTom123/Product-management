@@ -60,7 +60,7 @@ block main
                                 td(colspan="7" class="text-center") Giỏ hàng trống
         .row 
             .col-md-6
-                a(href="/cart/delete/all" class="btn btn-danger") Xóa tất cả
+                a(href="/cart/delete/all" class= `btn btn-danger ${cartDetail.products.length == 0 ? "d-none": ""}` ) Xóa tất cả
             .col-md-6 
                 h3(class="text-right") Tổng đơn hàng: #{cartDetail.totalPrice}$
            
