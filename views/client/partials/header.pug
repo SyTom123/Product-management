@@ -3,11 +3,11 @@ include ../mixins/sub-menu.pug
 header.header 
     .container 
         .row.d-flex.align-items-center
-            .col-2
+            .col-md-2
                 .inner-logo
                     a(href="/")
                         img(src="/images/logo.svg", alt="Logo")
-            .col-4 
+            .col-md-4 
                 form(
                     action="/search"
                     method="GET"
@@ -26,7 +26,7 @@ header.header
                             class="btn btn-primary"
                         ) Tìm
 
-            .col-6
+            .col-md-5
                 .inner-menu
                     ul 
                         li  
@@ -41,3 +41,8 @@ header.header
 
                             if(layoutCategoryProducts)  
                                 +sub-menu(layoutCategoryProducts, pathProduct)
+            .col-md-1
+                .inner-cart 
+                    a(href="/cart") 
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        span (#{miniCart ? miniCart.totalQuantity : "0"})
