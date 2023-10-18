@@ -1,10 +1,14 @@
 extends ../../layouts/default.pug 
 include ../../mixins/box-head.pug
+include ../../mixins/go-back.pug
 block main 
     .container.my-3 
         .row 
-            .col-12    
+            .col-6   
                 +box-head(pageTitle)
+            .col-6
+                div(class="text-right")
+                    +goBack()
         .row 
             each item in products 
                 .col-4.mb-3 

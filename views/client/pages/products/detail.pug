@@ -1,11 +1,14 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/alert.pug
+include ../../mixins/go-back.pug
 
 block main
     +alert-success(3000)    
     .product-detail
         .container.my-5
+            div(class="text-right mb-2")
+                +goBack()
             .row 
                 .col-6 
                     .inner-thumb

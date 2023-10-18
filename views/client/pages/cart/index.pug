@@ -1,14 +1,17 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 include ../../mixins/box-head.pug
+include ../../mixins/go-back.pug
 
 block main  
     +alert-success(3000)
     +alert-error(3000)
     .container.my-3     
         .row 
-            .col-md-12 
+            .col-md-6
                 +box-head("Giỏ hàng") 
+            .col-md-6.text-right 
+                +goBack()
         .row 
             .col-md-12 
                 table(class="table table-bordered text-center")
@@ -47,7 +50,7 @@ block main
                                     td
                                         a(
                                             href=`/cart/delete/${item.product_id}`
-                                            class="btn btn-danger"
+                                            class="btn btn-danger btn-sm"
                                         ) Xóa
                         else 
                             p Không có sản phẩm nào trong giỏ hàng
