@@ -77,13 +77,28 @@ module.exports.addPost = async (req, res) => {
 module.exports.delete = async (req, res) => {
     const cartId = req.cookies.cartId;
     const productId = req.params.productId;
-    
-    await Cart.updateOne({
-        _id: cartId,
-    },{
-        "$pull":{products: {"product_id": productId}}
-    })
 
+    const ids = [];
+
+    if(productId != "all") {
+        ids.push(productId);
+    }
+    else{
+        const cart = await Cart.findOne(
+            {_id : cartId}
+        );
+        cart.products.forEach(product => {
+            ids.push(product.product_id);
+        })
+    }
+    for(id of ids) {
+        await Cart.updateOne({
+            _id: cartId,
+        },{
+            "$pull":{products: {"product_id": id}}
+        })
+    }
+   
     req.flash("success", "Đã xóa sản phẩm khỏi giỏ hàng!");
     res.redirect("back");
 }
