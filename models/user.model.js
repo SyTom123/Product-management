@@ -11,15 +11,15 @@ const userSchema = new mongoose.Schema({
     },
     phone: String,
     avatar: String,
+    deleted: {
+        type: Boolean,
+        default: false
+    },
     status: {
         type: String,
         default: "active"
     },
-    deleted: {
-        type: Boolean,
-        default: false
-    }, 
-    deleted: Date
+    deletedAt: Date
 }, {timestamps: true});
 
 const User = mongoose.model("User", userSchema, "users");
