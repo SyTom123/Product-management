@@ -7,7 +7,7 @@ header.header
                 .inner-logo
                     a(href="/")
                         img(src="/images/logo.svg", alt="Logo")
-            .col-md-4 
+            .col-md-3 
                 form(
                     action="/search"
                     method="GET"
@@ -27,7 +27,7 @@ header.header
                             class="btn btn-primary"
                         ) Tìm
 
-            .col-md-5
+            .col-md-4
                 .inner-menu
                     ul 
                         li  
@@ -47,3 +47,11 @@ header.header
                     a(href="/cart") 
                         <i class="fa-solid fa-cart-shopping"></i>
                         span (#{miniCart ? miniCart.totalQuantity : "0"})
+            .col-md-2 
+                .inner-menu.outin
+                    ul
+                        li 
+                            a(href="/user/register") Đăng ký
+
+                        li 
+                            a(href="/user/login") Đăng nhập

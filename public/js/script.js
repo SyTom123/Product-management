@@ -44,3 +44,24 @@ if(tableCart) {
 }
 
 // Hết Cập nhật số lượng sản phẩm trong giỏ hàng
+// Hiển thị mật khẩu
+const formRegister = document.querySelector("[form-register]");
+
+if(formRegister){
+    const inputPasswords = formRegister.querySelectorAll("input[type='password']");
+    const inputCheckbox = formRegister.querySelector("input[type='checkbox']");
+
+    inputCheckbox.addEventListener("click", ()=> {
+        if(inputCheckbox.checked){
+            inputPasswords.forEach(input => {
+                input.type = "text"
+            })
+        }
+        else {
+            inputPasswords.forEach(input => {
+                input.type = "password"
+            })
+        }
+    })
+}
+// Hết Hiển thị mật khẩu

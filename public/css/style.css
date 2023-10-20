@@ -2,6 +2,8 @@
 .header {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
+    display: flex;
+    align-items: center;
 }
 
 .header .inner-logo img {
@@ -17,9 +19,20 @@
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
+    flex: 1;
+}
+.header .inner-menu.outin>ul {
+    justify-content: flex-end;
+}
+.header .inner-menu.outin {
+    margin-left: -20px;
 }
 
 .header .inner-menu>ul>li {
+    margin-right: 20px;
+}
+.header .inner-menu.outin>ul>li {
+    margin-right: 0px;
     margin-left: 20px;
 }
 
