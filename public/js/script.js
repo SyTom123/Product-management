@@ -65,3 +65,17 @@ if(formRegister){
     })
 }
 // Hết Hiển thị mật khẩu
+// Thời gian hết hạn
+const expriesTime = document.querySelector("[expries-time]");
+let time = 10;
+const expriesFun = setInterval(()=> {
+    if(time > 0 ) {
+        time = time-1;
+        expriesTime.innerHTML = time;
+    }
+    else {
+        clearInterval(expriesFun);
+    }
+},1000)
+
+// End Thời gian hết hạn
