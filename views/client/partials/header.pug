@@ -49,9 +49,13 @@ header.header
                         span (#{miniCart ? miniCart.totalQuantity : "0"})
             .col-md-2 
                 .inner-menu.outin
-                    ul
-                        li 
-                            a(href="/user/register") Đăng ký
+                    ul  
+                        if(user) 
+                            li
+                                a(href="/user/logout") Đăng xuất 
+                        else 
+                            li 
+                                a(href="/user/register") Đăng ký
 
-                        li 
-                            a(href="/user/login") Đăng nhập
+                            li 
+                                a(href="/user/login") Đăng nhập

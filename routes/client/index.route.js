@@ -12,6 +12,8 @@ module.exports = (app) => {
     app.use(categoryMiddleware.category);
 
     app.use(cartMiddleware.cartId);
+    
+    app.use(userMiddleware.infoUser);
 
     app.use("/", homeRouter);
 
@@ -23,7 +25,7 @@ module.exports = (app) => {
 
     app.use("/checkout", checkoutRouter);
 
-    app.use(userMiddleware.infoUser);
+    
 
     app.use("/user", userRouter);
 }
