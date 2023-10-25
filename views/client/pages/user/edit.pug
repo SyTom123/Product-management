@@ -1,15 +1,16 @@
-extends ../../layouts/default.pug
+extends ../../layouts/default.pug  
 include ../../mixins/alert.pug
 block main 
     +alert-error(3000)
     .container.my-5
         .row.justify-content-center 
-            .col-6 
-                h2(class="text-center") Đăng ký tài khoản
+            .col-7 
+                h2(class="text-center") Chỉnh sửa tài khoản
                 form(
-                    action="/user/register" 
+                    action=`/user/edit/${user.id}?_method=PATCH` 
                     method="POST"
                     form-register
+                    enctype="multipart/form-data"
                 )
                     div(class="form-group")
                         label(for="fullName") Họ và tên     
@@ -18,7 +19,29 @@ block main
                             class="form-control"
                             id="fullName"
                             name="fullName"
+                            value = user.fullName
                         )
+                    div(
+                        class="form-group"
+                        upload-image
+                    )
+                        label(for='avatar') Avatar 
+                        input(
+                            type="file"
+                            class="form-control-file"
+                            id="avatar"
+                            name="avatar"
+                            accept="image/*"
+                            upload-image-input
+                        )
+                        div(class="text-center mt-3")
+                            img(
+                                src = user.avatar ? user.avatar:"/images/avatar-none.jpg"
+                                class="image-preview"
+                                upload-image-preview
+                                width="200px" height="200px"
+                                style="object-fit: cover; border-radius: 50%; border: 1px solid #dbdbdb"
+                            )
                     div(class="form-group")
                         label(for="email") Email    
                         input(
@@ -26,6 +49,7 @@ block main
                             class="form-control"
                             id="email"
                             name="email"
+                            value = user.email
                         )
                     div(class="form-group")
                         label(for="phone") Phone    
@@ -34,6 +58,7 @@ block main
                             class="form-control"
                             id="phone"
                             name="phone"
+                            value = user.phone
                         )
                     div(class="form-group")
                         label(for="password") Password    
@@ -43,14 +68,7 @@ block main
                             id="password"
                             name="password"
                         )
-                    div(class="form-group")
-                        label(for="password") Nhập lại Password    
-                        input(
-                            type="password"
-                            class="form-control"
-                            id="password"
-                            name="rePassword"
-                        )
+                    
                     div(class="form-check")
                         input(
                             class="form-check-input " 
@@ -68,8 +86,7 @@ block main
                         button(
                         type="submit"
                         class="btn btn-primary btn-block"
-                    ) Đăng ký
+                    ) Cập nhật
 
-                a(href="/user/login") Hoặc đăng nhập
                                 
-                        
+                           

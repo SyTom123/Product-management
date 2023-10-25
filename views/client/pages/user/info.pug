@@ -1,0 +1,57 @@
+extends ../../layouts/default.pug 
+include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
+block main
+    +alert-success(3000)
+    .container.my-3 
+        .row 
+            .col-12 
+                +box-head("Thông tin tài khoản")
+                div(class="card mt-5" style="width: 50%; padding: 20px; margin: 0 auto")
+                    h3(class="text-center") #{user.fullName}
+                    div(class="text-center")
+                        img( src = user.avatar ? user.avatar:"/images/avatar-none.jpg", 
+                        alt= user.title, width="200px" height="200px" style="object-fit: cover; border-radius: 50%")
+
+                    p(class="mt-3") Email: !{user.email}
+                    p Phone: !{user.phone}
+                    p Tình trạng:
+                    div(class="d-flex")
+                        div(class="form-group form-check form-check-inline")
+                            input(
+                                type="radio"
+                                class="form-check-input"
+                                id="statusActive"
+                                name="status"
+                                value="active"
+                                onclick="return false"
+                                checked = user.status == "active" ? true: false
+                            )
+                            label(for="statusActive" class="form-check-label") Hoạt động
+                        div(class="form-group form-check form-check-inline")
+                            input(
+                                type="radio"
+                                class="form-check-input"
+                                id="statusInActive"
+                                name="status"
+                                value="inactive"
+                                onclick="return false"
+                                checked = user.status == "inactive" ? true: false
+                            )
+                            label(for="statusInActive" class="form-check-label") Dừng hoạt động
+                    div()  
+                        |Hành động:   
+                        a(
+                            href=`/user/edit/${user.id}`
+                            class="btn btn-warning btn-sm mx-1 text-white") Sửa
+                        button(
+                            class="btn btn-danger btn-sm ml-1"
+                            button-delete
+                            data-id=user.id
+                        ) Xóa
+                    form(
+                        id="form-delete-item"
+                        method="POST"
+                        action=""
+                        data-path=`/user/delete`
+                    )

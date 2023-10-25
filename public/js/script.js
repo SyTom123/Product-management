@@ -70,17 +70,43 @@ if(formRegister){
     })
 }
 // Hết Hiển thị mật khẩu
-// Thời gian hết hạn
-const expriesTime = document.querySelector("[expries-time]");
-let time = 10;
-const expriesFun = setInterval(()=> {
-    if(time > 0 ) {
-        time = time-1;
-        expriesTime.innerHTML = time;
-    }
-    else {
-        clearInterval(expriesFun);
-    }
-},1000)
 
-// End Thời gian hết hạn
+// Upload image
+const uploadImage = document.querySelector("[upload-image]");
+if(uploadImage){
+    const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
+    const uploadImagePreview = uploadImage.querySelector("[upload-image-preview]");
+
+    uploadImageInput.addEventListener("change", (e)=> {
+        if(e.target.files.length) {
+            const image = URL.createObjectURL(e.target.files[0]);
+            uploadImagePreview.src= image;
+        }
+    })
+}
+// End Upload imagess
+// Delete item 
+const buttonDelete = document.querySelectorAll("[button-delete]");
+
+if(buttonDelete.length > 0) {
+
+    const formDeleteItem = document.querySelector("#form-delete-item");
+    const path = formDeleteItem.getAttribute("data-path");
+
+    buttonDelete.forEach(button => {
+        button.addEventListener("click", () => {
+            const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa hay không?")
+            if(confirmDelete) {
+                const id = button.getAttribute('data-id');
+
+                const action = path + `/${id}?_method=DELETE`;
+
+                formDeleteItem.action = action;
+
+                formDeleteItem.submit();
+            }
+            
+        })
+    })
+}
+// End Delete Item

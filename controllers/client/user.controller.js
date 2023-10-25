@@ -50,12 +50,12 @@ module.exports.loginPost= async(req, res) => {
         deleted: false
       });
     if(!user) {
-        req.flash("Error", "Email không tồn tại");
+        req.flash("error", "Email không tồn tại hoặc đã bị xóa!");
         res.redirect("back");
         return;
     }
     if(md5(password) != user.password) {
-        req.flash("Error", "Sai mật khẩu");
+        req.flash("error", "Sai mật khẩu !");
         res.redirect("back");
         return;
     }
@@ -165,6 +165,52 @@ module.exports.resetPasswordPost = async(req, res) => {
         password: md5(password)
     });
     req.flash("success", "Đổi mật khẩu thành công");
+    res.redirect("/");
+}
+//[GET] /user/info 
+module.exports.info = async (req, res) => {
+    res.render('client/pages/user/info', {
+        pageTitle: "Thông tin tài khoản"
+    })
+}
+
+
+//[GET] /user/edit/:id
+module.exports.edit = async (req, res) => {
+    const id = req.params.id;
+    const user = await User.findOne({
+        _id: id,
+        deleted: false
+    });
+
+    res.render('client/pages/user/edit', {
+        pageTitle: "Chỉnh sửa thông tin tài khoản",
+        user: user
+    })
+}
+//[PATCH] /user/edit/:id
+module.exports.editPatch = async (req, res) => {
+    const id = req.params.id;
+
+    if(req.body.password) {
+        req.body.password = md5(req.body.password);
+    }
+    else {
+        delete req.body.password;
+    }
+    await User.updateOne({_id: id}, req.body);
+    req.flash("success", "Cập nhật tài khoản thành công!");
+    res.redirect("/user/info");
+}
+//[PATCH] /user/delete/:id
+module.exports.delete = async (req, res) => {
+    const id = req.params.id;
+
+    await User.updateOne({_id: id}, {
+        deleted: true
+    });
+    res.clearCookie("tokenUser");
+    req.flash("success", "Xóa tài khoản thành công!");
     res.redirect("/");
 }
 

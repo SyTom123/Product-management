@@ -258,10 +258,6 @@ module.exports.editPatch = async (req,res) => {
     req.body.discountPercentage = +req.body.discountPercentage;
     req.body.stock = +req.body.stock; 
     req.body.position = +req.body.position;
-    
-    if(req.file && req.file.filename){
-        req.body.thumbnail = `/uploads/${req.file.filename}`;
-    }
 
     const updatedBy = {
         account_id: res.locals.user.id,
