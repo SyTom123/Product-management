@@ -63,6 +63,11 @@ if(formRegister){
             })
         }
     })
+    inputPasswords.forEach(input => {
+        input.addEventListener("copy", (e)=> {
+            e.preventDefault();
+        })
+    })
 }
 // Hết Hiển thị mật khẩu
 // Thời gian hết hạn
