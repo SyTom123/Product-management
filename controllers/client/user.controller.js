@@ -1,10 +1,9 @@
 const User = require("../../models/user.model");
+const Cart = require("../../models/cart.model");
 const ForgotPassword = require("../../models/forgot-password.modle");
 const generateHelper = require("../../helper/generate");
 const md5 = require("md5");
 const sendMailHelper = require("../../helper/sendMail");
-
-
 
 //[GET] /user/register
 module.exports.register = async(req, res) => {
@@ -65,6 +64,13 @@ module.exports.loginPost= async(req, res) => {
         res.redirect("back");
         return;
     }
+    //  Lưu user_id vào collection cart
+
+    await Cart.updateOne({
+        _id: req.cookies.cartId
+    }, {
+        user_id: user.id
+    })
     res.cookie("tokenUser", user.tokenUser);
     res.redirect("/");
 
