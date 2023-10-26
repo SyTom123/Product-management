@@ -2,3 +2,53 @@ extend ../../layouts/default.pug
 
 block main 
     h2 Trang tổng quan 
+    .row.mt-4 
+        .col-12 
+            .card-mb-4 
+                .card-header Thông tin tài khoản 
+                .card-body
+                    if(user.avatar) 
+                        div(class="text-center mb-4")
+                            img(
+                                src=user.avatar, alt=user.title 
+                                style="width: 200px; height:200px; object-fit: cover; border-radius: 50%"
+                            )
+                        if(user.fullName)
+                            p Họ tên: <b>#{user.fullName}</b>
+                        if(user.email)
+                            p Email: <b>#{user.email}</b>
+                        if(user.phone)
+                            p Số điện thoại: <b>#{user.phone}</b>
+                        if(role.title)
+                            p Phân quyền: <b>#{role.title}</b>
+    .row 
+        .col-md-3   
+            .card.mb-4
+            .card-header Danh mục sản phẩm
+            .card-body
+                p Số lượng: <b>#{statistic.categoryProduct.total}</b>
+                p Hoạt động: <b>#{statistic.categoryProduct.active}</b>
+                p Dừng hoạt động: <b>#{statistic.categoryProduct.inactive}</b>
+        .col-md-3   
+            .card.mb-4
+            .card-header Sản phẩm
+            .card-body
+                p Số lượng: <b>#{statistic.product.total}</b>
+                p Hoạt động: <b>#{statistic.product.active}</b>
+                p Dừng hoạt động: <b>#{statistic.product.inactive}</b>
+        .col-md-3   
+            .card.mb-4
+            .card-header Tài khoản Admin
+            .card-body
+                p Số lượng: <b>#{statistic.account.total}</b>
+                p Hoạt động: <b>#{statistic.account.active}</b>
+                p Dừng hoạt động: <b>#{statistic.account.inactive}</b>
+
+        .col-md-3   
+            .card.mb-4
+            .card-header Tài khoản client
+            .card-body
+                p Số lượng: <b>#{statistic.user.total}</b>
+                p Hoạt động: <b>#{statistic.user.active}</b>
+                p Dừng hoạt động: <b>#{statistic.user.inactive}</b>         
+        
