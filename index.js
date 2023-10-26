@@ -29,7 +29,7 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 
 // Flash
 app.use(cookieParser("Nguyentiensy"));
-app.use(session({cookie:{maxAge: 60000}}));
+app.use(session({ cookie: { maxAge: 60000 } }));
 app.use(flash());
 // End Flash
 
@@ -55,8 +55,15 @@ routeAdmin(app);
 // connect database
 database.connect();
 
+// error 404 page
+app.get("*", (req, res) => {
+    res.render("client/pages/errors/404.pug", {
+        pageTitle: "404 Not Found",
+    })
+})
+
 // connection
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log("Server is listening at port " + port);
+    console.log("Server is listening at port " + port);
 });
