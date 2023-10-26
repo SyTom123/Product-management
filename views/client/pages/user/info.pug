@@ -16,29 +16,14 @@ block main
                     p(class="mt-3") Email: !{user.email}
                     p Phone: !{user.phone}
                     p Tình trạng:
-                    div(class="d-flex")
-                        div(class="form-group form-check form-check-inline")
-                            input(
-                                type="radio"
-                                class="form-check-input"
-                                id="statusActive"
-                                name="status"
-                                value="active"
-                                onclick="return false"
-                                checked = user.status == "active" ? true: false
-                            )
-                            label(for="statusActive" class="form-check-label") Hoạt động
-                        div(class="form-group form-check form-check-inline")
-                            input(
-                                type="radio"
-                                class="form-check-input"
-                                id="statusInActive"
-                                name="status"
-                                value="inactive"
-                                onclick="return false"
-                                checked = user.status == "inactive" ? true: false
-                            )
-                            label(for="statusInActive" class="form-check-label") Dừng hoạt động
+                        if(user.status =="active")
+                            span(
+                                class="badge badge-success ml-2 p-2"
+                            ) Hoạt động
+                        else
+                            span(
+                                class="badge badge-danger ml-2 p-2"
+                            )  Dừng hoạt động
                     div()  
                         |Hành động:   
                         a(

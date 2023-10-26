@@ -1,0 +1,23 @@
+extends ../../layouts/default.pug 
+block main 
+    h2 Chi tiết User
+    .container.my-3 
+        .row 
+            .col-12 
+                div(class="card mt-5" style="width: 50%; padding: 20px; margin: 0 auto")
+                    h3(class="text-center") #{user.fullName}
+                    div(class="text-center mt-4")
+                        img( src = user.avatar ? user.avatar:"/images/avatar-none.jpg", 
+                        alt= user.title, width="200px" height="200px" style="object-fit: cover; border-radius: 50%")
+
+                    p(class="mt-3") Email: !{user.email}
+                    p Phone: !{user.phone}
+                    p Trạng thái:
+                        if(user.status =="active")
+                            span(
+                                class="badge badge-success ml-2 p-2"
+                            ) Hoạt động
+                        else
+                            span(
+                                class="badge badge-danger ml-2 p-2"
+                            )  Dừng hoạt động
