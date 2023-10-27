@@ -11,6 +11,8 @@ const database = require('./config/database');
 const methodOverride = require("method-override");
 var path = require('path');
 var moment = require('moment');
+const {Server} = require("socket.io");
+const http = require('http');
 
 
 const systemConfig = require('./config/system')
@@ -21,6 +23,17 @@ const app = express();
 // views / view engine
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
+
+// Socket.io
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket)=> {
+    console.log(`a user connected`, socket.id);
+})
+
+
+// End Socket.io
 
 // tinymce
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
@@ -64,6 +77,6 @@ app.get("*", (req, res) => {
 
 // connection
 const port = process.env.PORT;
-app.listen(port, () => {
+server.listen(port, () => {
     console.log("Server is listening at port " + port);
 });
