@@ -8,20 +8,13 @@ block main
             .col-12 
                 .chat 
                     .inner-body 
-                        .inner-coming
-                            .inner-name Sy Tom 
-                            .inner-content
-                                | Hôm nay trời đẹp nhỉ, đi chơi không ?
-                        .inner-outgoing 
-                            .inner-content 
-                                | OK nha, mấy giờ bạn ơi 
-                        .inner-coming
-                            .inner-name Sy Tom 
-                            .inner-content
-                                |6h 30 đợi nhau ở chỗ cổng trường nhé
-                        .inner-outgoing 
-                            .inner-content 
-                                | OK không gặp không về
+                        each chat in chats
+                            div(class=(chat.infoUser.id == user.id ? "inner-outgoing": "inner-coming"))
+                                if(chat.infoUser.id != user.id)
+                                    .inner-name #{chat.infoUser.fullName}
+                                .inner-content
+                                    | #{chat.content}
+                        
                     .inner-foot 
                         form(
                             action=""
