@@ -2,16 +2,12 @@ const mongoose = require('mongoose');
 const forgotPasswordSchema = new mongoose.Schema({
     email: String,
     otp: String,
-    createdOn: {
+    expireAt: {
       type: Date,
-      
+      expires: 180
     }
 }, {timestamps:true});
 
-forgotPasswordSchema.pre("save", function(next) { 
-    this.sessionActivity = new Date(); 
-    next(); 
-});
-forgotPasswordSchema.index({createdOn: 1}, {expireAfterSeconds: 160});
+forgotPasswordSchema.index({createdOn: 1}, {expireAfterSeconds: 180});
 const ForgotPassword = mongoose.model("ForgotPassword", forgotPasswordSchema, "forgot-password");
 module.exports = ForgotPassword;
