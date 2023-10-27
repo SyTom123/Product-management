@@ -342,15 +342,20 @@
 .chat .inner-body .inner-content {
     background: #F0F0F0;
     margin-bottom: 10px;
-    max-width: 220px;
+    max-width: 300px;
     padding: 6px 10px;
     border-radius: 16px;
     line-height: 1.4;
+    display: inline-block;
+}
+.chat .inner-outgoing {
+    display: flex;
+    justify-content: flex-end;
 }
 .chat .inner-outgoing .inner-content {
-    margin-left: auto;
     background: #0084FF;
     color: #fff;
+    margin-left: auto;
 }
 .chat .inner-foot {
     border-top: 1px solid #ddd;

@@ -6,10 +6,10 @@ block main
             .col-12 
                 +box-head("Chat")  
             .col-12 
-                .chat 
+                .chat(my-id= user.id) 
                     .inner-body 
                         each chat in chats
-                            div(class=(chat.infoUser.id == user.id ? "inner-outgoing": "inner-coming"))
+                            div(class=(chat.infoUser.id == user.id ? "inner-outgoing": "inner-incoming"))
                                 if(chat.infoUser.id != user.id)
                                     .inner-name #{chat.infoUser.fullName}
                                 .inner-content
