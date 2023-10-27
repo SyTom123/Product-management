@@ -1,0 +1,37 @@
+extends ../../layouts/default.pug 
+include ../../mixins/box-head.pug 
+block main 
+    .container.my-3 
+        .row 
+            .col-12 
+                +box-head("Chat")  
+            .col-12 
+                .chat 
+                    .inner-body 
+                        .inner-coming
+                            .inner-name Sy Tom 
+                            .inner-content
+                                | Hôm nay trời đẹp nhỉ, đi chơi không ?
+                        .inner-outgoing 
+                            .inner-content 
+                                | OK nha, mấy giờ bạn ơi 
+                        .inner-coming
+                            .inner-name Sy Tom 
+                            .inner-content
+                                |6h 30 đợi nhau ở chỗ cổng trường nhé
+                        .inner-outgoing 
+                            .inner-content 
+                                | OK không gặp không về
+                    .inner-foot 
+                        form(
+                            action=""
+                            class="inner-form"
+                        ) 
+                            input(
+                                type="text"
+                                placeholder="Nhập nội dung..."
+                                name="content"
+                            )
+                            button
+                                <i class="fa-solid fa-paper-plane"></i>
+

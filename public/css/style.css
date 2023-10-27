@@ -21,9 +21,11 @@
     flex-wrap: wrap;
     flex: 1;
 }
+
 .header .inner-menu.outin>ul {
     justify-content: flex-end;
 }
+
 .header .inner-menu.outin {
     margin-left: -20px;
 }
@@ -31,6 +33,7 @@
 .header .inner-menu>ul>li {
     margin-right: 20px;
 }
+
 .header .inner-menu.outin>ul>li {
     margin-right: 0px;
     margin-left: 20px;
@@ -251,7 +254,7 @@
 
 .product-detail .inner-stock {
     margin-bottom: 10px;
-    
+
 }
 
 .product-detail .inner-stock span {
@@ -261,27 +264,31 @@
     display: inline-block;
     padding: 3px 6px;
     border-radius: 8px;
-    margin:0 8px 0 16px;
+    margin: 0 8px 0 16px;
 }
+
 .product-detail .cart-form input {
     width: 80px;
     display: inline-block;
     margin-left: 16px;
     text-align: center;
 }
+
 /* End product-detail */
 /* Show Alert */
-[show-alert]{
+[show-alert] {
     position: fixed;
     top: 70px;
     right: 15px;
     z-index: 10;
 }
+
 [show-alert].alert-hidden {
-    animation:alert-hidden ease-in 1s ;
+    animation: alert-hidden ease-in 1s;
     animation-fill-mode: both;
 }
- [close-alert] {
+
+[close-alert] {
     background-color: #fff;
     display: inline-flex;
     width: 24px;
@@ -295,19 +302,83 @@
     align-items: center;
     margin-left: 16px;
 }
+
 [close-alert] span {
     position: relative;
-    bottom:2px;
+    bottom: 2px;
 }
+
 @keyframes alert-hidden {
     from {
         right: 15px;
         opacity: 1;
     }
+
     to {
         right: -100%;
         opacity: 0;
         display: none;
     }
 }
+
 /* End Show Alert */
+/* chat */
+.chat {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+}
+
+.chat .inner-body {
+    padding: 20px 30px;
+}
+
+.chat .inner-body .inner-name {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.chat .inner-body .inner-content {
+    background: #F0F0F0;
+    margin-bottom: 10px;
+    max-width: 220px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    line-height: 1.4;
+}
+.chat .inner-outgoing .inner-content {
+    margin-left: auto;
+    background: #0084FF;
+    color: #fff;
+}
+.chat .inner-foot {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+}
+.chat .inner-form {
+    display: flex;
+    align-items: center;
+
+}
+.chat .inner-form input {
+    flex: 1;
+    height: 36px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 0 10px;
+    outline: none;
+    background: #F0F0F0;
+}
+.chat .inner-form button {
+    border-radius: 10px;
+    border: 1px solid #0084FF;
+    background: #0084FF;
+    color: #fff;
+    height: 32px;
+    padding: 0 10px;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+/* End chat */
