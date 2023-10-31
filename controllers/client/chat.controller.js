@@ -19,9 +19,14 @@ module.exports.index = async (req, res) => {
                 fullName: fullName,
                 content: content
             })
-        })
-
-       
+        });
+        socket.on("CLIENT_SEND_TYPING", (type) => {
+            socket.broadcast.emit("SERVER_RETURN_TYPING", {
+              userId: userId,
+              fullName: fullName,
+              type: type
+            });
+        });
     })
 
     // socket io
@@ -40,7 +45,6 @@ module.exports.index = async (req, res) => {
 
     }
    
-
     res.render("client/pages/chat/index", {
         pageTitle: "Chat",
         chats: chats
