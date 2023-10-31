@@ -32,7 +32,8 @@ module.exports.create = async(req, res) => {
    
     res.render("admin/pages/product-category/create.pug",{
         pageTitle: "Tạo Danh mục sản phẩm",
-        records: newRecords
+        records: newRecords,
+        status_02: "active"
     })
 }
 
@@ -69,7 +70,8 @@ module.exports.edit = async(req, res) => {
     res.render("admin/pages/product-category/edit",{
         pageTitle: "Chỉnh sửa danh mục sản phẩm",
         data:data,
-        records: newRecords
+        records: newRecords,
+        status_02: "active"
     })
 
 }
@@ -103,6 +105,7 @@ module.exports.detail = async(req, res) => {
     res.render("admin/pages/product-category/detail",{
         pageTitle: "Chi tiết danh mục sản phẩm",
         data:data,
+        status_02: "active"
     })
     
 }

@@ -16,7 +16,8 @@ module.exports.index = async (req, res) => {
 //[GET] /admin/role/create
 module.exports.create = async (req, res) => {
     res.render("admin/pages/roles/create.pug",{
-        pageTitle: "Tạo mới nhóm quyền"
+        pageTitle: "Tạo mới nhóm quyền",
+        status_04 : "active"
     })
 }
 //[POST] /admin/role/create
@@ -65,7 +66,8 @@ module.exports.edit = async (req, res) => {
     })
     res.render("admin/pages/roles/edit.pug", {
         pageTitle: "Chỉnh sửa nhóm quyền",
-        role: role
+        role: role,
+        status_04 : "active"
     });
 };
 
@@ -80,6 +82,7 @@ module.exports.editPatch = async (req, res) => {
     req.flash("success", "Cập nhật nhóm quyền thành công");
     res.redirect(`/${systemConfig.prefix_admin}/roles`);
 };
+
 //[PATCH]/role/delete/:id
 module.exports.delete = async (req, res) => {
     
@@ -92,7 +95,7 @@ module.exports.delete = async (req, res) => {
     });
     
     req.flash("success", "Xóa nhóm quyền thành công");
-    res.redirect(`/${systemConfig.prefixAdmin}/roles`);
+    res.redirect(`/${systemConfig.prefix_admin}/roles`);
 };
 
 //[GET]/role/detail
@@ -105,7 +108,8 @@ module.exports.detail = async (req, res) => {
     })
     res.render("admin/pages/roles/detail.pug", {
         pageTitle: "Chi tiết nhóm quyền",
-        role: role
+        role: role,
+        status_04 : "active"
     });
 };
 //[GET]/role/permissions
@@ -113,7 +117,8 @@ module.exports.permissions = async (req, res) => {
     const records = await Role.find({deleted: false});
     res.render("admin/pages/roles/permissions.pug", {
         pageTitle: "Phân quyền",
-        records: records
+        records: records,
+        status_05 : "active"
     });
 };
 

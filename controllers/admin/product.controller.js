@@ -192,7 +192,8 @@ module.exports.create = async (req,res) => {
 
     res.render("admin/pages/products/create", {
         pageTitle: "Thêm mới sản phẩm",
-        records: newRecords
+        records: newRecords,
+        status_03 : "active"
     });
 }
 //[POST] /admin/product/createPost
@@ -246,7 +247,8 @@ module.exports.edit = async (req, res) => {
 
     res.render("admin/pages/products/edit.pug", {
         product: product,
-        records: newRecords
+        records: newRecords,
+        status_03 : "active"
     })
 }
 
@@ -282,6 +284,7 @@ module.exports.detail = async (req, res) => {
         deleted: false
     })
     res.render("admin/pages/products/detail.pug", {
-        product: product
+        product: product,
+        status_03 : "active"
     })
 }

@@ -1,16 +1,17 @@
 const Account = require("../../models/account.model");
-const Role = require("../../models/role.modle");
+const Roles = require("../../models/role.modle");
 const systemConfig = require("../../config/system");
 const md5 = require("md5");
+const Accounts = require("../../models/account.model");
 
-// [GET]/admin/account/index
+// [GET]/admin/accounts/index
 module.exports.index = async (req, res) => {
     const records = await Account.find({
         deleted: false,
     });
 
     for (const record of records) {
-        const role = await Role.findOne({
+        const role = await Roles.findOne({
             _id: record.role_id,
         });
         record.role = role;
@@ -22,9 +23,9 @@ module.exports.index = async (req, res) => {
     });
 };
 
-// [GET]/admin/account/create
+// [GET]/admin/accounts/create
 module.exports.create = async (req, res) => {
-    const roles = await Role.find({
+    const roles = await Roles.find({
         deleted: false,
     });
 
@@ -33,7 +34,7 @@ module.exports.create = async (req, res) => {
         roles: roles,
     });
 };
-// [POST]/admin/account/create
+// [POST]/admin/accounts/create
 module.exports.createPost = async (req, res) => {
     req.body.password = md5(req.body.password);
 
@@ -44,7 +45,7 @@ module.exports.createPost = async (req, res) => {
     res.redirect(`/${systemConfig.prefix_admin}/accounts`);
 };
 
-// [GET]/admin/account/edit/:id
+// [GET]/admin/accounts/edit/:id
 module.exports.edit = async (req, res) => {
 
     const id = req.params.id;
@@ -52,7 +53,7 @@ module.exports.edit = async (req, res) => {
         _id: id,
         deleted: false,
     });
-    const roles = await Role.find({
+    const roles = await Roles.find({
         deleted: false,
     });
 
@@ -63,7 +64,7 @@ module.exports.edit = async (req, res) => {
         roles: roles
     });
 }
-// [PATCH]/admin/account/edit/:id
+// [PATCH]/admin/accounts/edit/:id
 module.exports.editPatch = async (req, res) => {
 
     if (req.body.password) {
@@ -75,5 +76,49 @@ module.exports.editPatch = async (req, res) => {
     await Account.updateOne({ _id: req.params.id }, req.body);
     req.flash("success", "Chỉnh sửa tài khoản thành công");
 
+    res.redirect("back");
+}
+//[GET]/accounts/detail/:id
+module.exports.detail = async(req, res) => {
+
+    const id = req.params.id;
+    const record = await Accounts.findOne({
+        _id: id,
+        deleted: false
+    }, )
+    const role = await Roles.findOne({
+        _id: record.role_id,
+        deleted: false
+    });
+    record.role = role;
+    res.render("admin/pages/accounts/detail", {
+        pageTitle: "Chi tiết tài khoản",
+        record: record,
+    })
+}
+//[PATCH]/accounts/delete/:id
+module.exports.delete = async(req, res) => {
+
+    const id = req.params.id;
+
+    await Accounts.updateOne({_id: id}, {deleted: true});
+    req.flash("success", "Xoá tài khoản thành công!");
+    
+    res.redirect(`/${systemConfig.prefix_admin}/accounts`);
+}
+//[POST]/accounts/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+    const status = req.params.status;
+    const id = req.params.id;
+    
+    const result = await Accounts.updateOne ({
+        _id: id
+    }, {
+        status: status
+    });
+
+    if(result) {
+        req.flash("success", "Thay đổi trạng thái thành công!");
+    }
     res.redirect("back");
 }
