@@ -38,7 +38,6 @@ module.exports.detail =  async(req, res) => {
 //[GET]/users/delete/:id
 module.exports.delete =  async(req, res) => {
     const id = req.params.id;
-    console.log(id);
     await User.updateOne({_id: id}, {
         deleted: true
     });

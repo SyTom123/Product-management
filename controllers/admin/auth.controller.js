@@ -4,9 +4,15 @@ const systemConfig = require("../../config/system");
 
 // [GET]/admin/auth/login
 module.exports.login = async (req, res) => {
-    res.render("admin/pages/auth/login.pug", {
-        pageTitle: "Đăng nhập",
-    });
+    const token = req.cookies.token;
+    if(token) {
+        res.redirect(`/${systemConfig.prefix_admin}/dashboard`);
+    }
+    else {
+        res.render("admin/pages/auth/login.pug", {
+            pageTitle: "Đăng nhập",
+        });
+    }
 };
 
 // [POST]/admin/auth/login
