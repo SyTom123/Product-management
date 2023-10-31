@@ -14,7 +14,7 @@ block main
                         href=`/${prefixAdmin}/roles/create`
                         class ="btn btn-outline-success"
                     ) 
-                        <i class="fa-solid fa-plus"> Thêm mới
+                        <i class="fa-solid fa-plus"></i> Thêm mới
             table(
                 class="table table-hover table-sm mt-3"
             )
@@ -33,15 +33,15 @@ block main
                                 td !{item.description}
                                 td 
                                     a(
-                                        class="btn btn-warning btn-sm"
+                                        class="btn btn-warning btn-sm text-white"
                                         href = `/${prefixAdmin}/roles/detail/${item.id}`
                                     ) Chi tiết
                                     a(
-                                        class="btn btn-secondary btn-sm mx-2"
+                                        class="btn btn-secondary btn-sm mx-1"
                                         href = `/${prefixAdmin}/roles/edit/${item.id}`
                                     ) Sửa
                                     button(
-                                        class="btn btn-danger btn-sm ml-1"
+                                        class="btn btn-danger btn-sm "
                                     ) Xóa
                     else 
                         tr 

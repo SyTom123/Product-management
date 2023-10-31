@@ -1,8 +1,9 @@
 extends ../../layouts/default.pug
 include ../../mixins/table-tree.pug
+include ../../mixins/alert.pug
 
 block main  
-
+    +alert-success(3000)
     if(role.permissions.includes("products-category_view"))
         h2(class="mb-4") Danh mục sản phẩm
         .card.mb-3 
@@ -15,7 +16,7 @@ block main
                             a(
                                 href=`/${prefixAdmin}/product-category/create`
                                 class="btn btn-outline-success"
-                            ) <i class="fa-solid fa-plus"> Thêm mới
+                            ) <i class="fa-solid fa-plus"></i> Thêm mới
                 table(
                     class="table table-hover table-sm mt-3"
                 )
@@ -29,4 +30,16 @@ block main
                             th Hành động
                     tbody 
                         +table-tree(records)
+        form(
+            id="form-change-status"
+            method="POST"
+            action=""
+            data-path=`/${prefixAdmin}/product-category/change-status`
+        )
+        form(
+            id="form-delete-item"
+            method="POST"
+            action=""
+            data-path=`/${prefixAdmin}/product-category/delete`
+        )
                         

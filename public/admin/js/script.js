@@ -245,3 +245,20 @@ if(sort) {
 
 }
 // End Sort
+// Hiển thị mật khẩu
+const formAuth = document.querySelector("[form-auth]");
+if(formAuth) {
+    const inputPassword = formAuth.querySelector("input[type='password']");
+    const inputCheckbox = formAuth.querySelector("input[type='checkbox']");
+    inputCheckbox.addEventListener("click", ()=> {
+        if(inputCheckbox.checked == true) {
+            inputPassword.type = "text"
+        }
+        else {
+            inputPassword.type="password";
+        }
+    })
+}
+// Hết Hiển thị mật khẩu
+
+

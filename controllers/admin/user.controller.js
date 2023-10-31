@@ -7,7 +7,8 @@ module.exports.index =  async(req, res) => {
     })
     res.render("admin/pages/users/index.pug", {
         pageTitle: "Danh sách user",
-        records: records
+        records: records,
+        status_07: 'active'
     })
 }
 //[PATCH]/users/change-status/:status/:id

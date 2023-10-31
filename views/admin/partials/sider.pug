@@ -1,29 +1,44 @@
-.sider
-    .inner-menu 
-        ul 
-            li 
-                a(href=`/${prefixAdmin}/dashboard`) Tổng quan 
-
-            if(role.permissions.includes("products-category_view"))
+mixin sider () 
+    .sider
+        .inner-menu 
+            ul 
                 li 
-                    a(href=`/${prefixAdmin}/product-category`) Danh mục sản phẩm
+                    a(href=`/${prefixAdmin}/dashboard` class=`${status_01}`)  
+                        <i class="fa-solid fa-gauge mr-2"></i>
+                        span Tổng quan
+                if(role.permissions.includes("products-category_view"))
+                    li 
+                        a(href=`/${prefixAdmin}/product-category` class=`${status_02}`)
+                            <i class="fa-solid fa-list mr-2"></i>
+                            span Danh mục sản phẩm
 
-            if(role.permissions.includes("products_view"))
-                li 
-                    a(href=`/${prefixAdmin}/products`) Sản phẩm
+                if(role.permissions.includes("products_view"))
+                    li 
+                        a(href=`/${prefixAdmin}/products` class=`${status_03}`) 
+                            <i class="fa-solid fa-shop mr-2"></i>
+                            span Sản phẩm
 
-            if(role.permissions.includes("roles_view"))
-                li 
-                    a(href=`/${prefixAdmin}/roles`) Nhóm quyền
+                if(role.permissions.includes("roles_view"))
+                    li 
+                        a(href=`/${prefixAdmin}/roles` class=`${status_04}`) 
+                            <i class="fa-solid fa-gears mr-2"></i>
+                            span Nhóm quyền
+                if(role.permissions.includes("permissions_view"))
+                    li 
+                        a(href=`/${prefixAdmin}/roles/permissions` class=`${status_05}`) 
+                            <i class="fa-solid fa-flag mr-2"></i>
+                            span Phân quyền
 
-            if(role.permissions.includes("permissions_view"))
+                if(role.permissions.includes("accounts_view"))
+                    li 
+                        a(href=`/${prefixAdmin}/accounts` class=`${status_06}`)
+                            <i class="fa-solid fa-user-gear mr-2"></i>
+                            span Tài khoản Admin
                 li 
-                    a(href=`/${prefixAdmin}/roles/permissions`) Phân quyền
-
-            if(role.permissions.includes("accounts_view"))
-                li 
-                    a(href=`/${prefixAdmin}/accounts`) Tài khoản Admin
-            li 
-                a(href=`/${prefixAdmin}/users`) Tài khoản User
-            li
-                a(href=`/${prefixAdmin}/settings/general`) Cài đặt chung
+                    a(href=`/${prefixAdmin}/users` class=`${status_07}`) 
+                        <i class="fa-solid fa-user mr-2"></i>
+                        span Tài khoản User
+                li
+                    a(href=`/${prefixAdmin}/settings/general` class=`${status_08}`) 
+                        <i class="fa-solid fa-gear mr-2"></i>
+                        span Cài đặt chung 

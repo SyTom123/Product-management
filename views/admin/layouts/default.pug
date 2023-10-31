@@ -1,3 +1,4 @@
+include ../partials/sider.pug
 doctype html
 html
     head
@@ -9,7 +10,8 @@ html
         if(role.permissions.length > 0)
             include ../partials/header.pug
             .body 
-                include ../partials/sider.pug
+                //- include ../partials/sider.pug
+                +sider()
                 .main
                     block main 
 

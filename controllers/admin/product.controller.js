@@ -94,7 +94,8 @@ else {
         products: products,
         filterStatus: filterStatus,
         keyword: objectSearch.keyword,
-        pagination: objectPagination
+        pagination: objectPagination,
+        status_03 : "active"
     });
 }
 

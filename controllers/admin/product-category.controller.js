@@ -14,7 +14,8 @@ module.exports.index = async (req, res) => {
     const newRecords = createTree(records);
 
     res.render("admin/pages/product-category/index", {
-        records: newRecords
+        records: newRecords,
+        status_02: "active"
     });
     
 
@@ -104,4 +105,61 @@ module.exports.detail = async(req, res) => {
         data:data,
     })
     
+}
+// [PATCH]/admin/product-category/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+    const status = req.params.status;
+    const id = req.params.id;
+
+    await ProductCategory.updateOne({
+        _id: id,
+    }, {
+        status: status,
+    });
+
+    const productCategory =await ProductCategory.findOne({ _id: id,});
+
+    const parent_id = productCategory.id;
+
+    const proCates= await ProductCategory.find({parent_id: parent_id});
+    if(proCates) {
+        for(const item of proCates) {
+            await ProductCategory.updateOne({
+                _id: item.id,
+            }, {
+                status: status,
+            });
+        }
+    }
+
+    req.flash("success", "Cập nhật trạng thái thành công!");
+    res.redirect("back");
+};
+//[DELETE]/products-category/:id
+module.exports.delete = async(req, res) => {
+
+    const id = req.params.id;
+
+    const productCategory = await ProductCategory.updateOne({
+        _id: id,
+    }, {
+        deleted: true,
+        deletedAt: new Date(),
+    });
+
+    const proCates= await ProductCategory.find({parent_id: id});
+    
+    if(proCates) {
+        for(const item of proCates) {
+            await ProductCategory.updateOne({
+                _id: item.id,
+            }, {
+               parent_id: "",
+            });
+        }
+    }
+
+    req.flash("success", "Xóa danh mục sản phẩm thành công");
+
+    res.redirect(`/${systemConfig.prefix_admin}/product-category`);
 }

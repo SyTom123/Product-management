@@ -83,6 +83,7 @@ module.exports.dashboard =async (req, res) => {
 
     res.render("admin/pages/dashboard/index", {
         pageTitle: "Tổng quan",
-        statistic: statistic
+        statistic: statistic,
+        status_01: "active"
     });
 };
