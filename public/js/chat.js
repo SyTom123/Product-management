@@ -24,7 +24,8 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
   
     if(myId == data.userId) {
       div.classList.add("inner-outgoing");
-    } else {
+    }
+    else {
       div.classList.add("inner-incoming");
       htmlFullName = `<div class="inner-name">${data.fullName}</div>`;
     }
@@ -35,6 +36,14 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
     `;
   
     body.appendChild(div);
+    body.scrollTop = bodyChat.scrollHeight
   });
   // End SERVER_RETURN_MESSAGE
 //SERVER_RETURN_MESSAGE
+
+// Scroll chat
+const bodyChat = document.querySelector(".chat .inner-body");
+if(bodyChat) {
+  bodyChat.scrollTop = bodyChat.scrollHeight
+}
+// End Scroll chat

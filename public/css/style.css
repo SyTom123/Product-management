@@ -4,6 +4,12 @@
     padding: 10px 0;
     display: flex;
     align-items: center;
+    background-color: #EE4D2D;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
 }
 
 .header .inner-logo img {
@@ -41,10 +47,22 @@
 
 .header .inner-menu>ul>li a {
     text-decoration: none;
+    color: #000;
 }
-
+.header .inner-menu>ul>li a:hover {
+    color: gold;
+}
+.header .inner-menu > ul>li>a {
+    color: #fff;
+}
+.header .inner-cart a {
+    color: #fff;
+}
 /* End header */
-
+.body {
+    margin-top: 70px;
+    padding-top: 10px;
+}
 /* Box head */
 .box-head {
     margin-bottom: 30px;
@@ -133,7 +151,7 @@
 
 /* Footer */
 .footer {
-    background-color: #333;
+    background-color: #EE4D2D;
     color: white;
     text-align: center;
     padding: 10px;
@@ -332,6 +350,8 @@
 
 .chat .inner-body {
     padding: 20px 30px;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .chat .inner-body .inner-name {
@@ -347,6 +367,7 @@
     border-radius: 16px;
     line-height: 1.4;
     display: inline-block;
+  
 }
 .chat .inner-outgoing {
     display: flex;
