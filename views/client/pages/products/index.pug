@@ -10,7 +10,7 @@ block main
         .row 
             each item in products 
                 .col-3.mb-3 
-                    div(class="product-item" href=`/products/detail/${item.slug}`)
+                    a(class="product-item" href=`/products/detail/${item.slug}`)
                         div(class="product-item__img")
                             img(src=item.thumbnail, alt=item.title)
                         h4(class="product-item__name") #{item.title}

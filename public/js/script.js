@@ -118,3 +118,31 @@ $('.slider-one').slick({
     autoplaySpeed: 5000,
 });
 // slicker
+
+// Change quantity
+const productDetail = document.querySelector("#product-detail");
+if(productDetail) {
+    const formDetail = document.querySelector("#product-detail [form-detail]");
+    let quantity = 1;
+    const buttonChangeUp = formDetail.querySelector("[button-change-qty-up]");
+    const buttonChangeDown = formDetail.querySelector("[button-change-qty-down]");
+    const inputQty = formDetail.querySelector("input[name='quantity']");
+
+    const maxQty = productDetail.querySelector("[stock-qty]").getAttribute("stock-qty") || 0;
+
+    buttonChangeUp.addEventListener("click", ()=> {
+        if(quantity < maxQty) {
+            quantity += 1;
+            inputQty.value = quantity;
+        }
+    })
+    
+    buttonChangeDown.addEventListener("click", ()=> {
+        if(quantity > 1) {
+            quantity -= 1;
+            inputQty.value = quantity;
+        }
+    })
+}
+
+// End Change quantity
