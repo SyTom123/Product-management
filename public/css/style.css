@@ -259,7 +259,7 @@ background-color: #F5F5F5;
 /* End header */
 .body {
     margin-top: 70px;
-    padding-top: 20px;
+    padding-top: 30px;
 }
 /* Box head */
 .box-head {
@@ -603,12 +603,49 @@ background-color: #F5F5F5;
 }
 
 /* End Show Alert */
+/* edit user */
+.edit-user {
+    background-color: #fff;
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* End edit user */
+/* cart */
+/* End cart */
+.cart table thead{
+    background-color: #BEE5EB;
+}
+.cart table tbody{
+    background-color: #fff;
+}
+.cart table a{
+    text-decoration: none;
+}
+/* checkout */
+.checkout table thead{
+    background-color: #BEE5EB;
+}
+.checkout table tbody{
+    background-color: #fff;
+}
+.checkout form {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+/* End checkout */
+
+
 /* chat */
 .chat {
     width: 100%;
-    border: 1px solid #ddd;
+    border: 1px solid #dbdbdb;
     border-radius: 8px;
-
+    background-color: #fff;
+    margin-bottom: 20px;
 }
 
 .chat .inner-body {
@@ -631,6 +668,9 @@ background-color: #F5F5F5;
     line-height: 1.4;
     display: inline-block;
   
+}
+.chat .inner-body .inner-content::-webkit-scrollbar {
+    display: none;
 }
 .chat .inner-outgoing {
     display: flex;
@@ -657,7 +697,6 @@ background-color: #F5F5F5;
     border-radius: 15px;
     padding: 0 10px;
     outline: none;
-    background: #F0F0F0;
 }
 .chat .inner-form button {
     border-radius: 10px;
