@@ -1,13 +1,17 @@
 mixin product-item(item)
-  .col-4.mb-3
-    .product-item
-      .inner-image
-        img(src=item.thumbnail, alt=item.title)
-        if(item.featured == "1")
-          .inner-featured Nổi bật
-      .inner-content
-        h3.inner-title
-          a(href=`/products/detail/${item.slug}`) #{item.title}
-        .inner-price-new #{item.priceNew}$
-        .inner-price-old #{item.price}$
-        .inner-discount -#{item.discountPercentage}%
+    .col-3.mb-3
+        a(class="product-item" href=`/products/detail/${item.slug}`)
+            div(class="product-item__img")
+                img(src=item.thumbnail, alt=item.title)
+            h4(class="product-item__name") #{item.title}
+            div(class="product-item__price")
+                span(class="product-item__price-old") #{item.priceNew} $
+                span(class="product-item__price-current") #{item.price} $
+            if(item.featured == "1")
+                div(class="product-item__featured")
+                    <i class="fa-solid fa-check"></i>
+                    span Nổi bật
+            div(class="product-item__sale-off")
+                span(class="product-item__percent") #{item.discountPercentage} %
+                span(class="product-item__sale-off-label") GIẢM
+            div(class="product-item-line")
