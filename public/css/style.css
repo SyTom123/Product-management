@@ -39,7 +39,8 @@ background-color: #F5F5F5;
 .header .inner-menu > ul > li a {
     text-decoration: none;
     color: #333;
-   
+    position: relative;
+    z-index: 1;
 }
 .header .inner-menu > ul > li a:hover {
     color: gold;
@@ -135,7 +136,10 @@ background-color: #F5F5F5;
 .header .inner-cart {
     text-align: right;
     padding-right: 16px;
-  
+    
+}
+.header .inner-cart:hover .inner-cart-logo {
+    color: gold;
 }
 .header .inner-cart .inner-cart-logo {
     position: relative;
@@ -181,6 +185,9 @@ background-color: #F5F5F5;
 }
 .header .user-avatar .user-avatar-name {
     color: #fff;
+}
+.header .user-avatar .user-avatar-name:hover {
+    color: gold;
 }
 .header .user-avatar .user-avatar-image img {
     width: 26px;
@@ -409,7 +416,44 @@ background-color: #F5F5F5;
 }
 /* End Home Product */
 /* End Product Item */
+/* slick-arrow-square */
+.slick-arrow-square {
+    position: relative;
+}
 
+.slick-arrow-square .slick-arrow {
+    background-color: #00000080;
+    position: absolute;
+    border: 0;
+    top:calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+    color: transparent;
+    border-radius: 8px;
+}
+.slick-arrow-square .slick-arrow::before {
+    content: "\f104";
+    font-weight: 600;
+    opacity: 0.6;
+    font-family: "Font awesome 6 Free";
+    color: #fff;
+    font-size: 2.4rem;
+}
+.slick-arrow-square .slick-next::before {
+    content: "\f105";
+}
+.slick-arrow-square .slick-arrow:hover {
+    background-color:#ee4d2d ;
+}
+.slick-arrow-square .slick-next {
+    right: 10px;
+   
+}
+.slick-arrow-square .slick-prev {
+    left: 10px;
+    z-index: 1;
+}
+/* End slick-arrow-square */
 
 /* Footer */
 .footer {

@@ -110,3 +110,11 @@ if(buttonDelete.length > 0) {
     })
 }
 // End Delete Item
+// slicker
+$('.slider-one').slick({
+    infinite: true,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+});
+// slicker

@@ -4,13 +4,33 @@ include ../../mixins/product-layout.pug
 include ../../mixins/alert.pug
 block main 
     +alert-success(3000)
+    .container 
+        .row 
+            .col-12 
+                div(class="slider-one slick-arrow-square mb-4")
+                    div(class="banner")
+                        div(class="inner-image")
+                            img(src="/images/banner/banner_1.webp" alt="Banner" width="100%")
+                    div(class="banner")
+                        div(class="inner-image")
+                            img(src="/images/banner/banner_2.webp" alt="Banner" width="100%")
+                    div(class="banner")
+                        div(class="inner-image")
+                            img(src="/images/banner/banner_3.webp" alt="Banner" width="100%")
+                    div(class="banner")
+                        div(class="inner-image")
+                            img(src="/images/banner/banner_4.webp" alt="Banner" width="100%")
+                    div(class="banner")
+                        div(class="inner-image")
+                            img(src="/images/banner/banner_5.webp" alt="Banner" width="100%")
+
     .section-products-featered.mb-5 
         .container 
             .row 
                 .col-12 
                     +box-head("Sản phẩm nổi bật")
             +product-grid(productsFeatured)
-    .section-products-featered.my-5 
+    .section-products-featered.mt-5 
         .container 
             .row 
                 .col-12 
