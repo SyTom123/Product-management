@@ -47,11 +47,11 @@ header.header
                         <i class="fa-solid fa-cart-shopping"></i>
                         span(class ="inner-cart-text")  #{miniCart ? miniCart.totalQuantity : "0"}
             .col-md-2 
-                .inner-user
+                .inner-user 
                     if(user) 
                         a(class="user-avatar") 
                             div(class="user-avatar-image")
-                                img(src = user.avatar ? user.avatar:"/images/avatar-none.jpg", alt= user.avatar)
+                                img(src = user.avatar ? user.avatar : "/images/avatar-none.jpg", alt= user.fullName)
                             div(class="user-avatar-name") #{user.fullName} 
 
                         ul(class="user-submenu")

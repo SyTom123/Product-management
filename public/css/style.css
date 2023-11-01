@@ -64,7 +64,7 @@ background-color: #F5F5F5;
 }
 .header .sub-menu-list a {
     display: inline-block;
-    padding: 10px;
+    padding: 8px 10px;
     width: 100%;
 }
 .header .sub-menu-list-1  {
@@ -670,6 +670,32 @@ background-color: #F5F5F5;
     border-radius: 8px;
 }
 /* End checkout */
+
+/* section-service  */
+.section-service .inner-boxs{
+    padding: 20px 0;
+}
+.section-service .inner-box {
+    display: flex;
+    align-items: center;
+}
+.section-service .inner-box .inner-logo {
+    margin-right: 10px;
+}
+.section-service .inner-box .inner-logo img {
+    width: 50px;
+}
+.section-service .inner-box .inner-title  {
+    font-weight: 700;
+    color: #333;
+}
+.section-service .inner-box .inner-desc  {
+    color: #838393;
+    font-size: 14px;
+}
+/* End section-service  */
+
+
 
 
 /* chat */
