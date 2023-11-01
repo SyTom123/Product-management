@@ -37,29 +37,33 @@ header.header
                             - const pathProduct ="/products";
                             a(href=pathProduct) 
                                 <span> Sản phẩm </span>
-                                <i class="fa-solid fa-angle-down" style="position:relative; top:2px"></i>
-
+                                <i class="fa-solid fa-angle-down" ></i>
 
                             if(layoutCategoryProducts)  
                                 +sub-menu(layoutCategoryProducts, pathProduct)
             .col-md-1
                 .inner-cart 
-                    a(href="/cart") 
+                    a(href="/cart" class="inner-cart-logo") 
                         <i class="fa-solid fa-cart-shopping"></i>
-                        span (#{miniCart ? miniCart.totalQuantity : "0"})
+                        span(class ="inner-cart-text")  #{miniCart ? miniCart.totalQuantity : "0"}
             .col-md-2 
-                .inner-menu.outin
-                    ul  
-                        if(user) 
+                .inner-user
+                    if(user) 
+                        a(class="user-avatar") 
+                            div(class="user-avatar-image")
+                                img(src = user.avatar ? user.avatar:"/images/avatar-none.jpg", alt= user.avatar)
+                            div(class="user-avatar-name") #{user.fullName} 
+
+                        ul(class="user-submenu")
                             li
-                                a(href="/user/logout") Đăng xuất 
+                                a(href="/user/info") Tài khoản của tôi
                             li
                                 a(href="/chat") Chat 
                             li
-                                a(href="/user/info") #{user.fullName} 
-                        else 
-                            li 
-                                a(href="/user/register") Đăng ký
-
+                                a(href="/user/logout") Đăng xuất
+                    else 
+                        ul(class="header-auth")
                             li 
                                 a(href="/user/login") Đăng nhập
+                            li 
+                                a(href="/user/register") Đăng ký
