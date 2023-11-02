@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug 
+include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
+include ../../mixins/go-back.pug
+
+block main
+    +alert-success(3000)
+    .container
+        .row 
+            .col-12 
+                +box-head("Thông tin tài khoản")
+                +goBack()
+                div(class="card my-3" style="width: 50%; padding: 20px; margin: 0 auto")
+                    h3(class="text-center") #{data.fullName}
+                    div(class="text-center")
+                        img( src = data.avatar ? data.avatar:"/images/avatar-none.jpg", 
+                        alt= data.title, width="200px" height="200px" style="object-fit: cover; border-radius: 50%")
+
+                    p(class="mt-3") Email: !{data.email}
+                    p Phone: !{data.phone}
+                    p Tình trạng:
+                        if(data.status =="active")
+                            span(
+                                class="badge badge-success ml-2 p-2"
+                            ) Hoạt động
+                        else
+                            span(
+                                class="badge badge-danger ml-2 p-2"
+                            )  Dừng hoạt động

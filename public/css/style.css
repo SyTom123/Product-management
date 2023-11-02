@@ -886,10 +886,12 @@ background-color: #F5F5F5;
     flex: 1;
 }
   
-.box-user .inner-info .inner-name {
+.box-user .inner-info .inner-name a{
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 3px;
+    display: inline-block;
+    text-decoration: none;
 }
 .box-user [btn-cancel-friend] {
     display: none;

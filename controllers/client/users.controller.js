@@ -9,10 +9,26 @@ module.exports.notFriend = async (req, res) => {
         deleted: false
     }).select("avatar fullName");
 
-    console.log(users);
     res.render("client/pages/users/not-friends",{
         pageTitle: "Danh sách người dùng",
         users: users
+    });
+
+}
+//[GET]/users/:id
+module.exports.userInfo = async (req, res) => {
+
+    const userId = req.params.id;
+    const data = await User.findOne({
+        _id: userId,
+        status: "active",
+        deleted: false
+    });
+
+
+    res.render("client/pages/users/info-user",{
+        pageTitle: "Thông tin người dùng",
+        data: data
     });
 
 }

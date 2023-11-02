@@ -16,7 +16,8 @@ block main
                                 alt= user.fullName
                             )
                         div(class="inner-info")
-                            div(class="inner-name") #{user.fullName}
+                            div(class="inner-name") 
+                                a(href=`/users/${user.id}`) #{user.fullName}
                             div(class="inner-buttons")
                                 button(
                                     class="btn btn-sm btn-primary mr-1"

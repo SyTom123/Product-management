@@ -29,7 +29,7 @@ module.exports = (app) => {
 
     app.use("/cart", cartRouter);
 
-    app.use("/checkout", checkoutRouter);
+    app.use("/checkout",authenticate.requireAuth, checkoutRouter);
     
     app.use("/user", userRouter);
 
