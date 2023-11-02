@@ -734,6 +734,7 @@ background-color: #F5F5F5;
 .chat .inner-outgoing {
     display: flex;
     justify-content: flex-end;
+    flex-direction: column;
 }
 .chat .inner-outgoing .inner-content {
     background: #0084FF;
@@ -767,7 +768,25 @@ background-color: #F5F5F5;
     cursor: pointer;
     margin-left: 6px;
 }
-
+.chat .inner-body .inner-images {
+    display: block;
+}
+.chat .inner-body .inner-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    background: #efefee;
+    padding: 5px;
+    margin: 0 5px 5px 0;
+    border-radius: 5px;
+}
+.chat .inner-body .inner-outgoing .inner-images {
+    margin-left: auto;
+    text-align: right;
+}
+.chat .inner-body .inner-outgoing .inner-images {
+    margin: 0 0 5px 5px;
+}
 /* End chat */
 
 /* emoji-picker */
