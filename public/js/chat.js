@@ -1,13 +1,20 @@
 import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js';
 
-
+// FileUploadWithPreview
+const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-image', {
+    multiple: true,
+    maxFileCount: 6
+});
+// End FileUploadWithPreview
 // CLIEND_SEND_MESSAGE
 const formSendData = document.querySelector(".chat .inner-form");
 if (formSendData) {
     formSendData.addEventListener("submit", (e) => {
         e.preventDefault();
         const content = e.target.elements.content.value;
-        if (content) {
+        const images = upload.cachedFileArray || [];
+        console.log(images);
+        if (content || images.length > 0) {
             socket.emit("CLIEND_SEND_MESSAGE", content);
             e.target.elements.content.value = "";
             socket.emit("CLIENT_SEND_TYPING", "hidden");
@@ -85,9 +92,10 @@ if (emojiPicker) {
     emojiPicker.addEventListener("emoji-click", (e) => {
         const icon = e.detail.unicode;
         inputChat.value = inputChat.value + icon;
-        cons
-        inputChat.setSelectionRange()
-        showTyping(e);
+        const end = inputChat.value.length;
+        inputChat.setSelectionRange(end, end);
+        inputChat.focus();
+        showTyping(e);      
     });
     
     inputChat.addEventListener("keyup", (e)=> {

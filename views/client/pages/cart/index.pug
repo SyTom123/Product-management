@@ -61,7 +61,8 @@ block main
                 .col-md-6
                     a(href="/cart/delete/all" class= `btn btn-danger` ) Xóa tất cả
                 .col-md-6 
-                    h3(class="text-right") Tổng đơn hàng: #{cartDetail.totalPrice}$
+                    p(class="text-right") Tổng: 
+                        b(style ="font-size: 24px") #{cartDetail.totalPrice} $
             
                     div(class="text-right my-3") 
                         a(href="/checkout" class="btn btn-success") Thanh toán 
