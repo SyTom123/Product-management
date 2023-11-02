@@ -20,7 +20,9 @@ block main
                                         each image in chat.images
                                             img(src= image, alt="")
                         div(class="inner-list-typing")
-                        
+                    
+                    .inner-preview-images
+                        div(class="custom-file-container" data-upload-id="upload-image")
                     .inner-foot 
                         form(
                             action=""
@@ -31,7 +33,11 @@ block main
                                 placeholder="Nhập nội dung..."
                                 name="content"
                             )
-                            div(class="custom-file-container" data-upload-id="upload-image")
+                            label(
+                                class=" btn btn-light mx-2 mb-0"
+                                for = "file-upload-with-preview-upload-image"
+                            ) 
+                                <i class="fa-regular fa-image"></i>
                             span(class="button-icon btn btn-light mx-2")
                                 <i class="fa-regular fa-face-smile"></i>
                             button(type="submit")
