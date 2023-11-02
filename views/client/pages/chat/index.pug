@@ -5,6 +5,9 @@ block main
         .row 
             .col-12 
                 +box-head("Chat")  
+        include ../../partials/list-btn-users.pug
+            
+        .row.mt-4       
             .col-12 
                 .chat(my-id= user.id) 
                     .inner-body 
