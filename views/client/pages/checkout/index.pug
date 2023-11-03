@@ -50,15 +50,17 @@ block main
                                         id="fullName"
                                         name="fullName"
                                         required
+                                        value = user.fullName
                                     )
                                 div(class="form-group")
                                     label(for="phone") Số điện thoại
                                     input(
-                                    type="text"
-                                    class="form-control"
-                                    id="phone"
-                                    name="phone"
-                                    required
+                                        type="text"
+                                        class="form-control"
+                                        id="phone"
+                                        name="phone"
+                                        value = user.phone
+                                        required
                                     )
                                 div(class="form-group")
                                     label(for="address") Địa chỉ
@@ -67,6 +69,7 @@ block main
                                     class="form-control"
                                     id="address"
                                     name="address"
+                                    value = user.address
                                     required
                                     )
                                 div(class="form-group")

@@ -1,12 +1,17 @@
 const Cart = require('../../models/cart.model');
+const User = require("../../models/user.model");
 const Product = require('../../models/product.model');
 const Order = require('../../models/order.model');
 const productHelper = require('../../helper/product');
 
 //[GET]/checkout
 module.exports.index = async(req, res) => {
-    const cartId = req.cookies.cartId;
 
+    const cartId = req.cookies.cartId;
+    
+    const user = await User.findOne({
+        tokenUser: req.cookies.tokenUser
+    })
     const cart = await Cart.findOne({
         _id: cartId
     })
@@ -30,12 +35,18 @@ module.exports.index = async(req, res) => {
 
     res.render('client/pages/checkout/index', {
         pageTitle: "Đặt hàng",
-        cartDetail: cart
+        cartDetail: cart,
+        user: user
     })
 }
 //[POST] /checkout/order
 module.exports.order = async(req, res) => {
     const cartId = req.cookies.cartId;
+
+    const user = await User.findOne({
+        tokenUser: req.cookies.tokenUser
+    })
+    const userId = user._id;
     const userInfo = req.body;
 
     const cart = await Cart.findOne({
@@ -67,6 +78,7 @@ module.exports.order = async(req, res) => {
         products.push(objectProduct);
     }
     const objectOrder = {
+        user_id: userId,
         cart_id: cartId,
         userInfo: userInfo,
         products: products
