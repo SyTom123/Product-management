@@ -7,37 +7,38 @@ const productHelper = require('../../helper/product');
 //[GET]/checkout
 module.exports.index = async(req, res) => {
 
-    const cartId = req.cookies.cartId;
+    const cartId = req.cookies.cartId || "";
+    if(cartId) {
+        const user = await User.findOne({
+            tokenUser: req.cookies.tokenUser
+        })
+        const cart = await Cart.findOne({
+            _id: cartId
+        })
     
-    const user = await User.findOne({
-        tokenUser: req.cookies.tokenUser
-    })
-    const cart = await Cart.findOne({
-        _id: cartId
-    })
-
-    if(cart.products.length > 0) {
-        for(const item of cart.products) {
-            const productId = item.product_id;
-
-            const productInfo = await Product.findOne({
-                _id: productId
-            })
-
-            productInfo.priceNew = productHelper.newPrice(productInfo);
-
-            item.productInfo = productInfo;
-
-            item.totalPrice = item.quantity * productInfo.priceNew;
+        if(cart.products.length > 0) {
+            for(const item of cart.products) {
+                const productId = item.product_id;
+    
+                const productInfo = await Product.findOne({
+                    _id: productId
+                })
+    
+                productInfo.priceNew = productHelper.newPrice(productInfo);
+    
+                item.productInfo = productInfo;
+    
+                item.totalPrice = item.quantity * productInfo.priceNew;
+            }
         }
+        cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
+    
+        res.render('client/pages/checkout/index', {
+            pageTitle: "Đặt hàng",
+            cartDetail: cart,
+            user: user
+        })
     }
-    cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
-
-    res.render('client/pages/checkout/index', {
-        pageTitle: "Đặt hàng",
-        cartDetail: cart,
-        user: user
-    })
 }
 //[POST] /checkout/order
 module.exports.order = async(req, res) => {
@@ -47,8 +48,9 @@ module.exports.order = async(req, res) => {
         tokenUser: req.cookies.tokenUser
     })
     const userId = user._id;
+    delete req.body.detailAddress;
     const userInfo = req.body;
-
+    
     const cart = await Cart.findOne({
         _id: cartId
     });
@@ -92,12 +94,11 @@ module.exports.order = async(req, res) => {
         products: []
     })
 
-
     res.redirect(`/checkout/success/${order.id}`);
 }
 // [GET] /checkout/success/:orderId
 module.exports.success = async (req, res) => {
-
+   
     const order = await Order.findOne({
         _id: req.params.orderId
     })
@@ -106,7 +107,6 @@ module.exports.success = async (req, res) => {
         const productInfo = await Product.findOne({
             _id: product.product_id
         }).select('title thumbnail')
-        console.log(productInfo);
 
         product.productInfo = productInfo;
 

@@ -5,37 +5,38 @@ const productHelper = require("../../helper/product");
 //[GET]/ cart
 module.exports.index = async (req, res) => {
 
-    const cartId = req.cookies.cartId;
-    const cart = await Cart.findOne(
-        {_id : cartId}
-    );
-
-    if(cart.products.length > 0) {
-        for(const item of cart.products) {
-            const productId = item.product_id;
-
-            const productInfo = await Product.findOne({
-                _id: productId
-            });
-            productInfo.priceNew = productHelper.newPrice(productInfo);
-
-            item.productInfo = productInfo
-
-            item.totalPrice = +item.quantity* item. productInfo.priceNew
-
-        }
-    } 
-    cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
+    const cartId = req.cookies.cartId ;
+    if(cartId) {
+        const cart = await Cart.findOne(
+            {_id : cartId}
+        );
     
-    res.render("client/pages/cart/index.pug", {
-        pageTitle: "Trang giỏ hàng",
-        cartDetail: cart
-    })
-
+        if(cart.products.length > 0) {
+            for(const item of cart.products) {
+                const productId = item.product_id;
+    
+                const productInfo = await Product.findOne({
+                    _id: productId
+                });
+                productInfo.priceNew = productHelper.newPrice(productInfo);
+    
+                item.productInfo = productInfo
+    
+                item.totalPrice = +item.quantity* item. productInfo.priceNew
+            }
+        } 
+        cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
+        
+        res.render("client/pages/cart/index.pug", {
+            pageTitle: "Trang giỏ hàng",
+            cartDetail: cart
+        })
+    }
 }
 
 //[POST] /cart/add/:productId
 module.exports.addPost = async (req, res) => {
+
     const cartId = req.cookies.cartId;
 
     const productId = req.params.productId;
@@ -44,7 +45,7 @@ module.exports.addPost = async (req, res) => {
     const cart = await Cart.findOne({
         _id: cartId
     })
-
+    console.log(cart);
     const existProductInCart = cart.products.find(item => item.product_id == productId);
     if(existProductInCart) {
         const newQuantity = existProductInCart.quantity + quantity;

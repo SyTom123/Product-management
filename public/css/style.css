@@ -669,6 +669,28 @@ background-color: #F5F5F5;
     margin: 20px 0;
     border-radius: 8px;
 }
+.checkout .sum-cart {
+    font-size: 18px;
+    border-bottom: 2px solid #ee4d2d;
+    padding-bottom: 8px;
+    margin: 0;
+}
+.checkout .sum-cart-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+    padding: 10px 0;
+}
+.checkout .sum-cart-text {
+    padding: 0;
+    margin: 0;
+}
+.checkout .sum-cart-number b {
+    color: #ee4d2d;
+    font-size: 16px;
+}
 /* End checkout */
 
 /* section-service  */

@@ -146,3 +146,18 @@ if(productDetail) {
 }
 
 // End Change quantity
+// submit form checkout
+formAddressCheckout = document.querySelector("[form-address-checkout]");
+if(formAddressCheckout) {
+    formAddressCheckout.addEventListener("submit",(e)=> {
+        const city = formAddressCheckout.querySelector(`option[value="${e.target.city.value}"]`).innerText;
+        const district = formAddressCheckout.querySelector(`option[value="${e.target.district.value}"]`).innerText;
+        const ward = formAddressCheckout.querySelector(`option[value="${e.target.ward.value}"]`).innerText;
+        const detailAddress = e.target.detailAddress.value;
+    
+        const address = formAddressCheckout.querySelector("#address");
+        address.value = `${detailAddress}, ${ward}, ${district}, ${city}`;
+    })
+}
+
+// submit form checkout

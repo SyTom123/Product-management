@@ -10,7 +10,7 @@ block main
                 .col-12 
                     +box-head("Đặt hàng")
             .row 
-                .col-12 
+                .col-7
                     table(class="table table-bordered text-center")
                         thead
                             th STT
@@ -34,6 +34,16 @@ block main
                                         td #{item.productInfo.priceNew}$
                                         td #{item.quantity}
                                         td #{item.totalPrice}$
+                .col-5
+                    h5(class="sum-cart") Cộng giỏ hàng
+                    div(class="sum-cart-box")
+                        p(class="sum-cart-text") Tạm tính: 
+                        div(class="sum-cart-number")
+                            <b>#{cartDetail.totalPrice}</b> $
+                    div(class="sum-cart-box")
+                        p(class="sum-cart-text") Tổng: 
+                        div(class="sum-cart-number")
+                            <b>#{cartDetail.totalPrice}</b> $
             if(cartDetail.products.length > 0)
                 .row 
                     .col-12
@@ -41,38 +51,61 @@ block main
                             form(
                                 action="/checkout/order"
                                 method = "POST"
+                                form-address-checkout
                             ) 
-                                div(class="form-group")
-                                    label(for="fullName") Họ tên
-                                    input(
-                                        type="text"
-                                        class="form-control"
-                                        id="fullName"
-                                        name="fullName"
-                                        required
-                                        value = user.fullName
-                                    )
-                                div(class="form-group")
-                                    label(for="phone") Số điện thoại
-                                    input(
-                                        type="text"
-                                        class="form-control"
-                                        id="phone"
-                                        name="phone"
-                                        value = user.phone
-                                        required
-                                    )
-                                div(class="form-group")
-                                    label(for="address") Địa chỉ
-                                    input(
-                                    type="text"
-                                    class="form-control"
-                                    id="address"
-                                    name="address"
-                                    value = user.address
-                                    required
-                                    )
-                                div(class="form-group")
+                                h4(class="mb-3 ") Thông tin khách hàng
+                                .row 
+                                    .col-md-6 
+                                        div(class="form-group")
+                                            input(
+                                                type="text"
+                                                placholder="Họ và tên"
+                                                class="form-control"
+                                                id="fullName"
+                                                name="fullName"
+                                                required
+                                                value = user.fullName
+                                            )
+                                    .col-md-6 
+                                        div(class="form-group")
+                                            input(
+                                                type="text"
+                                                class="form-control"
+                                                placholder="Số điện thoại"
+                                                id="phone"
+                                                name="phone"
+                                                value = user.phone
+                                                required
+                                            )
+                                    .col-md-6
+                                        <select class=" form-control mb-3" id="city" >
+                                            <option value="" name="city" selected>Chọn tỉnh thành</option>
+                                        </select>
+                                    .col-md-6
+                                        <select class="form-control mb-3" id="district" >
+                                            <option value="" name="district" selected>Chọn quận huyện</option>
+                                        </select>
+                                    .col-md-6
+                                        <select class="form-control mb-3" id="ward" >
+                                            <option value="" name="ward" selected>Chọn phường xã</option>
+                                        </select>
+                                    .col-md-6
+                                        input(
+                                            type="text"
+                                            class="form-control"
+                                            id="detailAddress"
+                                            name="detailAddress"
+                                            placeholder="Số nhà, ngõ, đường"
+                                        )
+                                    .col-md-12
+                                        input(
+                                            type="text"
+                                            class="form-control"
+                                            id="address"
+                                            name="address"
+                                            class="d-none"
+                                        )
+                                div(class="form-group mt-2")
                                 button(
                                     type="submit"
                                     class="btn btn-success btn-block"

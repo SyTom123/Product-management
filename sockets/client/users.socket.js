@@ -94,7 +94,7 @@ module.exports = async (res) => {
             if (existUserAInB) {
                 await User.updateOne(
                     {
-                        _id: myUserId,shouldComponentUpdate(nextProps, nextState) { first }
+                        _id: myUserId
                     },
                     {
                         $pull: { acceptFriends: userId },
