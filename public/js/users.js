@@ -28,3 +28,17 @@ if (buttonCancelFriends.length > 0) {
     });
 }
 // Chức năng hủy gửi yêu cầu
+// Chức năng từ chối kết bạn
+const buttonRefuseFriends = document.querySelectorAll("[btn-refuse-friend]");
+if (buttonRefuseFriends.length > 0) {
+    buttonRefuseFriends.forEach((button) => {
+        button.addEventListener("click", () => {
+            button.closest(".box-user").classList.add("refuse");
+            const userId = button.getAttribute("btn-refuse-friend");
+            
+            socket.emit("CLIENT_REFUSE_FRIEND", userId);
+
+        });
+    });
+}
+// Hết Chức năng từ chối kết bạn
