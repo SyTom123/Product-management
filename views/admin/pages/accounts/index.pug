@@ -43,19 +43,25 @@ block main
                             td #{item.email}
                             td 
                                 if(item.status == "active")
-                                    button(
-                                        class="btn btn-success btn-sm"
-                                        button-change-status 
-                                        data-status=item.status
-                                        data-id = item.id
-                                    ) Hoạt động 
+                                    if(role.permissions.includes("accounts_edit"))
+                                        button(
+                                            class="btn btn-success btn-sm"
+                                            button-change-status 
+                                            data-status= item.status 
+                                            data-id= item.id
+                                        ) Hoạt động 
+                                    else 
+                                        span(class="badge badge-success p-2") Hoạt động
                                 else 
-                                    button(
-                                        class="btn btn-danger btn-sm"
-                                        button-change-status 
-                                        data-status=item.status
-                                        data-id = item.id
-                                    ) Dừng Hoạt động 
+                                    if(role.permissions.includes("accounts_edit"))
+                                        button(
+                                            class="btn btn-danger btn-sm"
+                                            button-change-status 
+                                            data-status=item.status
+                                            data.id = item.id
+                                        ) Dừng Hoạt động 
+                                    else 
+                                        span(class="badge badge-danger p-2") Dừng Hoạt động 
                             td 
                                 a(
                                     class="btn btn-secondary btn-sm"

@@ -34,10 +34,12 @@ mixin sider ()
                         a(href=`/${prefixAdmin}/accounts` class=`${status_06}`)
                             <i class="fa-solid fa-user-gear mr-2"></i>
                             span Tài khoản Admin
-                li 
-                    a(href=`/${prefixAdmin}/users` class=`${status_07}`) 
-                        <i class="fa-solid fa-user mr-2"></i>
-                        span Tài khoản User
+                            
+                if(role.permissions.includes("users_view"))
+                    li 
+                        a(href=`/${prefixAdmin}/users` class=`${status_07}`) 
+                            <i class="fa-solid fa-user mr-2"></i>
+                            span Tài khoản User
                 li
                     a(href=`/${prefixAdmin}/settings/general` class=`${status_08}`) 
                         <i class="fa-solid fa-gear mr-2"></i>

@@ -2,7 +2,7 @@ extends ../../layouts/default.pug
 
 block main 
     .row 
-        .col-xl-4.m-auto
+        .col-xl-6.m-auto
             .card 
                 .card-header
                     h2(class="mb-4 text-center") Tài khoản của tôi 
@@ -10,7 +10,7 @@ block main
                 .card-body
                     div(class="text-center")
                         if(user.avatar) 
-                            img(src=user.avatar, width="150px",class="mb-3", alt="avatar")
+                            img(src=user.avatar, width="150px",style="border-radius: 50%" ,class="mb-3", alt="avatar")
                         else 
                             img(src="/admin/images/avatar.jpg", width="150px", class="mb-3", alt="avatar")
 
@@ -25,8 +25,10 @@ block main
                     
                     p
                         span Trạng thái:
-                        span 
-                            <b>#{user.status == "active" ? "Hoạt động": "Dừng hoạt động" } </b>
+                            if(user.status == "active")
+                                span(class="badge badge-success p-2 ml-3") Hoạt động 
+                            else 
+                                span(class="badge badge-danger p-2 ml-3") Dừng Hoạt động 
 
                     if(role.title)
                         p Phân quyền: <b>#{role.title} </b>

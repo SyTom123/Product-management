@@ -79,11 +79,21 @@ module.exports.order = async(req, res) => {
 
         products.push(objectProduct);
     }
+    const countOrder = await Order.countDocuments() + 1;
+    const order_id = `SY-${countOrder}`;
+    const status = "initial";
     const objectOrder = {
+        order_id: order_id,
+        status: status,
         user_id: userId,
         cart_id: cartId,
         userInfo: userInfo,
         products: products
+    }
+    if(cart.products.length <= 0){
+        req.flash("error", 'Giỏ hàng trống')
+        res.redirect("/");
+        return
     }
     const order = new Order(objectOrder);
     await order.save();

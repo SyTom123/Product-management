@@ -20,22 +20,26 @@ mixin table-tree(items, level = 1)
                     name="position"
                 )
             td
-                if(item.status == 'active')
-                    button(
-                        class="badge badge-success"
-                        style="border:none;padding: 10px;font-size: 13px"
-                        button-change-status
-                        data-status= item.status 
-                        data-id= item.id
-                    ) Hoạt động
+                if(item.status == "active")
+                    if(role.permissions.includes("products-category_edit"))
+                        button(
+                            class="btn btn-success btn-sm"
+                            button-change-status 
+                            data-status=item.status
+                            data.id = item.id
+                        ) Hoạt động 
+                    else 
+                        span(class="badge badge-success p-2") Hoạt động 
                 else 
-                    button(
-                        class="badge badge-danger"
-                        style="border:none;padding: 10px;font-size: 13px"
-                        button-change-status 
-                        data-status= item.status 
-                        data-id= item.id
-                    ) Dừng hoạt động
+                    if(role.permissions.includes("products-category_edit"))
+                        button(
+                            class="btn btn-danger btn-sm"
+                            button-change-status 
+                            data-status=item.status
+                            data.id = item.id
+                        ) Dừng Hoạt động 
+                    else 
+                        span(class="badge badge-danger p-2") Dừng Hoạt động 
             td
                 if(role.permissions.includes("products-category_view"))
                     a(

@@ -74,8 +74,6 @@ for(const product of products) {
 }
 
 
-
-
 if(products.length == 0 && countProducts > 0) {
     let stringQuery = "";
 

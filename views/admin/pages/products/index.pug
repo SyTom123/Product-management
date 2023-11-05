@@ -89,22 +89,26 @@ block main
                                             name="position"
                                         )
                                     td 
-                                        if(item.status == 'active')
-                                            button(
-                                                class="badge badge-success"
-                                                style="border:none;padding: 10px;font-size: 13px"
-                                                button-change-status
-                                                data-status= item.status 
-                                                data-id= item.id
-                                            ) Hoạt động
+                                        if(item.status == "active")
+                                            if(role.permissions.includes("products_edit"))
+                                                button(
+                                                    class="btn btn-success btn-sm"
+                                                    button-change-status 
+                                                    data-status=item.status
+                                                    data.id = item.id
+                                                    ) Hoạt động 
+                                            else 
+                                                span(class="badge badge-success p-2") Hoạt động 
                                         else 
-                                            button(
-                                                class="badge badge-danger"
-                                                style="border:none;padding: 10px;font-size: 13px"
-                                                button-change-status 
-                                                data-status= item.status 
-                                                data-id= item.id
-                                            ) Dừng hoạt động
+                                            if(role.permissions.includes("items_edit"))
+                                                button(
+                                                    class="btn btn-danger btn-sm"
+                                                    button-change-status 
+                                                    data-status=item.status
+                                                    data.id = item.id
+                                                ) Dừng hoạt động 
+                                            else 
+                                                span(class="badge badge-danger p-2") Dừng Hoạt động 
                                     td 
                                         if(item.createdBy.accountFullname)
                                             div #{item.createdBy.accountFullname}

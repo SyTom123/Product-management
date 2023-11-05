@@ -219,5 +219,11 @@ module.exports.delete = async (req, res) => {
     req.flash("success", "Xóa tài khoản thành công!");
     res.redirect("/");
 }
+//[GET] /user/orders
+module.exports.orders = async(req, res) => {
+    res.render("client/pages/user/orders", {
+        pageTitle: "Đơn hàng của tôi"
+    })
+}
 
 
