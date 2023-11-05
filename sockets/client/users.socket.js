@@ -55,38 +55,46 @@ module.exports = async (res) => {
         socket.on("CLIENT_CANCEL_FRIEND", async (userId) => {
             const myUserId = res.locals.user.id;
            
+            // userId : id của B
+            // myUserId : id của A
             // Xóa id của A trong acceptFriends của B
             const existUserAInB = await User.findOne({
                 _id: userId,
-                acceptFriends: myUserId,
-            });
-            if (existUserAInB) {
-                await User.updateOne(
-                    {
-                        _id: myUserId
-                    },
-                    {
-                        $pull: { acceptFriends: userId },
-                    }
-                );
-            }
-
+                acceptFriends: myUserId
+              });
+        
+              if(existUserAInB) {
+                await User.updateOne({
+                  _id: userId
+                }, {
+                  $pull: { acceptFriends: myUserId }
+                });
+              }
+            // Xóa id của B trong requestFriends của A
             // Xóa id của B trong requestFriends của A
             const existUserBInA = await User.findOne({
-                _id: userId ,
-                requestFriends: myUserId,
+                _id: myUserId,
+                requestFriends: userId
             });
 
-            if (existUserBInA) {
-                await User.updateOne(
-                    {
-                        _id: userId,
-                    },
-                    {
-                        $pull: { requestFriends: myUserId },
-                    }
-                );
+            if(existUserBInA) {
+                await User.updateOne({
+                _id: myUserId
+                }, {
+                $pull: { requestFriends: userId }
+                });
             }
+          
+            //  Lấy độ dài acceptFriends của B trả về cho B
+            const infoUserB = await User.findOne({
+                _id: userId,
+            })
+            const lengthAcceptFriends = infoUserB.acceptFriends.length;
+
+            socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
+                userId: userId,
+                lengthAcceptFriends: lengthAcceptFriends
+            });
         });
 
          // Người dùng từ chối kết bạn

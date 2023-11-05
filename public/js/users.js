@@ -27,7 +27,7 @@ if (buttonCancelFriends.length > 0) {
         });
     });
 }
-// Chức năng hủy gửi yêu cầu
+// Hết Chức năng hủy gửi yêu cầu
 // Chức năng từ chối kết bạn
 const buttonRefuseFriends = document.querySelectorAll("[btn-refuse-friend]");
 if (buttonRefuseFriends.length > 0) {
