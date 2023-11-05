@@ -17,3 +17,7 @@ row
             href="/users/accept"
             class="btn btn-primary m-1"
         ) Lời mời kết bạn 
+            span(
+                class="badge badge-light"
+                bagde-users-accept=user.id
+            ) #{user.acceptFriends.length}

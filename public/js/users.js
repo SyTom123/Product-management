@@ -57,3 +57,15 @@ if (buttonAcceptFriends.length > 0) {
     });
 }
 // Hết Chức năng chấp nhận kết bạn
+// SERVER_RETURN_LENGTH_ACCEPT_FRIEND
+socket.on("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", (data)=> {
+
+    const bagdeUsersAccept = document.querySelector("[bagde-users-accept]");
+    const userId = bagdeUsersAccept.getAttribute("bagde-users-accept");
+
+    if(userId == data.userId) {
+        bagdeUsersAccept.innerHTML = data.lengthAcceptFriends
+    }
+
+})
+// SERVER_RETURN_LENGTH_ACCEPT_FRIEND
