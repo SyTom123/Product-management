@@ -7,9 +7,12 @@ block main
                 +box-head("Lời mời đã nhận")
         include ../../partials/list-btn-users.pug
 
-        .row.mt-4 
+        .row(
+            data-users-accept = user.id
+            class="mt-4"
+        )
             each user in users
-                .col-4 
+                .col-4(user-id = user.id)
                     div(class="box-user add")
                         div(class="inner-avatar")
                             img(
