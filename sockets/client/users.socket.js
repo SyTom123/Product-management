@@ -174,19 +174,21 @@ module.exports = async (res) => {
             // Tạo phòng chat chung
             let roomChat = "";
             if(existUserAInB && existUserBInA) {
+                console.log(userId);
+                console.log(myUserId);
                 roomChat = new RoomChat({
                     typeRoom: "friend",
                     users: [
-                        {
-                            user_id: userId,
-                            role: "superAdmin"
-                        },
-                        {
-                            user_id: myUserId,
-                            role: "superAdmin"
-                        }
+                      {
+                        user_id: userId,
+                        role: "superAdmin"
+                      },
+                      {
+                        user_id: myUserId,
+                        role: "superAdmin"
+                      }
                     ]
-                })
+                });
                 await roomChat.save();
             }
 
