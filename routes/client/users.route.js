@@ -8,6 +8,8 @@ router.get("/request", controller.request);
 
 router.get("/accept", controller.accept);
 
+router.get("/friends", controller.friends);
+
 router.get("/:id", controller.userInfo);
 
 

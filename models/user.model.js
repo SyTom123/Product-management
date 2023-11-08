@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    statusOnline:String,
     status: {
         type: String,
         default: "active"
