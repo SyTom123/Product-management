@@ -9,4 +9,8 @@ router.get("/create", controller.create);
 
 router.post("/create", controller.createPost);
 
+router.get("/:id/add-member", controller.addMember);
+
+router.post("/:id/add-member", controller.addMemberPost);
+
 module.exports = router;

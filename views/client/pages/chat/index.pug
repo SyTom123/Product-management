@@ -55,9 +55,14 @@ block main
             if(roomChat.typeRoom == "group") 
                 .col-3 
                     .friend-list
-                        p 
-                            b Danh sách thành viên
+                        h5(class="mb-3" style="fontsize = 26px; color: #EE4D2D") Danh sách thành viên
                         .row
+                            if(user.id == roomChat.superAdminId)
+                                .col-12 
+                                    a(
+                                        href=`/rooms-chat/${roomChat._id}/add-member`
+                                        class="btn btn-sm btn-primary mb-3"
+                                    ) Thêm thành viên
                             each item in roomChat.users
                                 .col-12
                                     div(class="box-user")
