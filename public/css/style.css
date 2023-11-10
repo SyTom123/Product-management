@@ -981,3 +981,15 @@ background-color: #F5F5F5;
     margin-right: 10px;
 }
 /*End  box-room */
+
+.box-user.deleted button[btn-delete-member-out-group] {
+    display: none;
+}
+.box-user button[btn-deleted-member-out-group]{
+    display: none;
+}
+
+.box-user.deleted button[btn-deleted-member-out-group] {
+    display: inline-block;
+}
+

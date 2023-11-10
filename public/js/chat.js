@@ -168,3 +168,26 @@ if(chatBody) {
 
 }
 // End Preview image
+
+// Chức năng xóa thành viên khỏi nhóm chat
+const btnDeleteMemberOutGroup = document.querySelectorAll("[btn-delete-member-out-group]");
+if(btnDeleteMemberOutGroup) {
+
+    btnDeleteMemberOutGroup.forEach(button => {
+        button.addEventListener("click", () => {
+            button.closest(".box-user").classList.add("deleted");
+
+            const userIdB = button.getAttribute("btn-delete-member-out-group");
+            const superAdminId = button.getAttribute("super-admin-id");
+            const roomChatId = button.getAttribute("room-chat-id");
+            socket.emit("ADMIN_DELETE_MEMBER_OUT_GROUP",{
+                userIdB: userIdB,
+                superAdminId: superAdminId,
+                roomChatId: roomChatId
+            } )
+            
+        })
+    })
+   
+}
+// End Chức năng xóa thành viên khỏi nhóm chat

@@ -1,5 +1,6 @@
 const Chat = require('../../models/chat.model');
 const uploadToCloudinary = require("../../helper/uploadCloudinary");
+const RoomChat = require('../../models/rooms-chat.model');
 
 module.exports = async(req, res) => {
     const userId = res.locals.user.id;
@@ -8,6 +9,7 @@ module.exports = async(req, res) => {
 
     _io.once('connection', (socket)=> {
         socket.join(roomChatId);
+
         socket.on("CLIEND_SEND_MESSAGE", async(data)=> {
 
             let images = [];
@@ -39,5 +41,30 @@ module.exports = async(req, res) => {
               type: type
             });
         });
+
+        // ADMIN_DELETE_MEMBER_OUT_GROUP
+        socket.on("ADMIN_DELETE_MEMBER_OUT_GROUP", async(data)=> {
+            if(userId  == data.superAdminId) {
+                const roomChat = await RoomChat.findOne({
+                    _id: data.roomChatId,
+                    deleted: false,
+                    "users.user_id": data.userIdB
+                })
+                if(roomChat) {
+                    await RoomChat.updateOne({
+                        _id: data.roomChatId,
+                    }, {
+                        $pull : {
+                            users: {
+                                user_id: data.userIdB
+                            }
+                        }
+                    })
+                }
+            }
+        } );
+
+
+        // END ADMIN_DELETE_MEMBER_OUT_GROUP
     })
 }

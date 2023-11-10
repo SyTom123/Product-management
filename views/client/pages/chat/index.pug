@@ -6,9 +6,15 @@ block main
             .col-12 
                 +box-head("Chat")  
         include ../../partials/list-btn-users.pug
-            
+
+        .row 
+            .col-12  
+                if(roomChat.typeRoom == "group")   
+                    div(class ="mt-2")
+                        h3(class ="m-0" style = "color: #EE4D2D; font-size: 26px") #{roomChat.title}
+                
         .row.mt-4       
-            .col-12 
+            div(class = `${roomChat.typeRoom == "group" ? "col-9" : "col-12"}`)
                 .chat(my-id= user.id) 
                     .inner-body 
                         each chat in chats
@@ -45,6 +51,43 @@ block main
                                 <i class="fa-regular fa-face-smile"></i>
                             button(type="submit")
                                 <i class="fa-solid fa-paper-plane"></i>
+
+            if(roomChat.typeRoom == "group") 
+                .col-3 
+                    .friend-list
+                        p 
+                            b Danh sách thành viên
+                        .row
+                            each item in roomChat.users
+                                .col-12
+                                    div(class="box-user")
+                                        div(class="inner-avatar")
+                                            img(
+                                                src= item.infoUser.avatar ? item.infoUser.avatar : "/images/avatar-none.jpg",
+                                                alt= item.infoUser.fullName
+                                            )
+                                        div(class="inner-info")
+                                            div(class="inner-name") 
+                                                a(href=`/users/${item.user_id}`) #{item.infoUser.fullName}
+                                            
+                                            div(class="inner-buttons")
+                                                if((user.id == roomChat.superAdminId) && (user.id != item.user_id))
+                                                    button(
+                                                        class="btn btn-sm btn-danger"
+                                                        btn-delete-member-out-group = item.user_id
+                                                        super-admin-id = roomChat.superAdminId
+                                                        room-chat-id = roomChat.id
+                                                    ) Xóa khỏi nhóm
+                                                    button(
+                                                        class="btn btn-sm btn-danger"
+                                                        btn-deleted-member-out-group
+                                                        disabled
+                                                    ) Đã Xóa khỏi nhóm
+                                                if(item.user_id == roomChat.superAdminId)
+                                                    div 
+                                                        span(
+                                                            class="badge badge-success ml-2 p-2"
+                                                        ) Trưởng nhóm
 
     div(class='tooltip' role="tooltip")
         emoji-picker(class="light")

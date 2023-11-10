@@ -174,8 +174,7 @@ module.exports = async (res) => {
             // Tạo phòng chat chung
             let roomChat = "";
             if(existUserAInB && existUserBInA) {
-                console.log(userId);
-                console.log(myUserId);
+                
                 roomChat = new RoomChat({
                     typeRoom: "friend",
                     users: [

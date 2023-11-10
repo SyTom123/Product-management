@@ -25,6 +25,7 @@ module.exports.create = async(req, res) => {
 
         friend.infoFriend = infoFriend
     }
+    
     res.render("client/pages/rooms-chat/create", {
         pageTitle: "Tạo mới phòng chat",
         friendList: friendList
