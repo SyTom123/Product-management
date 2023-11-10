@@ -191,3 +191,26 @@ if(btnDeleteMemberOutGroup) {
    
 }
 // End Chức năng xóa thành viên khỏi nhóm chat
+
+// button-delete-group-chat
+const buttonDeleteGroupChat = document.querySelector("[button-delete-group-chat]");
+
+if(buttonDeleteGroupChat) {
+    buttonDeleteGroupChat.addEventListener("click", ()=> {
+        const confirm = window.confirm("Bạn có chắc chắn muốn xóa không?");
+        if(!confirm) {
+            return
+        }
+        const formDeleteChatGroup = document.querySelector("#form-delete-chat-group");
+        
+        const dataId = buttonDeleteGroupChat.getAttribute("data-id");
+        const dataPath = formDeleteChatGroup.getAttribute("data-path");
+        const action = `${dataPath}${dataId}?_method=DELETE`;
+        formDeleteChatGroup.action = action;
+
+        formDeleteChatGroup.submit();
+
+    })
+
+}
+// End button-delete-group-chat

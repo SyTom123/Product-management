@@ -149,3 +149,30 @@ module.exports.addMemberPost = async (req, res) => {
     }
     res.redirect(`/chat/${roomChatId}`);
 };
+//[DELETE] /rooms-chat/:id
+module.exports.delete = async (req, res) => {
+    const roomChatId = req.params.id;
+    const roomChat = await RoomChat.findOne({
+        _id: roomChatId,
+        deleted: false,
+    });
+
+    var superAdminId = "";
+    roomChat.users.forEach((item) => {
+        if (item.role == "superAdmin") {
+            superAdminId = item.user_id;
+        }
+    });
+
+    if (superAdminId != res.locals.user.id) {
+        res.redirect("/");
+        return;
+    }
+    await RoomChat.updateOne ({
+        _id: roomChatId,
+    }, {
+        deleted: true
+    })
+    req.flash("success", "Xóa phòng chat thành công !");
+    res.redirect(`/rooms-chat`);
+};

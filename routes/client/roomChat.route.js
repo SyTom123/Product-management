@@ -13,4 +13,6 @@ router.get("/:id/add-member", controller.addMember);
 
 router.post("/:id/add-member", controller.addMemberPost);
 
+router.delete("/delete/:id", controller.delete);
+
 module.exports = router;

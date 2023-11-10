@@ -58,11 +58,18 @@ block main
                         h5(class="mb-3" style="fontsize = 26px; color: #EE4D2D") Danh sách thành viên
                         .row
                             if(user.id == roomChat.superAdminId)
-                                .col-12 
-                                    a(
-                                        href=`/rooms-chat/${roomChat._id}/add-member`
-                                        class="btn btn-sm btn-primary mb-3"
-                                    ) Thêm thành viên
+                                .col-12
+                                    div(style ="display: flex; justify-content:space-between") 
+                                        div
+                                            a(
+                                                href=`/rooms-chat/${roomChat._id}/add-member`
+                                                class="btn btn-sm btn-primary mb-3"
+                                            ) Thêm thành viên
+                                        button(
+                                            class="btn btn-sm btn-danger mb-3"
+                                            data-id = roomChat._id
+                                            button-delete-group-chat
+                                        ) Xóa phòng
                             each item in roomChat.users
                                 .col-12
                                     div(class="box-user")
@@ -93,6 +100,12 @@ block main
                                                         span(
                                                             class="badge badge-success ml-2 p-2"
                                                         ) Trưởng nhóm
+    form(
+        id = "form-delete-chat-group"
+        method="POST"
+        action = ""
+        data-path= "/rooms-chat/delete/"
+    )
 
     div(class='tooltip' role="tooltip")
         emoji-picker(class="light")
