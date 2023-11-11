@@ -58,6 +58,8 @@ socket.on("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", (data) => {
     const bagdeUsersAccept = document.querySelector("[bagde-users-accept]");
     const userId = bagdeUsersAccept.getAttribute("bagde-users-accept");
 
+    bagdeUsersAccept.classList.add("active");
+
     if (userId == data.userId) {
         bagdeUsersAccept.innerHTML = data.lengthAcceptFriends;
     }
@@ -81,10 +83,14 @@ socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
             newBoxUser.innerHTML = `
             <div class="box-user">
               <div class="inner-avatar">
-                <img src="${data.infoUserA.avatar}? ${data.infoUserA.avatar}:/images/avatar-none.jpg" alt="${data.infoUserA.fullName}">
+                <img src="${data.infoUserA.avatar ? data.infoUserA.avatar :"/images/avatar-none.jpg"}" alt="${data.infoUserA.fullName}">
               </div>
               <div class="inner-info">
-                <div class="inner-name">${data.infoUserA.fullName}</div>
+                <div class="inner-name">
+                    <a href="/users/${data.infoUserA._id}"> 
+                        ${data.infoUserA.fullName}
+                    </a>
+                </div>
                 <div class="inner-buttons">
                   <button
                     class="btn btn-sm btn-primary mr-1"
@@ -93,7 +99,7 @@ socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
                     Chấp nhận
                   </button>
                   <button
-                    class="btn btn-sm btn-secondary mr-1"
+                    class="btn btn-sm btn-danger mr-1"
                     btn-refuse-friend="${data.infoUserA._id}"
                   >
                     Xóa

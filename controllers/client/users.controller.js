@@ -79,7 +79,6 @@ module.exports.accept = async (req, res) => {
         deleted: false
     }).select("id fullName avatar");
 
-    
     res.render("client/pages/users/accept",{
         pageTitle: 'Lời mời đã nhận',
         users: users

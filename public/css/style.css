@@ -1017,3 +1017,11 @@ background-color: #F5F5F5;
 
 /* End room chat create */
 
+/* .list-btn-users */
+.list-btn-users .badge-light.active {
+    background-color: red;
+    color: #fff;
+    font-weight: 600;
+}
+/* .list-btn-users */
+
