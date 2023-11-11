@@ -34,7 +34,7 @@ module.exports.index = async (req, res) => {
     for(const user of roomChat.users) {
         const infoUser = await User.findOne({
             _id: user.user_id
-        }).select ("avatar fullName");
+        }).select ("avatar fullName statusOnline");
 
         if(user.role == "superAdmin") {
             roomChat.superAdminId = user.user_id

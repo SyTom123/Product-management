@@ -2,35 +2,35 @@ extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 
 block main
-  .container.my-3
+    .container
+        .row
+            .col-12
+                +box-head("Danh sách bạn bè")
 
-    include ../../partials/list-btn-users.pug
+        include ../../partials/list-btn-users.pug
 
-    .row
-      .col-12
-        +box-head("Danh sách bạn bè")
-
-    .row(data-users-friend)
-      each user in users
-        .col-4(user-id = user.id)
-          div(class="box-user")
-            div(class="inner-avatar")
-              img(
-                src=(user.avatar ? user.avatar : "/images/avatar.jpg")
-                alt=user.fullName
-              )
-            div(class="inner-info")
-              div(class="inner-name") #{user.fullName}
-              div(class="inner-buttons")
-                a(
-                  href=`/chat/${user.roomChatId}`
-                  class="btn btn-sm btn-primary mr-1"
-                ) Nhắn tin
-            div(
-              class="inner-status"
-              status=user.statusOnline
-            ) <i class="fa-solid fa-circle"></i>
+        .row(data-users-friend class ="mt-4")
+            each user in users
+                .col-4(user-id = user.id)
+                    div(class="box-user")
+                        div(class="inner-avatar")
+                            img(
+                                src=(user.avatar ? user.avatar : "/images/avatar-none.jpg")
+                                alt=user.fullName
+                            )
+                        div(class="inner-info")
+                            div(class= "inner-name")
+                                a(href=`/users/${user.id}`) #{user.fullName}
+                            div(class="inner-buttons")
+                                a(
+                                    href=`/chat/${user.roomChatId}`
+                                    class="btn btn-sm btn-primary mr-1"
+                                ) Nhắn tin
+                        div(
+                            class="inner-status"
+                            status=user.statusOnline
+                        ) <i class="fa-solid fa-circle"></i>
 
 
 block script
-  script( src="/js/users.js")
+    script( src="/js/users.js")

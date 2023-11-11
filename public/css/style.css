@@ -956,11 +956,11 @@ background-color: #F5F5F5;
     font-size: 12px;
     color: #00d800;
     opacity: 0;
-  }
+}
   
-  .box-user .inner-status[status="online"] {
+.box-user .inner-status[status="online"] {
     opacity: 1;
-  }
+}
 /* End box-users */
 
 /* box-room */
@@ -980,6 +980,22 @@ background-color: #F5F5F5;
     background: #f2f2f2;
     margin-right: 10px;
 }
+.box-room .inner-info .inner-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    display: inline-block;
+    
+}
+.box-room .inner-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.box-room .inner-info {
+    flex: 1;
+}
+  
 /*End  box-room */
 
 .box-user.deleted button[btn-delete-member-out-group] {
@@ -992,4 +1008,12 @@ background-color: #F5F5F5;
 .box-user.deleted button[btn-deleted-member-out-group] {
     display: inline-block;
 }
+/* room chat create */
+.room-chat-create {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+
+/* End room chat create */
 

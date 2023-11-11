@@ -171,7 +171,7 @@ if(chatBody) {
 
 // Chức năng xóa thành viên khỏi nhóm chat
 const btnDeleteMemberOutGroup = document.querySelectorAll("[btn-delete-member-out-group]");
-if(btnDeleteMemberOutGroup) {
+if(btnDeleteMemberOutGroup.length > 0) {
 
     btnDeleteMemberOutGroup.forEach(button => {
         button.addEventListener("click", () => {
@@ -214,3 +214,36 @@ if(buttonDeleteGroupChat) {
 
 }
 // End button-delete-group-chat
+// Chức năng thành viên rời khỏi nhóm chat
+const btnMemberLeaveGroup = document.querySelectorAll("[btn-member-leave-group]");
+if(btnMemberLeaveGroup.length > 0) {
+
+    btnMemberLeaveGroup.forEach(button => {
+        button.addEventListener("click", () => {
+            const userIdB = button.getAttribute("btn-member-leave-group");
+            const roomChatId = button.getAttribute("room-chat-id");
+            const confirm = window.confirm("Bạn có chắc chắn muốn rời nhóm không ?");
+            if(!confirm) {
+                return;
+            }
+            socket.emit("MEMBER_LEAVE_GROUP", {
+                userIdB: userIdB,
+                roomChatId: roomChatId
+            })
+        })
+    })
+   
+}
+// End Chức năng thành viên rời khỏi nhóm chat
+
+// SERVER_RETURN_USER_ONLINE
+socket.on("SERVER_RETURN_USER_ONLINE", (userId)=> {
+    const dataUsersFriend = document.querySelector("[data-users-friend]");
+    if(dataUsersFriend) {
+      const boxUser =  dataUsersFriend.querySelector(`[user-id ="${userId}"]`);
+      if(boxUser) {
+        boxUser.querySelector("[status]").setAttribute("status", "online");
+      }
+    }
+  })
+// SERVER_RETURN_USER_ONLINE

@@ -1,11 +1,14 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug 
+
 block main 
     .container
         .row 
             .col-12 
                 +box-head("Danh sách người dùng")
+
         include ../../partials/list-btn-users.pug
+
         .row(
             data-users-not-friend = user.id
             class = "mt-4"

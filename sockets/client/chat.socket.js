@@ -66,5 +66,28 @@ module.exports = async(req, res) => {
 
 
         // END ADMIN_DELETE_MEMBER_OUT_GROUP
+
+        // ADMIN_DELETE_MEMBER_OUT_GROUP
+        socket.on("MEMBER_LEAVE_GROUP", async(data)=> {
+            const roomChat = await RoomChat.findOne({
+                _id: data.roomChatId,
+                deleted: false,
+                "users.user_id": data.userIdB
+            })
+            if(roomChat) {
+                await RoomChat.updateOne({
+                    _id: data.roomChatId,
+                }, {
+                    $pull : {
+                        users: {
+                            user_id: data.userIdB
+                        }
+                    }
+                })
+            }
+        } );
+
+
+        // END ADMIN_DELETE_MEMBER_OUT_GROUP
     })
 }

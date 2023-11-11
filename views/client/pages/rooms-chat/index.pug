@@ -19,8 +19,8 @@ block main
             each room in listRoomChat
                 .col-4 
                     div(class="box-room")
-                        div(class="avatar")
-                            img(src="/" , alt = room.title)
+                        div(class="inner-avatar")
+                            img(src=(room.avatar ? room.avatar : "/images/avatar-none.jpg") , alt = room.title)
                         div(class ="inner-info")
                             div(class="inner-name") #{room.title}
                             div(class="inner-buttons")

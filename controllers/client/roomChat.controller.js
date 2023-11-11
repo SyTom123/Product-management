@@ -36,7 +36,15 @@ module.exports.create = async (req, res) => {
 module.exports.createPost = async (req, res) => {
     const title = req.body.title;
     const userId = req.body.usersId;
+    const avatar = req.body.avatar;
 
+    const dataChat = {
+        title: title,
+        typeRoom: "group",
+        avatar: avatar,
+        users: [],
+    };
+    
     if(userId) {
         let usersArr = [];
         if(typeof userId == "object") {
@@ -45,12 +53,6 @@ module.exports.createPost = async (req, res) => {
         else {
             usersArr.push(userId);
         }
-
-        const dataChat = {
-            title: title,
-            typeRoom: "group",
-            users: [],
-        };
 
         usersArr.forEach((userId) => {
             dataChat.users.push({
@@ -89,7 +91,7 @@ module.exports.addMember = async (req, res) => {
 };
 
 
-//[POST] /rooms-chat/:id/create
+//[POST] /rooms-chat/:id/addMember
 module.exports.addMemberPost = async (req, res) => {
     const roomChatId = req.params.id;
     const usersId = req.body.usersId;
@@ -147,6 +149,7 @@ module.exports.addMemberPost = async (req, res) => {
         }
        
     }
+    req.flash("success", "Thêm thành viên vào nhóm chat thành công");
     res.redirect(`/chat/${roomChatId}`);
 };
 //[DELETE] /rooms-chat/:id

@@ -1,6 +1,8 @@
 extends ../../layouts/default.pug 
 include ../../mixins/box-head.pug 
+include ../../mixins/alert.pug 
 block main 
+    +alert-success(3000)
     .container
         .row 
             .col-12 
@@ -53,7 +55,7 @@ block main
                                 <i class="fa-solid fa-paper-plane"></i>
 
             if(roomChat.typeRoom == "group") 
-                .col-3 
+                .col-3(data-users-friend)
                     .friend-list
                         h5(class="mb-3" style="fontsize = 26px; color: #EE4D2D") Danh sách thành viên
                         .row
@@ -83,6 +85,8 @@ block main
                                                 a(href=`/users/${item.user_id}`) #{item.infoUser.fullName}
                                             
                                             div(class="inner-buttons")
+                                                // nếu người dùng đang đăng nhập có id = superAdminId và khác với id đang lặp qua
+                                                // thì hiển thị nút xóa khỏi nhóm
                                                 if((user.id == roomChat.superAdminId) && (user.id != item.user_id))
                                                     button(
                                                         class="btn btn-sm btn-danger"
@@ -95,11 +99,25 @@ block main
                                                         btn-deleted-member-out-group
                                                         disabled
                                                     ) Đã Xóa khỏi nhóm
+                                                // nếu người dùng đang đăng nhập có id khác với id đang lặp qua và khác với superAdminId
+                                                // thì hiển thị nút rời nhóm
+                                                if((item.user_id == user.id) && (item.user_id != roomChat.superAdminId)) 
+                                                    div 
+                                                        a(
+                                                            class="btn btn-sm btn-danger"
+                                                            btn-member-leave-group = user.id
+                                                            room-chat-id = roomChat.id
+                                                            href = "/rooms-chat"
+                                                        ) Rời nhóm
                                                 if(item.user_id == roomChat.superAdminId)
                                                     div 
                                                         span(
                                                             class="badge badge-success ml-2 p-2"
                                                         ) Trưởng nhóm
+                                        div(
+                                            class="inner-status"
+                                            status = item.infoUser.statusOnline
+                                        ) <i class="fa-solid fa-circle"></i>
     form(
         id = "form-delete-chat-group"
         method="POST"
