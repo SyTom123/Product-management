@@ -1,4 +1,5 @@
 const Product = require("../../models/product.model");
+const CategoryProduct = require("../../models/product-category.model")
 const productsHelper = require("../../helper/product");
 // [GET] /products
 module.exports.index = async (req, res) => {
@@ -20,9 +21,11 @@ module.exports.index = async (req, res) => {
     
     const newProductsNew =  productsHelper.priceNewProduct(productsNew);
 
+    const categoryProduct =await CategoryProduct.find({deleted: false})
     res.render("client/pages/home/index.pug", {
         pageTitle: "Trang chủ",
         productsFeatured: newProductsFeatured,
-        productsNew: newProductsNew
+        productsNew: newProductsNew,
+        categoryProduct: categoryProduct
     })
 }

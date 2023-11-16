@@ -22,10 +22,10 @@ block main
                         div(class="inner-wrap")
                             if (product.price)
                                 div(class="inner-price-old") 
-                                    span(class="inner-price-old-number") #{product.price} $
+                                    span(class="inner-price-old-number") #{product.priceOld}
                                     span(class="inner-price-old-text") (inclusive off all taxes)
                             if (product.priceNew)
-                                div(class="inner-price-new") #{product.priceNew} $ 
+                                div(class="inner-price-new") #{product.priceNew} 
                                     if (product.discountPercentage)
                                         div(class="inner-percent") 
                                             span #{product.discountPercentage} % OFF

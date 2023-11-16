@@ -49,7 +49,7 @@ module.exports.createPost = async(req, res) => {
 
     const record = new ProductCategory(req.body);
     await record.save();
-
+    req.flash("success", 'Tạo mới danh mục sản phẩm thành công!');
     res.redirect(`/${systemConfig.prefix_admin}/product-category`);
 }
 

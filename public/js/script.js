@@ -117,6 +117,13 @@ $('.slider-one').slick({
     autoplay: true,
     autoplaySpeed: 5000,
 });
+$('.slider-two').slick({
+    infinite: false,
+    slidesToShow: 5,
+    slidesToScroll: 2,
+    autoplay: true,
+    autoplaySpeed: 5000,
+});
 // slicker
 
 // Change quantity

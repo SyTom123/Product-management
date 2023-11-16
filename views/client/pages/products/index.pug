@@ -15,8 +15,8 @@ block main
                             img(src=item.thumbnail, alt=item.title)
                         h4(class="product-item__name") #{item.title}
                         div(class="product-item__price")
-                            span(class="product-item__price-old") #{item.priceNew} $
-                            span(class="product-item__price-current") #{item.price} $
+                            span(class="product-item__price-old") #{item.priceOld}
+                            span(class="product-item__price-current") #{item.priceNew} 
                         if(item.featured == "1")
                             div(class="product-item__featured")
                                 <i class="fa-solid fa-check"></i>
@@ -25,6 +25,6 @@ block main
                             span(class="product-item__percent") #{item.discountPercentage} %
                             span(class="product-item__sale-off-label") GIẢM
                         div(class="product-item-line")
-        .col-12
+        .col-12(class="pb-3")
             div(class="text-right")
                 +goBack()

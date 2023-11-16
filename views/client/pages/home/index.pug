@@ -5,76 +5,90 @@ include ../../mixins/alert.pug
 block main 
     +alert-success(3000)
     +alert-error(3000)
-    .container 
-        .row 
-            .col-12 
-                div(class="slider-one slick-arrow-square mb-4")
-                    div(class="banner")
-                        div(class="inner-image")
-                            img(src="/images/banner/banner_1.webp" alt="Banner" width="100%")
-                    div(class="banner")
-                        div(class="inner-image")
-                            img(src="/images/banner/banner_2.webp" alt="Banner" width="100%")
-                    div(class="banner")
-                        div(class="inner-image")
-                            img(src="/images/banner/banner_3.webp" alt="Banner" width="100%")
-                    div(class="banner")
-                        div(class="inner-image")
-                            img(src="/images/banner/banner_4.webp" alt="Banner" width="100%")
-                    div(class="banner")
-                        div(class="inner-image")
-                            img(src="/images/banner/banner_5.webp" alt="Banner" width="100%")
+    div(class= "home")
+        .container
+            .row 
+                .col-12 
+                    div(class="slider-one slick-arrow-square mb-4")
+                        div(class="banner")
+                            div(class="inner-image")
+                                img(src="/images/banner/banner_1.webp" alt="Banner" width="100%")
+                        div(class="banner")
+                            div(class="inner-image")
+                                img(src="/images/banner/banner_2.webp" alt="Banner" width="100%")
+                        div(class="banner")
+                            div(class="inner-image")
+                                img(src="/images/banner/banner_3.webp" alt="Banner" width="100%")
+                        div(class="banner")
+                            div(class="inner-image")
+                                img(src="/images/banner/banner_4.webp" alt="Banner" width="100%")
+                        div(class="banner")
+                            div(class="inner-image")
+                                img(src="/images/banner/banner_5.webp" alt="Banner" width="100%")
+        .container 
+            .row 
+                .col-12
+                    +box-head("Danh mục sản phẩm")
+                .col-12
+                    div(class="slider-two mb-3")
+                        each item in categoryProduct
+                            div(class="product-category")
+                                div(class="inner-image")
+                                    a(href=`products/${item.slug}`)
+                                        img(src= item.thumbnail  alt=item.title )
+                                div(class="inner-text")
+                                    a(href=`products/${item.slug}`) #{item.title}
 
-    .section-products-featered.mb-5 
-        .container 
-            .row 
-                .col-12 
-                    +box-head("Sản phẩm nổi bật")
-            +product-grid(productsFeatured)
-    .section-products-featered.mt-5 
-        .container 
-            .row 
-                .col-12 
-                    +box-head("Sản phẩm mới nhất")
-            +product-grid(productsNew)
-    
-    .section-service 
-        .container 
-            .inner-boxs
+        .section-products-featered.mb-5 
+            .container 
                 .row 
-                    .col-md-3 
-                        .inner-box 
-                            .inner-logo
-                                img(src="/images/service/ico_sv1.webp", alt="Icon-1")
-                            .inner-wrap 
-                                .inner-title 
-                                    |Hàng chính hãng
-                                .inner-desc
-                                    |Đa dạng và chuyên sâu
-                    .col-md-3 
-                        .inner-box 
-                            .inner-logo
-                                img(src="/images/service/ico_sv2.webp", alt="Icon-2")
-                            .inner-wrap 
-                                .inner-title 
-                                    |Đổi trả trong 7 ngày
-                                .inner-desc
-                                    |Kể từ ngày mua hàng
-                    .col-md-3 
-                        .inner-box 
-                            .inner-logo
-                                img(src="/images/service/ico_sv3.webp", alt="Icon-3")
-                            .inner-wrap 
-                                .inner-title 
-                                    |Cam kết 100%
-                                .inner-desc
-                                    |Chất lượng sản phẩm
-                    .col-md-3 
-                        .inner-box 
-                            .inner-logo
-                                img(src="/images/service/ico_sv4.webp", alt="Icon-4")
-                            .inner-wrap 
-                                .inner-title 
-                                    |Giao hàng 2H
-                                .inner-desc
-                                    |Theo từng sản phẩm
+                    .col-12 
+                        +box-head("Sản phẩm nổi bật")
+                +product-grid(productsFeatured)
+        .section-products-featered.mt-5 
+            .container 
+                .row 
+                    .col-12 
+                        +box-head("Sản phẩm mới nhất")
+                +product-grid(productsNew)
+        
+        .section-service 
+            .container 
+                .inner-boxs
+                    .row 
+                        .col-md-3 
+                            .inner-box 
+                                .inner-logo
+                                    img(src="/images/service/ico_sv1.webp", alt="Icon-1")
+                                .inner-wrap 
+                                    .inner-title 
+                                        |Hàng chính hãng
+                                    .inner-desc
+                                        |Đa dạng và chuyên sâu
+                        .col-md-3 
+                            .inner-box 
+                                .inner-logo
+                                    img(src="/images/service/ico_sv2.webp", alt="Icon-2")
+                                .inner-wrap 
+                                    .inner-title 
+                                        |Đổi trả trong 7 ngày
+                                    .inner-desc
+                                        |Kể từ ngày mua hàng
+                        .col-md-3 
+                            .inner-box 
+                                .inner-logo
+                                    img(src="/images/service/ico_sv3.webp", alt="Icon-3")
+                                .inner-wrap 
+                                    .inner-title 
+                                        |Cam kết 100%
+                                    .inner-desc
+                                        |Chất lượng sản phẩm
+                        .col-md-3 
+                            .inner-box 
+                                .inner-logo
+                                    img(src="/images/service/ico_sv4.webp", alt="Icon-4")
+                                .inner-wrap 
+                                    .inner-title 
+                                        |Giao hàng 2H
+                                    .inner-desc
+                                        |Theo từng sản phẩm

@@ -1,7 +1,7 @@
 const Product = require('../../models/product.model');
 const ProductCategory = require("../../models/product-category.model");
 const productsHelper = require("../../helper/product");
-
+const formatMoneyHelper = require("../../helper/formatMoney");
 
 // [GET] /product
 module.exports.index = async (req, res) => {
@@ -10,11 +10,10 @@ module.exports.index = async (req, res) => {
         deleted: false,
         status: "active"
     }).sort({position: "desc"});
-
+    
     const newProducts = productsHelper.priceNewProduct(products);
-
     res.render("client/pages/products/index.pug", {
-        pageTitle: "Danh sach san pham",
+        pageTitle: "Danh sách sản phẩm",
         products: newProducts
     })
 }
@@ -50,8 +49,8 @@ module.exports.detail = async (req, res) => {
             product.category = category;
         }
         product.priceNew = productsHelper.newPrice(product);
+        product.priceOld = formatMoneyHelper.formatMoney(product.price);
 
-       
         res.render("client/pages/products/detail", {
             pageTitle: "Chi tiết sản phẩm",
             product: product

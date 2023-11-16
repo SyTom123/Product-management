@@ -6,6 +6,7 @@ const searchHelper = require("../../helper/search.js");
 const paginationHelper = require('../../helper/pagination');
 const systemConfig = require('../../config/system')
 const createTree = require("../../helper/createTree");
+const formatMoneyHelper = require("../../helper/formatMoney");
 
 // [GET] /admin/product
 module.exports.index = async (req, res) => {
@@ -29,7 +30,7 @@ if(req.query.keyword){
 // Pagination
 const initPagination = {
     currentPage: 1,
-    limitItems: 4
+    limitItems: 8
 }
 const countProducts  = await Product.count(find);
 const objectPagination = paginationHelper(initPagination, req.query, countProducts);
@@ -52,6 +53,7 @@ const products = await Product.find(find)
 .skip(objectPagination.skip);
 
 for(const product of products) {
+    product.priceOld = formatMoneyHelper.formatMoney(product.price);
     // Lấy ra người tạo
     const userCreated = await Account.findOne ({
         _id: product.createdBy.account_id
@@ -72,7 +74,6 @@ for(const product of products) {
         }
     }
 }
-
 
 if(products.length == 0 && countProducts > 0) {
     let stringQuery = "";
@@ -281,6 +282,7 @@ module.exports.detail = async (req, res) => {
         _id: id,
         deleted: false
     })
+    product.priceOld = formatMoneyHelper.formatMoney(product.price);
     res.render("admin/pages/products/detail.pug", {
         product: product,
         status_03 : "active"

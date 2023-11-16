@@ -45,7 +45,6 @@ module.exports.addPost = async (req, res) => {
     const cart = await Cart.findOne({
         _id: cartId
     })
-    console.log(cart);
     const existProductInCart = cart.products.find(item => item.product_id == productId);
     if(existProductInCart) {
         const newQuantity = existProductInCart.quantity + quantity;

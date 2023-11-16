@@ -5,8 +5,8 @@ mixin product-item(item)
                 img(src=item.thumbnail, alt=item.title)
             h4(class="product-item__name") #{item.title}
             div(class="product-item__price")
-                span(class="product-item__price-old") #{item.priceNew} $
-                span(class="product-item__price-current") #{item.price} $
+                span(class="product-item__price-old") #{item.priceOld}
+                span(class="product-item__price-current") #{item.priceNew}
             if(item.featured == "1")
                 div(class="product-item__featured")
                     <i class="fa-solid fa-check"></i>
