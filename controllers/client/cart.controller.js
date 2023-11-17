@@ -32,6 +32,9 @@ module.exports.index = async (req, res) => {
             cartDetail: cart
         })
     }
+    else {
+        res.redirect("back");
+    }
 }
 
 //[POST] /cart/add/:productId
