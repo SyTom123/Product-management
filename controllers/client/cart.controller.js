@@ -1,6 +1,7 @@
 const Cart = require('../../models/cart.model');
 const Product = require("../../models/product.model");
 const productHelper = require("../../helper/product");
+const formatMoneyHelper = require("../../helper/formatMoney");
 
 //[GET]/ cart
 module.exports.index = async (req, res) => {
@@ -19,14 +20,21 @@ module.exports.index = async (req, res) => {
                     _id: productId
                 });
                 productInfo.priceNew = productHelper.newPrice(productInfo);
+
+                productInfo.priceNewFormatVND = productHelper.newPriceFormatVND(productInfo);
     
                 item.productInfo = productInfo
     
-                item.totalPrice = +item.quantity* item. productInfo.priceNew
+                item.totalPrice = +item.quantity * item. productInfo.priceNew
+
+                item.totalPriceFormatVND = formatMoneyHelper.formatMoney(item.totalPrice);
+
             }
         } 
         cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
         
+        cart.totalPriceFormatVND =  formatMoneyHelper.formatMoney(cart.totalPrice);
+
         res.render("client/pages/cart/index.pug", {
             pageTitle: "Trang giỏ hàng",
             cartDetail: cart

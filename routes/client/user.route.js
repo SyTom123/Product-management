@@ -40,6 +40,5 @@ router.patch("/edit/:id", upload.single("avatar"), uploadCloud.upload,
 
 router.delete("/delete/:id", controller.delete);
 
-router.get("/orders", middleware.requireAuth ,controller.orders);
   
 module.exports = router;    

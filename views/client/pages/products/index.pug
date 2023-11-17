@@ -16,7 +16,7 @@ block main
                         h4(class="product-item__name") #{item.title}
                         div(class="product-item__price")
                             span(class="product-item__price-old") #{item.priceOld}
-                            span(class="product-item__price-current") #{item.priceNew} 
+                            span(class="product-item__price-current") #{item.priceNewFormatVND} 
                         if(item.featured == "1")
                             div(class="product-item__featured")
                                 <i class="fa-solid fa-check"></i>

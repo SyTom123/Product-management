@@ -31,19 +31,19 @@ block main
                                                 width="80px"
                                             )
                                         td #{item.productInfo.title}
-                                        td #{item.productInfo.priceNew}$
+                                        td #{item.productInfo.priceNewFormatVND}
                                         td #{item.quantity}
-                                        td #{item.totalPrice}$
+                                        td #{item.totalPriceFormatVND}
                 .col-5
                     h5(class="sum-cart") Cộng giỏ hàng
                     div(class="sum-cart-box")
                         p(class="sum-cart-text") Tạm tính: 
                         div(class="sum-cart-number")
-                            <b>#{cartDetail.totalPrice}</b> $
+                            <b>#{cartDetail.totalPriceFormatVND}</b> 
                     div(class="sum-cart-box")
                         p(class="sum-cart-text") Tổng: 
                         div(class="sum-cart-number")
-                            <b>#{cartDetail.totalPrice}</b> $
+                            <b>#{cartDetail.totalPriceFormatVND}</b> 
             if(cartDetail.products.length > 0)
                 .row 
                     .col-12

@@ -43,7 +43,7 @@ block main
                         )
                             div(class="inner-box-quantity") 
                                 span(class="qty-label") Số lượng:  
-                                span(class="button-change-qty " button-change-qty-up ) <i class="fa-solid fa-plus"></i>
+                                span(class="button-change-qty" button-change-qty-down) <i class="fa-solid fa-minus"></i>
                                 input(
                                     class="form-control"
                                     type="text"
@@ -52,7 +52,7 @@ block main
                                     min="1"
                                     max=product.stock
                                 )
-                                span(class="button-change-qty" button-change-qty-down) <i class="fa-solid fa-minus"></i>
+                                span(class="button-change-qty " button-change-qty-up ) <i class="fa-solid fa-plus"></i>
                             button(
                                 type="submit"
                                 class="btn btn-success btn-block"

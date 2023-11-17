@@ -3,6 +3,7 @@ const User = require("../../models/user.model");
 const Product = require('../../models/product.model');
 const Order = require('../../models/order.model');
 const productHelper = require('../../helper/product');
+const formatMoneyHelper = require("../../helper/formatMoney");
 
 //[GET]/checkout
 module.exports.index = async(req, res) => {
@@ -25,14 +26,19 @@ module.exports.index = async(req, res) => {
                 })
     
                 productInfo.priceNew = productHelper.newPrice(productInfo);
+
+                productInfo.priceNewFormatVND = productHelper.newPriceFormatVND(productInfo);
     
                 item.productInfo = productInfo;
     
                 item.totalPrice = item.quantity * productInfo.priceNew;
+               
+                item.totalPriceFormatVND = formatMoneyHelper.formatMoney(item.totalPrice);
             }
         }
         cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
-    
+        
+        cart.totalPriceFormatVND =  formatMoneyHelper.formatMoney(cart.totalPrice);
         res.render('client/pages/checkout/index', {
             pageTitle: "Đặt hàng",
             cartDetail: cart,
@@ -121,10 +127,16 @@ module.exports.success = async (req, res) => {
         product.productInfo = productInfo;
 
         product.priceNew = productHelper.newPrice(product);
+
+        product.priceNewFormatVND = formatMoneyHelper.formatMoney(product.priceNew);
+
         product.totalPrice = product.priceNew * product.quantity;
+
+        product.totalPriceFormatVND = formatMoneyHelper.formatMoney(product.totalPrice);
 
     }
     order.totalPrice = order.products.reduce((sum, item)=>sum + item.totalPrice, 0);
+    order.totalPriceFormatVND = formatMoneyHelper.formatMoney(order.totalPrice);
     res.render("client/pages/checkout/success", {
         pageTitle: "Đặt hàng thành công",
         order: order

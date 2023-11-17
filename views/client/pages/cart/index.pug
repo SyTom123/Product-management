@@ -38,7 +38,7 @@ block main
                                             a(href=`products/detail/${item.productInfo.slug}`) 
                                                 span #{item.productInfo.title}
                                         td 
-                                            span #{item.productInfo.priceNew} $
+                                            span #{item.productInfo.priceNewFormatVND}
                                         td 
                                             input(
                                                 type="number"
@@ -48,7 +48,7 @@ block main
                                                 product-id = item.product_id
                                                 style="width: 55px; border: 1px solid #ddd; outline: none; text-align:center"
                                             )
-                                        td #{item.totalPrice}
+                                        td #{item.totalPriceFormatVND}
                                         td
                                             a(
                                                 href=`/cart/delete/${item.product_id}`
@@ -62,7 +62,7 @@ block main
                     a(href="/cart/delete/all" class= `btn btn-danger` ) Xóa tất cả
                 .col-md-6 
                     p(class="text-right") Tổng: 
-                        b(style ="font-size: 24px") #{cartDetail.totalPrice} $
+                        b(style ="font-size: 20px") #{cartDetail.totalPriceFormatVND} 
             
                     div(class="text-right my-3") 
                         a(href="/checkout" class="btn btn-success") Thanh toán 

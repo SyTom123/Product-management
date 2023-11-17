@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug 
+include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
+include ../../mixins/moment.pug
+block main
+    +alert-success(3000)
+    +alert-error(3000)
+    .container
+        .row 
+            .col-12 
+                +box-head("Đơn hàng của tôi")
+        .row 
+            .col-12 
+                table( class="table table-bordered table-hover text-center")
+                    thead(style="background:lightgreen") 
+                        tr 
+                            th STT
+                            th Mã đơn hàng
+                            th Tên người nhận
+                            th Thời gian tạo
+                            th Tiền thanh toán
+                            th Trạng thái
+                            th Hành động
+                    tbody 
+                        if(orders.length > 0)
+                            each item, index in orders 
+                                tr 
+                                    td #{index}
+                                    td #{item.order_id}
+                                    td #{item.userInfo.fullName}
+                                    td
+                                        +formatDateTime(item.createdAt)
+                                    td #{item.totalPriceFormatVND}
+                                    td 
+                                        span(style="color:red; font-weight: 600") #{item.statusVN}
+                                    td 
+                                        a(
+                                            href=`/orders/detail/${item.id}`
+                                            class="btn btn-secondary btn-sm text-white") Chi tiết
+                                            
+                                        button( class="btn btn-danger btn-sm text-white ml-2"
+                                                button-change-status 
+                                                data-status=item.status
+                                                data-id = item._id
+                                            ) Hủy
+                        else 
+                            tr 
+        
+                                td(colspan="6" class="text-center") Đơn hàng trống
+        form(
+            id="form-change-status"
+            method="POST"
+            action=""
+            data-path=`orders/change-status`
+        )
+        form(
+            id="form-delete-item"
+            method="POST"
+            action=""
+            data-path=`/orders/delete`
+        )

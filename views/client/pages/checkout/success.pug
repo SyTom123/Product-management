@@ -31,7 +31,7 @@ block main
                 .col-md-12 
                     h4(class="mb-3") Thông tin đơn hàng 
                     table(class="table table-bordered text-center")
-                        thead 
+                        thead(style = "background: #90EE90")
                             tr 
                                 th STT
                                 th Ảnh
@@ -47,9 +47,9 @@ block main
                                         td 
                                             img(src=item.productInfo.thumbnail, alt=item.productInfo.title, width="100px")
                                         td #{item.productInfo.title}
-                                        td #{item.priceNew} $
+                                        td #{item.priceNewFormatVND} 
                                         td #{item.quantity}
-                                        td <b>#{item.totalPrice}</b> $ 
+                                        td <b>#{item.totalPriceFormatVND}</b> 
 
                     if(order.products.length > 0)
-                        div(class="text-right") Tổng đơn hàng: <b> #{order.totalPrice} </b>$
+                        div(class="text-right") Tổng đơn hàng: <b> #{order.totalPriceFormatVND} </b>
