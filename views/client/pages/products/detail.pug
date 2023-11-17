@@ -24,8 +24,8 @@ block main
                                 div(class="inner-price-old") 
                                     span(class="inner-price-old-number") #{product.priceOld}
                                     span(class="inner-price-old-text") (inclusive off all taxes)
-                            if (product.priceNew)
-                                div(class="inner-price-new") #{product.priceNew} 
+                            if (product.priceNewFormatVND)
+                                div(class="inner-price-new") #{product.priceNewFormatVND} 
                                     if (product.discountPercentage)
                                         div(class="inner-percent") 
                                             span #{product.discountPercentage} % OFF

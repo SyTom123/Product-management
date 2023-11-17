@@ -50,6 +50,7 @@ module.exports.detail = async (req, res) => {
         }
         product.priceNew = productsHelper.newPrice(product);
         product.priceOld = formatMoneyHelper.formatMoney(product.price);
+        product.priceNewFormatVND = formatMoneyHelper.formatMoney( product.priceNews)
 
         res.render("client/pages/products/detail", {
             pageTitle: "Chi tiết sản phẩm",
