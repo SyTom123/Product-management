@@ -10,9 +10,9 @@ block main
                 .card-body
                     div(class="text-center")
                         if(user.avatar) 
-                            img(src=user.avatar, width="150px",style="border-radius: 50%" ,class="mb-3", alt="avatar")
+                            img(src=user.avatar, width="150px", height="150px",style="border-radius: 50%; object-fit: cover" ,class="mb-3", alt="avatar")
                         else 
-                            img(src="/admin/images/avatar.jpg", width="150px", class="mb-3", alt="avatar")
+                            img(src="/admin/images/avatar.jpg", width="150px"  height="150px", class="mb-3", alt="avatar")
 
                     if(user.fullName) 
                         p Họ tên: <b> #{user.fullName}</b>
