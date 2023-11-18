@@ -9,6 +9,10 @@ const orderSchema = new mongoose.Schema({
         address: String
     },
     user_id: String,
+    deleted : {
+        type: Boolean,
+        default:false
+    },
     products:[
         {
             product_id: String,

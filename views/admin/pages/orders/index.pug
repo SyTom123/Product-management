@@ -1,0 +1,62 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/moment.pug
+block main 
+    h2(class ="mb-4") Đơn hàng
+    +alert-success(3000)
+    table( class="table table-bordered table-hover text-center")
+        thead(style="background:lightgreen") 
+            tr 
+                th STT
+                th Mã đơn hàng
+                th Tên người nhận
+                th Thời gian tạo
+                th Tiền thanh toán
+                th Trạng thái
+                th Hành động
+        tbody 
+            if(orders.length > 0)
+                each item, index in orders 
+                    tr 
+                        td #{index}
+                        td #{item.order_id}
+                        td #{item.userInfo.fullName}
+                        td
+                            +formatDateTime(item.createdAt)
+                        td #{item.totalPriceFormatVND}
+                        td 
+                            if(item.status != "cancel")
+                                select(class="form-select form-select-lg" select-change-status data-id = item._id
+                                    style="border: 1px solid #dbdbdb; padding: 3px; border-radius: 4px; outline: none")
+                                    option(value="initial" selected = item.status == "initial" ? true : false ) Chờ xác nhận
+                                    option(value="ongoing" selected = item.status == "ongoing" ? true : false) Đang vận chuyển
+                                    option(value="cancel" selected = item.status == "cancel" ? true : false) Đã hủy
+                                    option(value="finish" selected = item.status == "finish" ? true : false) Hoàn thành
+                            else 
+                                span(style="color:red; font-weight: 600") #{item.statusVN}
+                        td 
+                            a(
+                                href=`/${prefixAdmin}/orders/detail/${item.id}`
+                                class="btn btn-secondary btn-sm text-white") Chi tiết
+                                
+                            button(
+                                class="btn btn-danger btn-sm ml-2"
+                                button-delete 
+                                data-id = item.id
+                            ) Xóa
+            else 
+                tr 
+
+                    td(colspan="7" class="text-center") Đơn hàng trống
+    form(
+        id="form-change-status"
+        method="POST"
+        action=""
+        data-path=`/${prefixAdmin}/orders/change-status`
+    )
+    form(
+        id="form-delete-item"
+        method='POST'
+        data-path=`/${prefixAdmin}/orders/delete`
+        action=""
+    ) 

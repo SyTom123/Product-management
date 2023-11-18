@@ -259,3 +259,29 @@ if(formAuth) {
     })
 }
 // Hết Hiển thị mật khẩu
+// Change status order
+const selectChangeStatus = document.querySelectorAll("[select-change-status]");
+
+if(selectChangeStatus.length > 0) {
+    const formChangeStatus = document.querySelector("#form-change-status");
+    const path = formChangeStatus.getAttribute("data-path");
+    selectChangeStatus.forEach(item =>{
+        item.addEventListener("change", () => {
+        
+            const statusChange = item.value;
+            const id = item.getAttribute('data-id');
+    
+            const action = path + `/${statusChange}/${id}?_method=PATCH`;
+            
+            formChangeStatus.action = action;
+            
+            const confirm = window.confirm("Bạn có chắc chắn muốn thay đổi trạng thái không?");
+            if(confirm) {
+                formChangeStatus.submit();
+            }
+            
+        })
+    } )
+    
+}
+// End Change status order

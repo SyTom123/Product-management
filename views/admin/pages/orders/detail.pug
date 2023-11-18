@@ -1,0 +1,56 @@
+extends ../../layouts/default.pug 
+include ../../mixins/alert.pug
+include ../../mixins/moment.pug
+block main
+    +alert-success(3000)
+    .container.order-detail
+        .row 
+            .col-12 
+                h2 Chi tiết đơn hàng
+        .row 
+            .col-12 
+                div
+                    div(class="text-center") 
+                        b Chi tiết đơn hàng #{order.order_id}
+                    div(class="text-center") Ngày đặt: 
+                        span 
+                            +formatDateTime(order.createdAt)
+                div 
+                    div(class= "order-status")
+                        div 
+                            <i class="fa-solid fa-splotch mr-2"></i>
+                            span Trạng thái: 
+                                span 
+                                    b(style="color: #EE4D2D") #{order.statusVN}
+                    div(class="user-info") 
+                        <i class="fa-solid fa-house mr-2"></i>
+                        span Thông tin giao hàng
+                        p - Họ và tên: 
+                            b #{order.userInfo.fullName}
+                        p - SDT: 
+                            b #{order.userInfo.phone}
+                        p - Địa chỉ: 
+                            b #{order.userInfo.address}
+                    div(class = "order-info")
+                        div(class = "mb-3")
+                            <i class="fa-solid fa-bag-shopping mr-2"></i>
+                            span Thông tin đơn hàng
+                        div 
+                            each item in order.products 
+                                div(class ="order-product")  
+                                    div(class = "order-product-image")  
+                                        img(src = item.productInfo.thumbnail)
+                                    div(class = "order-product-content")
+                                        div(class = "order-product-title")
+                                            p #{item.productInfo.title}
+                                        div(class = "order-product-price")
+                                            p Giá: #{item.priceNewFormatVND}
+                                        div(class = "order-product-quantity")
+                                            p Số lượng: #{item.quantity}
+                                        div(class = "order-product-quantity")
+                                            p Tổng tiền: 
+                                                b #{item.totalPriceFormatVND}
+                            div(class= "order-product-sum") 
+                                div Tổng tiền: 
+                                    b #{order.totalPriceFormatVND}   
+
