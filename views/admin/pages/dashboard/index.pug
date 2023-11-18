@@ -7,20 +7,19 @@ block main
             .card-mb-4 
                 .card-header Thông tin tài khoản 
                 .card-body
-                    if(user.avatar) 
-                        div(class="text-center mb-4")
-                            img(
-                                src=user.avatar, alt=user.title 
-                                style="width: 200px; height:200px; object-fit: cover; border-radius: 50%"
-                            )
-                        if(user.fullName)
-                            p Họ tên: <b>#{user.fullName}</b>
-                        if(user.email)
-                            p Email: <b>#{user.email}</b>
-                        if(user.phone)
-                            p Số điện thoại: <b>#{user.phone}</b>
-                        if(role.title)
-                            p Phân quyền: <b>#{role.title}</b>
+                    div(class="text-center mb-4")
+                        img(
+                            src = user.avatar ? user.avatar:"/admin/images/avatar.jpg" , alt=user.title 
+                            style="width: 200px; height:200px; object-fit: cover; border-radius: 50%"
+                        )
+                    if(user.fullName)
+                        p Họ tên: <b>#{user.fullName}</b>
+                    if(user.email)
+                        p Email: <b>#{user.email}</b>
+                    if(user.phone)
+                        p Số điện thoại: <b>#{user.phone}</b>
+                    if(role.title)
+                        p Phân quyền: <b>#{role.title}</b>
     .row 
         .col-md-3   
             .card.mb-4

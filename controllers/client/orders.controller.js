@@ -105,10 +105,10 @@ module.exports.changeStatus = async(req, res) => {
     })
     const now = Date.now();
     const timeCreateAt = new Date (order.createdAt);
-    const timeExpire = 30 * 60 *1000;
+    const timeExpire = 12 * 60 * 60 *1000;
 
     if(now - timeCreateAt > timeExpire){
-        req.flash("error", 'Hủy đặt hàng không thành công');
+        req.flash("error", 'Bạn chỉ được phép hủy đơn hàng trong vòng 12 giờ kể từ khi đặt.');
         res.redirect("back");
         return;
     }

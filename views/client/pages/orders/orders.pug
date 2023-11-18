@@ -38,10 +38,11 @@ block main
                                             href=`/orders/detail/${item.id}`
                                             class="btn btn-secondary btn-sm text-white") Chi tiết
                                             
-                                        button( class="btn btn-danger btn-sm text-white ml-2"
+                                        button(class="btn btn-danger btn-sm text-white ml-2"
                                                 button-change-status 
                                                 data-status=item.status
                                                 data-id = item._id
+                                                disabled = item.status == "cancel" ? true: false
                                             ) Hủy
                         else 
                             tr 
