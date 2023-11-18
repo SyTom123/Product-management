@@ -30,7 +30,7 @@ block main
                                     style="border: 1px solid #dbdbdb; padding: 3px; border-radius: 4px; outline: none")
                                     option(value="initial" selected = item.status == "initial" ? true : false ) Chờ xác nhận
                                     option(value="ongoing" selected = item.status == "ongoing" ? true : false) Đang vận chuyển
-                                    option(value="cancel" selected = item.status == "cancel" ? true : false) Đã hủy
+                                    option(value="cancel" selected = item.status == "cancel" ? true : false) Hủy
                                     option(value="finish" selected = item.status == "finish" ? true : false) Hoàn thành
                             else 
                                 span(style="color:red; font-weight: 600") #{item.statusVN}

@@ -53,6 +53,7 @@ module.exports.order = async(req, res) => {
     const user = await User.findOne({
         tokenUser: req.cookies.tokenUser
     })
+
     const userId = user._id;
     delete req.body.detailAddress;
     const userInfo = req.body;
@@ -75,7 +76,9 @@ module.exports.order = async(req, res) => {
         });
         
         const stock = productInfo.stock;
-        const newStock = stock -1;
+
+        const newStock = stock - product.quantity;
+
         await Product.updateOne({_id: product.product_id}, {
             stock: newStock
         })
@@ -85,8 +88,10 @@ module.exports.order = async(req, res) => {
 
         products.push(objectProduct);
     }
-    const countOrder = await Order.countDocuments() + 1;
-    const order_id = `SY-${countOrder}`;
+
+    const now = Date.now();
+    const order_id = `SY-${now}`;
+
     const status = "initial";
     const objectOrder = {
         order_id: order_id,
@@ -96,6 +101,7 @@ module.exports.order = async(req, res) => {
         userInfo: userInfo,
         products: products
     }
+    
     if(cart.products.length <= 0){
         req.flash("error", 'Giỏ hàng trống')
         res.redirect("/");

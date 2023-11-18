@@ -3,12 +3,14 @@ const Product = require("../../models/product.model");
 const productHelper = require("../../helper/product");
 const formatMoneyHelper = require("../../helper/formatMoney");
 
+//[GET]/orders/index
 module.exports.index = async(req, res) => {
 
     const id = res.locals.user.id;
 
     const orders = await Order.find({
-       user_id : id
+       user_id : id,
+       deleted: false
     });
     for(const item of orders) {
         switch (item.status) {
@@ -53,10 +55,13 @@ module.exports.index = async(req, res) => {
         orders: orders
     })
 }
+
+//[GET]/orders/detail/:id
 module.exports.detail = async(req, res) => {
     const id = req.params.id;
     const order = await Order.findOne({
-        _id: id
+        _id: id,
+        deleted: false
     });
     switch (order.status) {
         case "initial":
@@ -97,12 +102,15 @@ module.exports.detail = async(req, res) => {
         order: order
     })
 }
+
 //[PATCH]/change-status/:status/:id
 module.exports.changeStatus = async(req, res) => {
     const id = req.params.id;
     const order = await Order.findOne({
-        _id: id
+        _id: id,
+        deleted: false
     })
+ 
     const now = Date.now();
     const timeCreateAt = new Date (order.createdAt);
     const timeExpire = 12 * 60 * 60 *1000;
@@ -114,10 +122,34 @@ module.exports.changeStatus = async(req, res) => {
     }
     await Order.updateOne ({
         _id: id
-    },
-    {
+    },{
         status: "cancel"
     })
+    for(const product of order.products) {
+        const productInfo = await Product.findOne({
+            _id: product.product_id
+        });
+        
+        const stock = productInfo.stock;
+
+        const newStock = stock + product.quantity;
+
+        await Product.updateOne({_id: product.product_id}, {
+            stock: newStock
+        })
+    }
     req.flash("success", 'Hủy đặt hàng thành công');
+    res.redirect("back");
+}
+//[DELETE]/orders/delete/:id
+module.exports.delete = async (req, res) => {
+    const id = req.params.id;
+
+    await Order.updateOne({
+        _id: id,
+    }, {
+        deleted: true
+    })
+    req.flash("success", "Xóa đơn hàng thành công!");
     res.redirect("back");
 }

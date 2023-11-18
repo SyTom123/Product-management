@@ -44,6 +44,11 @@ block main
                                                 data-id = item._id
                                                 disabled = item.status == "cancel" ? true: false
                                             ) Hủy
+                                        button(
+                                            class="btn btn-danger btn-sm ml-2"
+                                            button-delete 
+                                            data-id = item.id
+                                        ) Xóa
                         else 
                             tr 
         
