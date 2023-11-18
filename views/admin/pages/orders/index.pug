@@ -25,25 +25,30 @@ block main
                             +formatDateTime(item.createdAt)
                         td #{item.totalPriceFormatVND}
                         td 
-                            if(item.status != "cancel")
-                                select(class="form-select form-select-lg" select-change-status data-id = item._id
-                                    style="border: 1px solid #dbdbdb; padding: 3px; border-radius: 4px; outline: none")
-                                    option(value="initial" selected = item.status == "initial" ? true : false ) Chờ xác nhận
-                                    option(value="ongoing" selected = item.status == "ongoing" ? true : false) Đang vận chuyển
-                                    option(value="cancel" selected = item.status == "cancel" ? true : false) Hủy
-                                    option(value="finish" selected = item.status == "finish" ? true : false) Hoàn thành
+                            if(role.permissions.includes("orders_edit"))
+                                if(item.status != "cancel")
+                                    select(class="form-select form-select-lg" select-change-status data-id = item._id
+                                        style="border: 1px solid #dbdbdb; padding: 3px; border-radius: 4px; outline: none")
+                                        option(value="initial" selected = item.status == "initial" ? true : false ) Chờ xác nhận
+                                        option(value="ongoing" selected = item.status == "ongoing" ? true : false) Đang vận chuyển
+                                        option(value="cancel" selected = item.status == "cancel" ? true : false) Hủy
+                                        option(value="finish" selected = item.status == "finish" ? true : false) Hoàn thành
+                                else 
+                                    span(style="color:red; font-weight: 600") #{item.statusVN}
                             else 
-                                span(style="color:red; font-weight: 600") #{item.statusVN}
+                                    span(style="color:red; font-weight: 600") #{item.statusVN}
                         td 
-                            a(
-                                href=`/${prefixAdmin}/orders/detail/${item.id}`
-                                class="btn btn-secondary btn-sm text-white") Chi tiết
-                                
-                            button(
-                                class="btn btn-danger btn-sm ml-2"
-                                button-delete 
-                                data-id = item.id
-                            ) Xóa
+                            if(role.permissions.includes("orders_view"))  
+                                a(
+                                    href=`/${prefixAdmin}/orders/detail/${item.id}`
+                                    class="btn btn-secondary btn-sm text-white") Chi tiết
+
+                            if(role.permissions.includes("orders_delete"))  
+                                button(
+                                    class="btn btn-danger btn-sm ml-2"
+                                    button-delete 
+                                    data-id = item.id
+                                ) Xóa
             else 
                 tr 
 

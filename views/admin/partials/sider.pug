@@ -17,10 +17,11 @@ mixin sider ()
                         a(href=`/${prefixAdmin}/products` class=`${status_03}`) 
                             <i class="fa-solid fa-shop mr-2"></i>
                             span Sản phẩm
-                li 
-                    a(href=`/${prefixAdmin}/orders` class=`${status_09}`) 
-                        <i class="fa-solid fa-bag-shopping mr-2"></i>
-                        span Orders
+                if(role.permissions.includes("orders_view"))
+                    li 
+                        a(href=`/${prefixAdmin}/orders` class=`${status_09}`) 
+                            <i class="fa-solid fa-bag-shopping mr-2"></i>
+                            span Đơn hàng
                 if(role.permissions.includes("roles_view"))
                     li 
                         a(href=`/${prefixAdmin}/roles` class=`${status_04}`) 

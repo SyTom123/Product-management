@@ -107,6 +107,11 @@
     display: none;
 }
 /* End image preview */
+/* table permission */
+[table-permissions] input {
+    cursor: pointer;
+}
+/* table permission */
 /* Order detail */
 
 .order-detail .order-status {

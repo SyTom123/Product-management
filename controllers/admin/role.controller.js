@@ -58,10 +58,9 @@ module.exports.permissionsPatch = async (req, res) => {
 }
 //[GET]/role/edit/:id
 module.exports.edit = async (req, res) => {
-    const id = req.body.id;
-
+    const id = req.params.id;
     const role = await Role.findOne({
-        id: id, 
+        _id: id, 
         deleted: false
     })
     res.render("admin/pages/roles/edit.pug", {
@@ -73,10 +72,10 @@ module.exports.edit = async (req, res) => {
 
 //[PATCH]/role/edit/:id
 module.exports.editPatch = async (req, res) => {
-    const id = req.body.id;
+    const id = req.params.id;
 
     const role = await Role.updateOne({
-        id: id, 
+        _id: id, 
     }, req.body);
     
     req.flash("success", "Cập nhật nhóm quyền thành công");
@@ -101,7 +100,7 @@ module.exports.delete = async (req, res) => {
 //[GET]/role/detail
 module.exports.detail = async (req, res) => {
 
-    const id = req. params.id;
+    const id = req.params.id;
     const role = await Role.findOne({
         _id: id, 
         deleted: false
