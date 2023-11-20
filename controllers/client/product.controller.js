@@ -2,19 +2,50 @@ const Product = require('../../models/product.model');
 const ProductCategory = require("../../models/product-category.model");
 const productsHelper = require("../../helper/product");
 const formatMoneyHelper = require("../../helper/formatMoney");
-
+const paginationHelper = require('../../helper/pagination');
 // [GET] /product
 module.exports.index = async (req, res) => {
+    const find = {
+        deleted: false
+    }
+    if(req.query.status){
+        find.status = req.query.status;
+    }
+    // sort
+    let sort = {};
+    let sortValue = "";
+    if(req.query.sortKey && req.query.sortValue) {
+        if(req.query.sortKey == "featured" && req.query.sortValue == "1") {
+            find.featured = "1"
+        }
+        else {
+            sort[req.query.sortKey]= req.query.sortValue;
+        }
+    }
+    else {
+        sort.position = "desc";
+    }
+    // End sort
+    // Pagination
+    const initPagination = {
+        currentPage: 1,
+        limitItems: 12
+    }
+    const countProducts  = await Product.countDocuments(find);
+    const objectPagination = paginationHelper(initPagination, req.query, countProducts);
 
-    const products = await Product.find({
-        deleted: false,
-        status: "active"
-    }).sort({position: "desc"});
+    // End Pagination
+
+    const products = await Product.find(find)
+        .sort(sort)
+        .limit(objectPagination.limitItems)
+        .skip(objectPagination.skip);
     
     const newProducts = productsHelper.priceNewProduct(products);
     res.render("client/pages/products/index.pug", {
         pageTitle: "Danh sách sản phẩm",
-        products: newProducts
+        products: newProducts,
+        pagination: objectPagination,
     })
 }
 // [GET] /products/detail/:slugProduct
@@ -70,6 +101,25 @@ module.exports.category = async (req, res) => {
         deleted: false,
         status: "active"
     });
+    const find = {
+        deleted: false,
+        status : 'active'
+    }
+    // sort
+    let sort = {};
+    let sortValue = "";
+    if(req.query.sortKey && req.query.sortValue) {
+        if(req.query.sortKey == "featured" && req.query.sortValue == "1") {
+            find.featured = "1"
+        }
+        else {
+            sort[req.query.sortKey]= req.query.sortValue;
+        }
+    }
+    else {
+        sort.position = "desc";
+    }
+    // End sort
 
     const getSubCategory = async(parentId) => {
         const subs = await ProductCategory.find({
@@ -92,11 +142,9 @@ module.exports.category = async (req, res) => {
 
     const listSubCategoryId = listSubCategory.map(item => item.id);
 
-    const products = await Product.find({
-        product_category_id: {$in:[category.id, ...listSubCategoryId] },
-        status: "active",
-        deleted: false
-    }).sort({ position: "desc" });
+    find.product_category_id = {$in:[category.id, ...listSubCategoryId] }
+    const products = await Product.find(find)
+    .sort(sort);
     
     const newProducts = productsHelper.priceNewProduct(products);
 

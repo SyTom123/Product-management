@@ -747,7 +747,122 @@ background-color: #F5F5F5;
     font-size: 14px;
 }
 /* End section-service  */
+/* product-sort */
+.product-sort {
+    display: flex;
+    align-items: center;
+    background-color: #EDEDED;
+    padding: 14px;
+}
+.product-sort .product-sort-text {
+    color: #555555;
+}
+.product-sort .product-sort-item {
+    background-color: #fff;
+    padding: 6px 12px;
+    margin: 0 10px;
+    display: inline-block;
+    color: #333;
+    cursor: pointer;
+}
+.product-sort .product-sort-item:hover {
+    background-color: #EE4D2D;
+    color: #fff;
+}
 
+.product-sort .product-sort-item.active {
+    background-color: #EE4D2D;
+    color: #fff;
+}
+.product-sort .product-sort-price {
+    background-color: #fff;
+    padding: 6px 8px;
+    margin: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333;
+    position: relative;
+    width: 200px;
+}
+.product-sort .product-sort-price:hover .product-sort-price-sub-items  {
+    display: block;
+}
+.product-sort .product-sort-price .product-sort-price-sub-item:hover {
+    background-color: #EE4D2D;
+    color: #fff;
+}
+.product-sort .product-sort-price .product-sort-price-sub-items {
+    position: absolute;
+    width: 200px;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #fff;
+    z-index: 1;
+}
+.product-sort .product-sort-price .product-sort-price-sub-item.active {
+    background-color: #EE4D2D;
+    color: #fff;
+}
+.product-sort .product-sort-price .product-sort-price-sub-item {
+    padding: 6px;
+    cursor: pointer;
+}
+/* product-sort */
+/* product -pagination */
+
+.product-pagination-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-pagination {
+    display: inline-flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.product-pagination .product-pagination-icon{
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #252525;
+    border-radius: 50% !important;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+.product-pagination .product-pagination-item {
+    color: #252525;
+    margin: 0 10px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+.product-pagination .product-pagination-item button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.product-pagination .product-pagination-item.active {
+    background-color: #EE4D2D;
+   
+    border-radius: 50%;
+    cursor: pointer;
+}
+.product-pagination .product-pagination-item.active button {
+    color: #fff;
+}
+
+/* End product -pagination */
 
 
 

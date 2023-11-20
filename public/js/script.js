@@ -190,3 +190,47 @@ if(buttonChangeStatus.length > 0) {
     })
 }
 // End Change status
+// pagination
+const buttonPagination = document.querySelectorAll("[button-pagination]");
+if(buttonPagination.length > 0) {
+    let url = new URL(window.location.href);
+
+    buttonPagination.forEach (button => {
+        button.addEventListener("click", () => {
+            const page = button.getAttribute("button-pagination");
+            url.searchParams.set("page", page);
+            window.location.href = url.href;
+        })
+    })
+}
+// End pagination
+// sort product
+const buttonSort = document.querySelectorAll("[button-sort]");
+if(buttonSort) {
+    let url = new URL(window.location.href);
+    
+    buttonSort.forEach(button => {
+        button.addEventListener("click", ()=> {
+            const value = button.getAttribute("data-sort");
+            const [sortKey, sortValue] = value.split("-");
+            url.searchParams.set("sortKey", sortKey);
+            url.searchParams.set("sortValue", sortValue);
+
+            window.location.href = url.href;
+        })
+
+    })
+    // Hiển thị lựa chọn mặc định
+   const sortKey = url.searchParams.get("sortKey");
+   const sortValue = url.searchParams.get("sortValue");
+   if(sortKey && sortValue) {
+       const stringSort = `${sortKey}-${sortValue}`;
+       const buttonActive = document.querySelector(`[data-sort=${stringSort}]`);
+       console.log(stringSort);
+       console.log(buttonActive);
+       buttonActive.classList.add("active");
+   }
+   
+}
+   
+// sort product
