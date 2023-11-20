@@ -21,21 +21,29 @@ block main
                     if(role.title)
                         p Phân quyền: <b>#{role.title}</b>
     .row 
-        .col-md-3   
+        .col-md-4   
             .card.mb-4
             .card-header Danh mục sản phẩm
             .card-body
                 p Số lượng: <b>#{statistic.categoryProduct.total}</b>
                 p Hoạt động: <b>#{statistic.categoryProduct.active}</b>
                 p Dừng hoạt động: <b>#{statistic.categoryProduct.inactive}</b>
-        .col-md-3   
+        .col-md-4   
             .card.mb-4
             .card-header Sản phẩm
             .card-body
                 p Số lượng: <b>#{statistic.product.total}</b>
                 p Hoạt động: <b>#{statistic.product.active}</b>
                 p Dừng hoạt động: <b>#{statistic.product.inactive}</b>
-        .col-md-3   
+        .col-md-4   
+            .card.mb-4
+            .card-header Đơn hàng
+            .card-body
+                p Số lượng: <b>#{statistic.order.total}</b>
+                p Chờ xác nhận: <b>#{statistic.order.initial}</b>
+                p Đang vận chuyển: <b>#{statistic.order.ongoing}</b>
+                p Hoàn thành: <b>#{statistic.order.finish}</b>
+        .col-md-4   
             .card.mb-4
             .card-header Tài khoản Admin
             .card-body
@@ -43,7 +51,7 @@ block main
                 p Hoạt động: <b>#{statistic.account.active}</b>
                 p Dừng hoạt động: <b>#{statistic.account.inactive}</b>
 
-        .col-md-3   
+        .col-md-4   
             .card.mb-4
             .card-header Tài khoản client
             .card-body

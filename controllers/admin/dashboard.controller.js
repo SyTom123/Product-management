@@ -1,5 +1,6 @@
 const ProductCategory = require('../../models/product-category.model');
 const Product = require('../../models/product.model');
+const Order = require("../../models/order.model");
 const Account = require('../../models/account.model');
 const User = require('../../models/user.model');
 // [GET] /admin/dashboard
@@ -14,6 +15,12 @@ module.exports.dashboard =async (req, res) => {
             total: 0,
             active: 0,
             inactive: 0,
+        },
+        order: {
+            total: 0,
+            initial: 0,
+            finish: 0,
+            ongoing: 0
         },
         account: {
             total: 0,
@@ -49,6 +56,25 @@ module.exports.dashboard =async (req, res) => {
     statistic.product.inactive =await Product.count(
         {
             status: "inactive", 
+            deleted: false
+        }
+    );
+    statistic.order.total = await Order.count({deleted: false});
+    statistic.order.initial = await Order.count(
+        {
+            status: "initial", 
+            deleted: false
+        }
+    );
+    statistic.order.ongoing = await Order.count(
+        {
+            status: "ongoing", 
+            deleted: false
+        }
+    );
+    statistic.order.finish = await Order.count(
+        {
+            status: "finish", 
             deleted: false
         }
     );
