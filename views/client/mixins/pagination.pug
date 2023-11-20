@@ -1,0 +1,24 @@
+mixin pagination (pagination)
+    .row 
+        .col-12 
+            if(pagination)
+                div(class="pagination product-pagination-wrap")
+                    div(class=`product-pagination` )
+                        div(class=`page-item ${pagination.currentPage == 1 ? "disabled": ""}`)
+                            button(
+                                class="page-link product-pagination-icon "
+                                button-pagination = pagination.currentPage - 1
+                                )
+                                    <i class="fa-solid fa-chevron-left"></i>
+                        -for(var i = 1; i <= pagination.totalPage; i++)
+                            div(class=` product-pagination-item ${i == pagination.currentPage ? "active": ""}`)
+                                button(
+                                    button-pagination= i
+                                    style="display: inline-block; padding: 8px"
+                                    ) #{i}
+                        div(class=`page-item ${pagination.currentPage == pagination.totalPage    ? "disabled": ""}`)
+                            button(
+                                class="page-link product-pagination-icon "
+                                button-pagination = pagination.currentPage + 1
+                                )
+                                <i class="fa-solid fa-chevron-right"></i>

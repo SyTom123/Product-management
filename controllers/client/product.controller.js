@@ -120,7 +120,7 @@ module.exports.category = async (req, res) => {
         sort.position = "desc";
     }
     // End sort
-
+   
     const getSubCategory = async(parentId) => {
         const subs = await ProductCategory.find({
             parent_id: parentId,
@@ -143,13 +143,26 @@ module.exports.category = async (req, res) => {
     const listSubCategoryId = listSubCategory.map(item => item.id);
 
     find.product_category_id = {$in:[category.id, ...listSubCategoryId] }
+    
+     // Pagination
+     const initPagination = {
+        currentPage: 1,
+        limitItems: 8
+    }
+    const countProducts  = await Product.countDocuments(find);
+    const objectPagination = paginationHelper(initPagination, req.query, countProducts);
+
+    // End Pagination
     const products = await Product.find(find)
-    .sort(sort);
+    .sort(sort)
+    .limit(objectPagination.limitItems)
+    .skip(objectPagination.skip);
     
     const newProducts = productsHelper.priceNewProduct(products);
 
     res.render("client/pages/products/index", {
         pageTitle: category.title,
-        products: newProducts
+        products: newProducts,
+        pagination: objectPagination,
     });
 }

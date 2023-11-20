@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug 
 include ../../mixins/box-head.pug
 include ../../mixins/go-back.pug
+include ../../mixins/pagination.pug
 block main 
     .container
         .row 
@@ -21,7 +22,6 @@ block main
                             div(class="product-sort-price-sub-item" button-sort data-sort="price-asc") Giá từ thấp đến cao
                             div(class="product-sort-price-sub-item" button-sort data-sort="price-desc") Giá từ cao đến thấp
 
-
         .row 
             each item in products 
                 .col-3.mb-3 
@@ -40,26 +40,5 @@ block main
                             span(class="product-item__percent") #{item.discountPercentage} %
                             span(class="product-item__sale-off-label") GIẢM
                         div(class="product-item-line")
-        .row 
-            .col-12 
-                if(pagination)
-                    div(class="pagination product-pagination-wrap")
-                        div(class=`product-pagination` )
-                            div(class=`page-item ${pagination.currentPage == 1 ? "disabled": ""}`)
-                                button(
-                                    class="page-link product-pagination-icon "
-                                    button-pagination = pagination.currentPage - 1
-                                    )
-                                        <i class="fa-solid fa-chevron-left"></i>
-                            -for(var i = 1; i <= pagination.totalPage; i++)
-                                div(class=` product-pagination-item ${i == pagination.currentPage ? "active": ""}`)
-                                    button(
-                                        button-pagination= i
-                                        style="display: inline-block; padding: 8px"
-                                        ) #{i}
-                            div(class=`page-item ${pagination.currentPage == pagination.totalPage    ? "disabled": ""}`)
-                                button(
-                                    class="page-link product-pagination-icon "
-                                    button-pagination = pagination.currentPage + 1
-                                    )
-                                    <i class="fa-solid fa-chevron-right"></i>
+        +pagination(pagination)
+  
