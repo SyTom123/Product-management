@@ -5,43 +5,46 @@ const formatMoneyHelper = require("../../helper/formatMoney");
 
 //[GET]/ cart
 module.exports.index = async (req, res) => {
-
-    const cartId = req.cookies.cartId ;
-    if(cartId) {
-        const cart = await Cart.findOne(
-            {_id : cartId}
-        );
-    
-        if(cart.products.length > 0) {
-            for(const item of cart.products) {
-                const productId = item.product_id;
-    
-                const productInfo = await Product.findOne({
-                    _id: productId
-                });
-                productInfo.priceNew = productHelper.newPrice(productInfo);
-
-                productInfo.priceNewFormatVND = productHelper.newPriceFormatVND(productInfo);
-    
-                item.productInfo = productInfo
-    
-                item.totalPrice = +item.quantity * item. productInfo.priceNew
-
-                item.totalPriceFormatVND = formatMoneyHelper.formatMoney(item.totalPrice);
-
-            }
-        } 
-        cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
+    try {
+        const cartId = req.cookies.cartId ;
+        if(cartId) {
+            const cart = await Cart.findOne(
+                {_id : cartId}
+            );
         
-        cart.totalPriceFormatVND =  formatMoneyHelper.formatMoney(cart.totalPrice);
+            if(cart.products.length > 0) {
+                for(const item of cart.products) {
+                    const productId = item.product_id;
+        
+                    const productInfo = await Product.findOne({
+                        _id: productId
+                    });
+                    productInfo.priceNew = productHelper.newPrice(productInfo);
 
-        res.render("client/pages/cart/index.pug", {
-            pageTitle: "Trang giỏ hàng",
-            cartDetail: cart
-        })
-    }
-    else {
-        res.redirect("back");
+                    productInfo.priceNewFormatVND = productHelper.newPriceFormatVND(productInfo);
+        
+                    item.productInfo = productInfo
+        
+                    item.totalPrice = +item.quantity * item. productInfo.priceNew
+
+                    item.totalPriceFormatVND = formatMoneyHelper.formatMoney(item.totalPrice);
+
+                }
+            } 
+            cart.totalPrice = cart.products.reduce((sum, item) => sum + item.totalPrice, 0);
+            
+            cart.totalPriceFormatVND =  formatMoneyHelper.formatMoney(cart.totalPrice);
+
+            res.render("client/pages/cart/index.pug", {
+                pageTitle: "Trang giỏ hàng",
+                cartDetail: cart
+            })
+        }
+        else {
+            res.redirect("back");
+        }
+    } catch (error) {
+        res.redirect("/");
     }
 }
 
@@ -65,7 +68,7 @@ module.exports.addPost = async (req, res) => {
                 'products.product_id': productId
             },
             {
-            'products.$.quantity': newQuantity
+                'products.$.quantity': newQuantity
             }
         )
     }
