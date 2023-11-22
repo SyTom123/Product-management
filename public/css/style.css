@@ -770,19 +770,23 @@ background-color: #F5F5F5;
     color: #fff;
 }
 
-.product-sort .product-sort-item.active {
+.product-sort .product-sort-item.active,
+.product-sort .product-sort-price .product-sort-price-sub-item.active {
     background-color: #EE4D2D;
     color: #fff;
 }
 .product-sort .product-sort-price {
     background-color: #fff;
-    padding: 6px 8px;
+    position: relative;
     margin: 0 10px;
+}
+.product-sort .product-sort-price-menu {
+    background-color: #fff;
+    padding: 6px 8px;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     color: #333;
-    position: relative;
     width: 200px;
 }
 .product-sort .product-sort-price:hover .product-sort-price-sub-items  {
@@ -801,7 +805,7 @@ background-color: #F5F5F5;
     background-color: #fff;
     z-index: 1;
 }
-.product-sort .product-sort-price .product-sort-price-sub-item.active {
+.product-sort .product-sort-price-menu.active {
     background-color: #EE4D2D;
     color: #fff;
 }

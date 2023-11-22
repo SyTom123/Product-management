@@ -221,15 +221,18 @@ if(buttonSort) {
 
     })
     // Hiển thị lựa chọn mặc định
-   const sortKey = url.searchParams.get("sortKey");
-   const sortValue = url.searchParams.get("sortValue");
-   if(sortKey && sortValue) {
-       const stringSort = `${sortKey}-${sortValue}`;
-       const buttonActive = document.querySelector(`[data-sort=${stringSort}]`);
-       console.log(stringSort);
-       console.log(buttonActive);
-       buttonActive.classList.add("active");
-   }
+    const sortKey = url.searchParams.get("sortKey");
+    const sortValue = url.searchParams.get("sortValue");
+    if(sortKey && sortValue) {
+        const stringSort = `${sortKey}-${sortValue}`;
+        const buttonActive = document.querySelector(`[data-sort=${stringSort}]`);
+        buttonActive.classList.add("active");
+
+        if(stringSort == "price-asc" || stringSort == "price-desc") {
+            const buttonPrice = document.querySelector("[button-price]");
+            buttonPrice.classList.add("active");
+        }
+    }
    
 }
    
